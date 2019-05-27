@@ -10,7 +10,7 @@ const User = require('../../models/User');
 router.get('/', (req, res) => {
     console.log('find all');
     User.find()
-        .sort({date: -1})
+        .sort({ date: -1 })
         .then(users => res.json(users))
 });
 
@@ -18,15 +18,43 @@ router.get('/', (req, res) => {
 //@route POST
 //@desc add a user
 //@access public
-router.post('/', (req, res) => {
+router.post('/createUser', (req, res) => {
+    console.log(req.body);
     const newUser = new User({
+        userType: req.body.userType,
+        userId: req.body.userId,
+        faculty: req.body.faculty,
+        course: req.body.course,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.nic,
+        nic: req.body.nic,
+        date: new Date(),
+        address1: req.body.address1,
+        address2: req.body.address2,
+        city: req.body.city,
+        landline: req.body.landline,
+        mobile: req.body.mobile,
+
     })
 
-    newUser.save().then(user => res.json(user));
+    try {
+        newUser.save().
+            then( user =>
+                res.status(200).send({
+                    message: 'User created successfully',
+                    data: user
+                })
+            );
+    } catch (err) {
+        res.status(500).send({
+            message : 'Unknown server error',
+            data : newUser
+        });
+    }
+
+
 });
 
 router.get('/:email', (req, res) => {
@@ -35,8 +63,8 @@ router.get('/:email', (req, res) => {
     User.find({
         "email": req.params.email
     })
-        .sort({date: -1})
-        .then(users => res.json(users))
+        .sort({ date: -1 })
+        .then(users => res.json(users));
 
 });
 

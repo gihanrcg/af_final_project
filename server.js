@@ -9,16 +9,12 @@ const app = express();
 app.use(BodyParser.json());
 
 const db = require('./config/keys').mongoURI;
+app.use('/api/users', userRoutes);
 
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => console.log("Mongo database connected"))
     .catch(err => console.log(err));
-
-
-app.use('/api/users', userRoutes);
-
-
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

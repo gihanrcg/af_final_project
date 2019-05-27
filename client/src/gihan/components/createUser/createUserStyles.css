@@ -1,0 +1,9 @@
+.main_form{
+    width: 60%;
+}
+
+@media screen and (max-width: 600px) {
+    .main_form{
+        width: 90%;
+    }
+}

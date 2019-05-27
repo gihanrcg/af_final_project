@@ -8,7 +8,11 @@ const UserSchema = new Schema({
         type: String,
         required : true
     },
-    idNo :{
+    userId :{
+        type : String,
+        required : true
+    },
+    faculty :{
         type : String,
         required : true
     },
@@ -31,12 +35,30 @@ const UserSchema = new Schema({
     password: {
         type: String,
     },
+    nic: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now()
     },
     dob: {
         type: Date,
+    },
+    address1: {
+        type: String,
+    },
+    address2: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    landline: {
+        type: String,
+    },
+    mobile: {
+        type: String,
     },
     isAdmin: {
         type: Boolean,
