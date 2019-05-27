@@ -1,0 +1,4 @@
+{
+    "mongoURI" : "mongodb+srv://group:group123@cluster0-4riju.mongodb.net/sms?retryWrites=true",
+    "jwt_secret_key" : "AF_FINAL_PROJECT_JWT_KEY"
+}

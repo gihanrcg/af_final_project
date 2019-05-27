@@ -2,14 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const BodyParser = require('body-parser');
 const path = require('path');
+const config = require('config');
+
 
 const userRoutes = require('./server/gihan/routes/api/UserRoute');
+const AuthRoutes = require('./server/gihan/routes/api/Auth');
 
 const app = express();
 app.use(BodyParser.json());
 
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 app.use('/api/users', userRoutes);
+app.use('/api/auth', AuthRoutes);
 
 mongoose
     .connect(db, { useNewUrlParser: true })
