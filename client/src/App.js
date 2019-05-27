@@ -18,11 +18,8 @@ function App() {
         <Route exact path="/" render={() => (
           <HomePage />
         )} />
-
         <Route path="/createUser" component={CreateUser} />
         <Route path="/login" component={Login} />
-
-
       </div>
     </Router>
   );

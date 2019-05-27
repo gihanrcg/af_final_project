@@ -1,4 +1,5 @@
 import React from 'react';
+import './HeaderStyles.css';
 
 import {
     Collapse,
@@ -15,7 +16,6 @@ import {
 } from 'reactstrap';
 
 
-
 class Header extends React.Component {
 
     constructor(props) {
@@ -23,7 +23,8 @@ class Header extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isLoggedIn: false
         };
     }
 
@@ -35,48 +36,50 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div>
-        <Navbar   expand="md" color="primary"  light >
-          <NavbarBrand href="/" style={{color:'white',fontSize:'32px'}}>School Management System</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar >
-              <NavItem>
-                <NavLink href="/components/" style={{color:'white'}}>Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/createUser">SignUp</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/login">Login</NavLink>
-              </NavItem>
+
+            <Navbar className="nav_styles" expand="lg" color="primary" light>
+                <NavbarBrand href="/" className="navbar-brand" style={{color: 'white'}}>School Management
+                    System</NavbarBrand>
+                {/*<div className="navbar-dark navbar-toggler-icon navbar-toggler" style={{color:'white',background:'white'}}/>*/}
+                <NavbarToggler onClick={this.toggle} className="navbar-dark" style={{color: 'white'}}/>
+                <Collapse isOpen={this.state.isOpen} navbar>
+
+                    <Nav className="" navbar>
+                        <NavItem>
+                            <NavLink href="/components/" style={{color: 'white'}}
+                                     className="nav_link_styles">Components</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="https://github.com/reactstrap/reactstrap" style={{color: 'white'}}
+                                     className="nav_link_styles">GitHub</NavLink>
+                        </NavItem>
 
 
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/createUser" className="nav_link_styles"
+                                     style={{color: 'white'}}>SignUp</NavLink>
+                        </NavItem>
 
-              {/* <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+
+                        {this.state.isLoggedIn &&
+                        <NavItem>
+                            <NavLink href="/logout" className="nav_link_styles"
+                                     style={{color: 'white'}}>Logout</NavLink>
+                        </NavItem>
+                        }
+
+                        {!this.state.isLoggedIn &&
+                        <NavItem>
+                            <NavLink href="/login" className="nav_link_styles" style={{color: 'white'}}>Login</NavLink>
+                        </NavItem>
+                        }
+                    </Nav>
+
+                </Collapse>
+            </Navbar>
+
         );
     }
 }

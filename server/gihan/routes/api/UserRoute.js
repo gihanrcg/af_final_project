@@ -41,7 +41,7 @@ router.post('/createUser', (req, res) => {
 
     try {
         newUser.save().
-            then( user =>
+            then(user =>
                 res.status(200).send({
                     message: 'User created successfully',
                     data: user
@@ -49,10 +49,49 @@ router.post('/createUser', (req, res) => {
             );
     } catch (err) {
         res.status(500).send({
-            message : 'Unknown server error',
-            data : newUser
+            message: 'Unknown server error',
+            data: newUser
         });
     }
+
+
+});
+
+
+router.post('/isValidUser', (req, res) => {
+
+   const em = req.body.email.toLowerCase();
+
+    User.find({
+        "email": em
+    })
+        .sort({ date: -1 })
+        .then(users => {
+            const u = users[0];
+            console.log(u);
+
+            if (u) {
+                if (u.password.trim().toUpperCase() === req.body.password.trim().toUpperCase()) {
+                    res.status(200).send({
+                        data: true,
+                        message: 'valid user'
+                    })
+
+                } else {
+                    res.status(200).send({
+                        data: false,
+                        message: 'invalid password'
+                    })
+                }
+            } else {
+                res.status(200).send({
+                    data: false,
+                    message: 'invalid email'
+                })
+            }
+        });
+
+   
 
 
 });
