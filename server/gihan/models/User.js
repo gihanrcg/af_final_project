@@ -63,6 +63,9 @@ const UserSchema = new Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    profilePic :{
+        type : String
     }
 
 });

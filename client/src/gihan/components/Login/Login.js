@@ -14,6 +14,9 @@ class Login extends React.Component {
             isLoading: false
         }
     }
+    componentWillMount() {
+        localStorage.removeItem('af_auth_token');
+    }
 
     onChangeHandler = e => {
         this.setState({

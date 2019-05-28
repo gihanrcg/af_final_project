@@ -12,6 +12,7 @@ const app = express();
 app.use(BodyParser.json());
 
 const db = config.get('mongoURI');
+app.use('/uploads', express.static('uploads'))
 app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
 

@@ -15,7 +15,9 @@ class CreateUser extends React.Component {
         super(props);
         this.state = {
             userType: '',
-            isLoading: false
+            isLoading: false,
+            profilePic: null,
+            uploading: 0
         }
     }
 
@@ -29,32 +31,53 @@ class CreateUser extends React.Component {
 
         e.preventDefault();
         this.setState({
-            isLoading : true
+            isLoading: true
         })
+
+        const frmData = new FormData();
+
+        frmData.set("userType", this.state.userType);
+        frmData.set("userId", this.state.userId);
+        frmData.set("course", this.state.course);
+        frmData.set("faculty", this.state.faculty);
+        frmData.set("firstName", this.state.firstName);
+        frmData.set("lastName", this.state.lastName);
+        frmData.set("email", this.state.email);
+        frmData.set("nic", this.state.nic);
+        frmData.set("address1", this.state.address1);
+        frmData.set("address2", this.state.address2);
+        frmData.set("city", this.state.city);
+        frmData.set("landline", this.state.landline);
+        frmData.set("mobile", this.state.mobile);
+
+        console.log(this.state.profilePic);
+        frmData.append('profilePic', this.state.profilePic);
+
         axios({
             method: 'post',
             url: '/api/users/createUser',
             headers: {},
-            data:
-                {
-                    "userType": this.state.userType,
-                    "userId": this.state.userId,
-                    "course": this.state.course,
-                    "faculty":this.state.faculty,
-                    "firstName":this.state.firstName,
-                    "lastName":this.state.lastName,
-                    "email":this.state.email,
-                    "nic":this.state.nic,
-                    "address1":this.state.address1,
-                    "address2":this.state.address2,
-                    "city":this.state.city,
-                    "landline":this.state.landline,
-                    "mobile":this.state.mobile,
-                }
+
+            data: frmData
+                //{
+                    // "userType": this.state.userType,
+                    // "userId": this.state.userId,
+                    // "course": this.state.course,
+                    // "faculty":this.state.faculty,
+                    // "firstName":this.state.firstName,
+                    // "lastName":this.state.lastName,
+                    // "email":this.state.email,
+                    // "nic":this.state.nic,
+                    // "address1":this.state.address1,
+                    // "address2":this.state.address2,
+                    // "city":this.state.city,
+                    // "landline":this.state.landline,
+                    // "mobile":this.state.mobile,
+               // }
 
         }).then(response => {
             this.setState({
-                isLoading : false
+                isLoading: false
             })
             console.log(response);
             swal({
@@ -70,8 +93,11 @@ class CreateUser extends React.Component {
         }).catch(error => {
             console.log(error);
         });
-
-
+    }
+    fileUploadHandler = e => {
+        this.setState({
+            profilePic : e.target.files[0]
+        })
     }
 
 
@@ -205,16 +231,23 @@ class CreateUser extends React.Component {
                             </Col>
                         </Row>
                         <Row form>
-                            <Col md={6}>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for="">Land Line</Label>
                                     <Input type="text" name="landline" id="landline" onChange={this.onChangeHandler}/>
                                 </FormGroup>
                             </Col>
-                            <Col md={6}>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for="">Mobile</Label>
                                     <Input type="text" name="mobile" id="mobile" onChange={this.onChangeHandler}/>
+                                </FormGroup>
+                            </Col>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="">Profile Picture</Label>
+                                    <Input type="file" name="fileUpload" id="fileUpload"
+                                           onChange={this.fileUploadHandler}/>
                                 </FormGroup>
                             </Col>
                         </Row>

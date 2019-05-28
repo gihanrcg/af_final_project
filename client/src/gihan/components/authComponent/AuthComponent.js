@@ -12,10 +12,10 @@ class AuthComponent extends React.Component {
         };
     }
 
-    componentDidMount() {
-
+    componentWillMount() {
         this.getUser();
     }
+
 
     getUser() {
         const jwt = localStorage.getItem('af_auth_token');
@@ -23,7 +23,8 @@ class AuthComponent extends React.Component {
         if (!jwt) {
             this.setState({
                 user: null
-            });
+            })
+            window.location.replace('/login/'+ this.props.a);
             return;
         }
 
@@ -64,11 +65,13 @@ class AuthComponent extends React.Component {
                     <LoadingScreen/>
                 </div>
             );
+        }else{
+            return this.props.children;
         }
 
 
 
-        return this.props.children;
+
     }
 
 }

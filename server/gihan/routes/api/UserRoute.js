@@ -5,9 +5,30 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const multer = require('multer');
 
+const x = multer
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/users/profilePic');
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().toISOString().replace(':','-') + file.originalname);
+    }
+});
 
-const upload = multer({dest : 'uploads/'})
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {c
+        cb(null, false);
+    }
+};
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+});
 
 const User = require('../../models/User');
 const auth = require('../../../../middleware/auth');
@@ -16,7 +37,7 @@ const auth = require('../../../../middleware/auth');
 //@route GET
 //@desc get all users
 //@access public
-router.get('/', auth,(req, res) => {
+router.get('/', auth, (req, res) => {
     console.log('find all');
     User.find()
         .sort({ date: -1 })
@@ -27,9 +48,7 @@ router.get('/', auth,(req, res) => {
 //@route POST
 //@desc add a user
 //@access public
-router.post('/createUser',auth, upload.single('userImage'),(req, res) => {
-
-    console.log(req.file);
+router.post('/createUser', upload.single('profilePic'), (req, res) => {
 
     User.findOne({
         email: req.body.email
@@ -56,7 +75,7 @@ router.post('/createUser',auth, upload.single('userImage'),(req, res) => {
             city: req.body.city,
             landline: req.body.landline,
             mobile: req.body.mobile,
-
+            profilePic : req.file.path,
         })
 
         bcrypt.genSalt(10, (err, salt) => {

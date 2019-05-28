@@ -1,6 +1,6 @@
 import React from 'react';
 import './HeaderStyles.css';
-
+import Avatar from 'react-avatar';
 import {
     Collapse,
     Navbar,
@@ -8,7 +8,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink, Button, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
+    NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import axios from "axios";
 
@@ -102,9 +102,16 @@ class Header extends React.Component {
                     {/*logged in state*/}
                     {this.state.isLoggedIn &&
                     <Nav className="ml-auto" navbar>
+
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{color: 'white'}}>
-                                Logged In as {this.state.user.firstName}
+                                Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
+                                {
+                                    console.log(this.state.user)
+                                }
+
+                                <Avatar style={{marginLeft:'20px'}} size="50" round={true} name="Gihan Saranga" src={this.state.user.profilePic} />
+
                             </DropdownToggle>
                             <DropdownMenu right>
                                 <DropdownItem>
