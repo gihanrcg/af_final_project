@@ -5,7 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 import './login.css';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Login extends React.Component {
     constructor(props) {
@@ -23,13 +23,13 @@ class Login extends React.Component {
 
     onSubmitHandler = e => {
 
-        e.preventDefault();
+        e.preventDefault()
         this.setState({
             isLoading: true
-        })
+        });
         axios({
             method: 'post',
-            url: '/api/users/isValidUser',
+            url: '/api/auth/getauth',
             headers: {},
             data:
                 {
@@ -38,26 +38,33 @@ class Login extends React.Component {
                 }
 
         }).then(res => {
-            this.setState({
-                isLoading: false
-            })
-           console.log(res)
-            if (res.data.data === true) {
 
-                swal({
-                    title: "Nice!",
-                    text: "You are Logged in successfully..!",
-                    icon: "success",
-                    button: "Go back to home",
-                }).then((value) => {
-                    if (value) {
+            localStorage.setItem('af_auth_token', res.data.token);
+            swal({
+                title: "Nice!",
+                text: "You are Logged in successfully..!",
+                icon: "success",
+                button: "Go back where you left",
+            }).then((value) => {
+                if (value) {
+                    console.log(this.props)
+                    if (this.props.match.params.from) {
+                        window.location.replace("/" + this.props.match.params.from);
+                    } else {
                         window.location.replace("/");
                     }
-                });
+                }
+            });
 
-            } else {
-                NotificationManager.error("Invalid Credentials","Try Again",2500);
-            }
+        }).catch(err => {
+            NotificationManager.error("Invalid Credentials", "Try Again", 2500);
+        }).finally(x => {
+            this.setState({
+                isLoading: false,
+                email: '',
+                password: ''
+            })
+
         });
 
 
@@ -66,17 +73,18 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <NotificationContainer/>
+
                 {this.state.isLoading && <LoadingScreen/>}
 
-                <div align="center" style={{marginTop:'50px'}}>
+                <div align="center" style={{marginTop: '50px'}}>
                     <div className="main_form">
                         <Form className="main_form" onSubmit={this.onSubmitHandler}>
                             <Row form>
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label for="">E-Mail</Label>
-                                        <Input type="email" name="email" id="email" onChange={this.onChangeHandler}/>
+                                        <Input type="email" name="email" id="email" value={this.state.email}
+                                               onChange={this.onChangeHandler}/>
 
                                     </FormGroup>
                                 </Col>
@@ -86,7 +94,7 @@ class Login extends React.Component {
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label for="">Password</Label>
-                                        <Input type="password" name="password" id="password"
+                                        <Input type="password" name="password" id="password" value={this.state.password}
                                                onChange={this.onChangeHandler}/>
 
                                     </FormGroup>
@@ -100,6 +108,7 @@ class Login extends React.Component {
                         </Form>
                     </div>
                 </div>
+                <NotificationContainer/>
             </div>);
     }
 

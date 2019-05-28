@@ -8,12 +8,9 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    // UncontrolledDropdown,
-    // DropdownToggle,
-    // DropdownMenu,
-    // DropdownItem
+    NavLink, Button, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
+import axios from "axios";
 
 
 class Header extends React.Component {
@@ -26,12 +23,58 @@ class Header extends React.Component {
             isOpen: false,
             isLoggedIn: false
         };
+
     }
 
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
+    }
+
+    componentDidMount() {
+        this.getUser();
+        console.log(this.state)
+    }
+
+    logoutOnClick = e =>{
+        localStorage.removeItem('af_auth_token');
+        this.setState({
+            isLoggedIn : false,
+            user : ''
+        })
+        window.location.replace('/')
+    }
+
+    getUser = () => {
+        const jwt = localStorage.getItem('af_auth_token');
+        console.log(jwt)
+        if (!jwt) {
+            this.setState({
+                user: null
+            });
+            return;
+        }
+
+        axios({
+            method: 'post',
+            url: '/api/auth/getauthuser',
+            headers: {
+                jwt_token: jwt
+            },
+            data: {}
+
+        }).then(res => {
+            console.log(res.data.user)
+            this.setState({
+                user: res.data.user,
+                isLoggedIn: true
+            })
+
+        }).catch(err => {
+
+
+        })
     }
 
     render() {
@@ -54,28 +97,43 @@ class Header extends React.Component {
                                      className="nav_link_styles">GitHub</NavLink>
                         </NavItem>
 
-
                     </Nav>
+
+                    {/*logged in state*/}
+                    {this.state.isLoggedIn &&
+                    <Nav className="ml-auto" navbar>
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret style={{color: 'white'}}>
+                                Logged In as {this.state.user.firstName}
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>
+                                    Option 1
+                                </DropdownItem>
+                                <DropdownItem>
+                                    Option 2
+                                </DropdownItem>
+                                <DropdownItem divider/>
+                                <DropdownItem onClick={this.logoutOnClick}>
+                                    Logout
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </Nav>
+                    }
+
+                    {!this.state.isLoggedIn &&
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <NavLink href="/createUser" className="nav_link_styles"
                                      style={{color: 'white'}}>SignUp</NavLink>
                         </NavItem>
-
-
-                        {this.state.isLoggedIn &&
-                        <NavItem>
-                            <NavLink href="/logout" className="nav_link_styles"
-                                     style={{color: 'white'}}>Logout</NavLink>
-                        </NavItem>
-                        }
-
-                        {!this.state.isLoggedIn &&
                         <NavItem>
                             <NavLink href="/login" className="nav_link_styles" style={{color: 'white'}}>Login</NavLink>
                         </NavItem>
-                        }
                     </Nav>
+                    }
+
 
                 </Collapse>
             </Navbar>
