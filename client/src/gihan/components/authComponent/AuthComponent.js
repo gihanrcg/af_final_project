@@ -49,12 +49,7 @@ class AuthComponent extends React.Component {
         })
 
 
-        // axios.post('/api/auth/getauthuser', { headers: { jwt_token: jwt } }).then(res => {
-        //     console.log(res);
-        //     this.setState({
-        //         user: res.user
-        //     })
-        // });
+
     }
 
     render() {

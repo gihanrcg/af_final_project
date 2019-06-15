@@ -34,7 +34,6 @@ class Header extends React.Component {
 
     componentDidMount() {
         this.getUser();
-        console.log(this.state)
     }
 
     logoutOnClick = e =>{
@@ -48,7 +47,6 @@ class Header extends React.Component {
 
     getUser = () => {
         const jwt = localStorage.getItem('af_auth_token');
-        console.log(jwt)
         if (!jwt) {
             this.setState({
                 user: null
@@ -65,7 +63,6 @@ class Header extends React.Component {
             data: {}
 
         }).then(res => {
-            console.log(res.data.user)
             this.setState({
                 user: res.data.user,
                 isLoggedIn: true
@@ -106,10 +103,6 @@ class Header extends React.Component {
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{color: 'white'}}>
                                 Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
-                                {
-                                    console.log(this.state.user)
-                                }
-
                                 <Avatar style={{marginLeft:'20px'}} size="50" round={true} name="Gihan Saranga" src={this.state.user.profilePic} />
 
                             </DropdownToggle>

@@ -41,7 +41,7 @@ class Login extends React.Component {
                 }
 
         }).then(res => {
-
+            console.log(res.data)
             localStorage.setItem('af_auth_token', res.data.token);
             swal({
                 title: "Nice!",

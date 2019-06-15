@@ -21,6 +21,7 @@ router.post('/getauthuser', (req, res) => {
                     message: 'User does not exsists'
                 });
             }else{
+                console.log('returning user')
                 return res.status(200).send({
                     user : user
                 })
@@ -73,7 +74,9 @@ router.post('/getauth', (req, res) => {
                         return res.status(200).send({
                             data: true,
                             message: 'valid user',
-                            token: token
+                            token: token,
+                            userId:u.userId,
+                            userType:u.userType
                         })
                     });
             })

@@ -22,6 +22,7 @@ class CreateUser extends React.Component {
     }
 
     onChangeHandler = e => {
+
         this.setState({
             [e.target.name]: e.target.value
         })
