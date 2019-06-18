@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/users/profilePic');
     },
     filename: function (req, file, cb) {
-        cb(null, new Date().toISOString().replace(':','-') + file.originalname);
+        cb(null, new Date().toISOString().replace(':', '-') + file.originalname);
     }
 });
 
@@ -20,7 +20,8 @@ const fileFilter = (req, file, cb) => {
     // reject a file
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         cb(null, true);
-    } else {c
+    } else {
+        c
         cb(null, false);
     }
 };
@@ -40,6 +41,34 @@ const auth = require('../../../../middleware/auth');
 router.get('/', auth, (req, res) => {
     console.log('find all');
     User.find()
+        .sort({ date: -1 })
+        .then(users => res.json(users))
+});
+
+//@route GET
+//@desc get all students
+//@access public
+router.get('/students', auth, (req, res) => {
+
+    User.find({
+        userType: 'Student'
+    })
+        .sort({ date: -1 })
+        .then(users => {
+            res.status(200).send({
+                students: users
+            })
+        })
+});
+
+//@route GET
+//@desc get all admnins
+//@access public
+router.get('/admins', auth, (req, res) => {
+
+    User.find({
+        userType: 'Admin'
+    })
         .sort({ date: -1 })
         .then(users => res.json(users))
 });
@@ -75,7 +104,7 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
             city: req.body.city,
             landline: req.body.landline,
             mobile: req.body.mobile,
-            profilePic : req.file.path,
+            profilePic: req.file.path,
         })
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -99,6 +128,42 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
                 }
             })
         })
+    })
+});
+
+
+//@route PUT
+//@desc add a user
+//@access public
+router.put('/updateUser', upload.single('profilePic'), (req, res) => {
+
+    User.findOne({
+        email: req.body.email
+    }).then(user => {
+        if (user) {
+
+            User.findByIdAndUpdate({ _id: user._id }, req.body, (err, doc) => {
+
+                if(err) {
+                    return res.status(400).send({
+                        message: err
+                    });
+                }    else{
+                    return res.status(200).send({
+                        message: 'updated'
+                    });
+                }          
+                  
+                
+            })
+
+
+        } else {
+            return res.status(400).send({
+                message: 'Invalid user'
+            });
+        }
+
     })
 });
 

@@ -103,7 +103,7 @@ class Header extends React.Component {
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{color: 'white'}}>
                                 Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
-                                <Avatar style={{marginLeft:'20px'}} size="50" round={true} name="Gihan Saranga" src={this.state.user.profilePic} />
+                                <Avatar style={{marginLeft:'20px'}} size="50" round={true} name={this.state.user.firstName + " " + this.state.user.firstName} src={this.state.user.profilePic} />
 
                             </DropdownToggle>
                             <DropdownMenu right>

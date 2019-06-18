@@ -66,7 +66,7 @@ router.post('/getauth', (req, res) => {
                     userType: u.userType,
                     id: u._id
                 }, config.get('jwt_secret_key'), {
-                        expiresIn: 3600
+                        expiresIn: 360000
                     }, (err, token) => {
 
                         if (err) throw err

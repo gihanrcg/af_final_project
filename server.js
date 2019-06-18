@@ -17,7 +17,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
 
 mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(db, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log("Mongo database connected"))
     .catch(err => console.log(err));
 

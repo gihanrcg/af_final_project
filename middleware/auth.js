@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 
 function auth(req,res,next){
 
-    const token = req.header('af_auth_token');
+
+    const token = req.headers.jwt_token;
 
     if(!token){
         res.status(401).json({
@@ -12,10 +13,12 @@ function auth(req,res,next){
     }
 
     try {
-        const decoded = jwt.verify(token,config.get('jwt_secret_key'));
-        req.user = decoded;
+
+
+        res.user = jwt.verify(token, config.get('jwt_secret_key'));
         next();
     } catch (error) {
+        console.log(error)
         res.status(400).json({
             message : 'Token is not valid'
         })

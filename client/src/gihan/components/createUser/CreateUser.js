@@ -95,6 +95,7 @@ class CreateUser extends React.Component {
             console.log(error);
         });
     }
+
     fileUploadHandler = e => {
         this.setState({
             profilePic : e.target.files[0]

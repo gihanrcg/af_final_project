@@ -1,14 +1,39 @@
 import React from 'react'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import AdminPanelSideNav from "../gihan/components/adminPanel/AdminPanelSideNav";
+import {checkAuthAdmin} from "../gihan/functions/checkAuth";
 
-class AdminPanel extends React.Component{
+
+
+import StudentDetails from '../gihan/components/adminPanel/StudentDetails'
+
+class AdminPanel extends React.Component {
 
     render() {
+
+        const PrivateRouteAdmin = ({component: Component, ...rest}) => (
+            <Route {...rest} render={(props) => (
+                checkAuthAdmin()
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: {from: props.location}
+                    }}/>
+            )}/>
+        )
+
 
         return (
 
             <div>
-                <h1>This is the Admin page</h1>
-                <p>My first react application</p>
+                {/*<AdminPanelSideNav/>*/}
+                {/*<div style={{marginLeft: '200px', padding: '5px 16px'}}>*/}
+                    <BrowserRouter>
+                        <Switch>
+                            <PrivateRouteAdmin path="/admin/students" component={StudentDetails}/>
+                        </Switch>
+                    </BrowserRouter>
+                {/*</div>*/}
             </div>
         )
     }
