@@ -8,6 +8,9 @@ const FileSchema = new Schema({
     file :{
         type : String
     },
+    submittedBy:{
+        type:String
+    }
 });
 
 module.exports = FileModel = mongoose.model('FileModel', FileSchema);

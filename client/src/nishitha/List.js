@@ -25,7 +25,7 @@ class List extends React.Component {
                                            download>{file.file.split('\\').pop()}</a>
                                     </td>
                                     <td>
-                                        hello
+                                        {file.submittedBy}
                                     </td>
                                     <td>
                                         <Button color="danger" onClick={(e)=>this.props.handleDelete(this.props.fileList,file)}>Delete</Button>

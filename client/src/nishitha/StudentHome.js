@@ -17,38 +17,40 @@ class StudentHome extends React.Component {
 
     }
 
-    // getUser = () => {
-    //     const jwt = localStorage.getItem('af_auth_token');
-    //     if (!jwt) {
-    //         this.setState({
-    //             user: null
-    //
-    //         });
-    //         return;
-    //     }
-    //
-    //     axios({
-    //         method: 'post',
-    //         url: '/api/auth/getauthuser',
-    //         headers: {
-    //             jwt_token: jwt
-    //         },
-    //         data: {}
-    //
-    //     }).then(res => {
-    //         this.setState({
-    //             user: res.data.user,
-    //             isLoggedIn: true
-    //         })
-    //
-    //     }).catch(err => {
-    //
-    //
-    //     })
-    // }
+    getUser = () => {
+        const jwt = localStorage.getItem('af_auth_token');
+        if (!jwt) {
+            this.setState({
+                user: null
+
+            });
+            return;
+        }
+
+        axios({
+            method: 'post',
+            url: '/api/auth/getauthuser',
+            headers: {
+                jwt_token: jwt
+            },
+            data: {}
+
+        }).then(res => {
+            console.log(res.data.user);
+            this.setState({
+                user: res.data.user,
+                isLoggedIn: true
+            })
+
+        }).catch(err => {
+
+
+        })
+    }
 
     componentDidMount() {
 
+         this.getUser();
             axios.get('/api/files').then((res) => {
                 console.log(res.data);
                 //res.data.map((fileObj)=>{
@@ -113,7 +115,8 @@ class StudentHome extends React.Component {
         const formData = new FormData();
 
         files.forEach((file) => {
-            formData.append("file", file)
+            formData.append("file", file);
+            formData.append("submitted",this.state.user.firstName+" "+this.state.user.lastName)
         });
 
         fetch('/api/files/upload', {
@@ -123,7 +126,7 @@ class StudentHome extends React.Component {
 
             },
             method: 'POST',
-            body: formData
+            body: formData,
 
         })
             .then(res => res.json())
@@ -196,7 +199,8 @@ class StudentHome extends React.Component {
                     fileList={this.state.fileList.map((file) => {
                         let fileObj = {
                             file: file.file,
-                            _id: file._id
+                            _id: file._id,
+                            submittedBy:file.submittedBy
                         };
                         return fileObj
 

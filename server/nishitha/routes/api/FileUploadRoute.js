@@ -51,10 +51,11 @@ router.delete('/:id', (req, res) => {
 });
 
 router.post('/upload', upload.single('file'), (req, res) => {
-
         const newFile = new File({
             file : req.file.path,
+            submittedBy:req.body.submitted
         });
+
 
     try {
         newFile.save().
