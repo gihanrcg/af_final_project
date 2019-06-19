@@ -8,7 +8,7 @@ function auth(req,res,next){
 
     if(!token){
         res.status(401).json({
-            message : 'No token found auth denided'
+            message : 'No token found auth denied'
         });
     }
 

@@ -12,6 +12,7 @@ import CreateUser from './gihan/components/createUser/CreateUser';
 import TestPageAuthenticated from './pages/TestPageAuthunticated';
 import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 import AdminPanel from "./pages/AdminPanel";
+import StudentHome from "./nishitha/StudentHome";
 
 
 class App extends React.Component {
@@ -52,6 +53,7 @@ class App extends React.Component {
                         <Route path="/createUser" component={CreateUser}/>
                         <Route path="/login/:from" component={Login}/>
                         <Route path="/login" component={Login}/>
+                        <Route path="/studenthome" component={StudentHome}/>
                         <PrivateRouteStudent path="/test" component={TestPageAuthenticated}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                         {/*<AuthComponent a={'test'}>*/}
