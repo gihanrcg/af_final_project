@@ -150,15 +150,10 @@ class StudentHome extends React.Component {
     };
 
     //download documents
-    handleDownload = (projectId, attachmentId, fileName) => {
+    handleDownload = (fileName) => {
 
-        this.setState({
-            // apiCallStatus: 'DOWNLOAD_INIT',
-            // errors: false
 
-        })
-
-        fetch('/projects/' + projectId + '/attachments/' + attachmentId + '/download', {
+        fetch('/api/files/download/'+fileName, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -200,7 +195,8 @@ class StudentHome extends React.Component {
                         let fileObj = {
                             file: file.file,
                             _id: file._id,
-                            submittedBy:file.submittedBy
+                            submittedBy:file.submittedBy,
+                            submittedDate:file.submittedDate
                         };
                         return fileObj
 

@@ -49,11 +49,17 @@ router.delete('/:id', (req, res) => {
 
 
 });
-
+router.get('/download/:filename',(req, res) => {
+    var file = req.params.filename;
+    var fileLocation = path.join('uploads/users/fileUploads/',file);
+    console.log(fileLocation);
+    res.download(fileLocation, file);
+});
 router.post('/upload', upload.single('file'), (req, res) => {
         const newFile = new File({
             file : req.file.path,
-            submittedBy:req.body.submitted
+            submittedBy:req.body.submitted,
+            submittedDate:new Date()
         });
 
 

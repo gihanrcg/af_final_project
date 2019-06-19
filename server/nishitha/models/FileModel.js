@@ -10,7 +10,12 @@ const FileSchema = new Schema({
     },
     submittedBy:{
         type:String
+    },
+    submittedDate:{
+        type:Date
     }
+
+
 });
 
 module.exports = FileModel = mongoose.model('FileModel', FileSchema);
