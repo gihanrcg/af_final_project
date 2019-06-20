@@ -51,7 +51,6 @@ class CreateUser extends React.Component {
         frmData.set("landline", this.state.landline);
         frmData.set("mobile", this.state.mobile);
 
-        console.log(this.state.profilePic);
         frmData.append('profilePic', this.state.profilePic);
 
         axios({
@@ -92,6 +91,9 @@ class CreateUser extends React.Component {
                 }
             });
         }).catch(error => {
+            this.setState({
+                isLoading: false
+            })
             console.log(error);
         });
     }

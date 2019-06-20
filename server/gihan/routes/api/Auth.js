@@ -80,8 +80,6 @@ router.post('/getauth', (req, res) => {
                         })
                     });
             })
-
-
     })
 });
 

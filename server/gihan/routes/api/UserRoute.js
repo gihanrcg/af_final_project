@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const multer = require('multer');
+const nodeMailer = require('nodemailer');
 
 const x = multer
 
@@ -34,6 +35,13 @@ const upload = multer({
 const User = require('../../models/User');
 const auth = require('../../../../middleware/auth');
 
+const transporter = nodeMailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: config.get('email'),
+        pass: config.get('password')
+    }
+});
 
 //@route GET
 //@desc get all users
@@ -44,6 +52,25 @@ router.get('/', auth, (req, res) => {
         .sort({ date: -1 })
         .then(users => res.json(users))
 });
+
+
+
+//@route GET
+//@desc get all lecturers
+//@access public
+router.get('/lecturers', auth, (req, res) => {
+
+    User.find({
+        userType: 'Lecturer'
+    })
+        .sort({ date: -1 })
+        .then(users => {
+            res.status(200).send({
+                lecturers: users
+            })
+        })
+});
+
 
 //@route GET
 //@desc get all students
@@ -72,6 +99,53 @@ router.get('/admins', auth, (req, res) => {
         .sort({ date: -1 })
         .then(users => res.json(users))
 });
+
+
+router.get('/confirm/:token',(req,res)=>{
+
+    try {
+        const decoded = jwt.verify(req.params.token, config.get('email_secret_key'));
+console.log('email',decoded.email)
+        
+        User.findOneAndUpdate({ email: decoded.email }, {confirm:true}, (err, doc) => {
+
+            if (err) {
+                return res.status(400).send({
+                    message: err
+                });
+            } else {
+                return res.status(200).send({
+                    message: 'updated'
+                });
+            }
+        })
+
+
+        // User.findOne({
+        //     email : decoded.email
+        // }).then(user => {
+        //     if (!user) {
+                
+        //         return res.status(400).send({
+        //             message: 'User does not exsists'
+        //         });
+        //     }else{
+               
+        //         user.confirm = true;
+        //         user.save().then(user =>{
+        //             return res.status(200).send({
+        //                 user : user
+        //             })
+        //         })             
+        //     }
+        // })
+    } catch (err) {
+        return res.status(401).send({
+            message: 'invalid token'
+        });
+    }
+
+})
 
 
 //@route POST
@@ -111,16 +185,53 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
                 if (err) console.log(err);
                 newUser.password = hash;
-                console.log(hash);
                 try {
                     newUser.save().
-                        then(user =>
-                            res.status(200).send({
-                                message: 'User created successfully',
-                                data: user
+                        then(user => {
+                            jwt.sign(
+                                {
+                                    email: user.email,
+                                },
+                                config.get('email_secret_key'),
+                                {
+                                    expiresIn: 3600
+                                }, (err, token) => {
+                                    console.log('token', token)
+                                    if (err) {
+                                        console.log(err)
+                                        throw err
+                                    }
+                                    else {
+                                        const url = 'http://localhost:5000/api/users/confirm/' + token;
+
+                                        console.log('url', url);
+                                        transporter.sendMail({
+                                            to: user.email,
+                                            subject: 'Email Confirmation',
+                                            html: 'Please click this url to confirm your email address : <a href="' + url + '">' + url + '</a>'
+
+                                        });
+                                        return res.status(200).send({
+                                            data: true,
+                                            message: 'valid user',
+                                            token: token,
+                                            userId: u.userId,
+                                            userType: u.userType
+                                        })
+                                    }
+                                })
+
+                            return res.status(200).send({
+                                data: true,
+                                message: 'valid user',
+                                token: token,
+                                userId: u.userId,
+                                userType: u.userType
                             })
-                        );
+                        });
+
                 } catch (err) {
+                    console.log(err)
                     res.status(500).send({
                         message: 'Unknown server error',
                         data: newUser
@@ -130,6 +241,44 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
         })
     })
 });
+
+
+//@route PUT
+//@desc change password
+//@access admin
+router.put('/changePassword', (req, res) => {
+    User.findOne({
+        email: req.body.email
+    }).then(user => {
+        if (user) {
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    if (err) console.log(err);
+                    user.password = hash;
+                    try {
+                        user.save().
+                            then(user =>
+                                res.status(200).send({
+                                    message: 'User password updated successfully',
+                                    data: user
+                                })
+                            );
+                    } catch (err) {
+                        res.status(500).send({
+                            message: 'Unknown server error',
+                            data: newUser
+                        });
+                    }
+                })
+            })
+
+        } else {
+            res.status(400).send({
+                message: 'Invalid user',
+            });
+        }
+    })
+})
 
 
 //@route PUT
@@ -144,17 +293,17 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
             User.findByIdAndUpdate({ _id: user._id }, req.body, (err, doc) => {
 
-                if(err) {
+                if (err) {
                     return res.status(400).send({
                         message: err
                     });
-                }    else{
+                } else {
                     return res.status(200).send({
                         message: 'updated'
                     });
-                }          
-                  
-                
+                }
+
+
             })
 
 

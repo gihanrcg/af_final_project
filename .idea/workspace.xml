@@ -3,14 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8d38db7a-05de-480c-bbd6-60b2456a7d60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/gihan/components/adminPanel/StudentDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/gihan/components/adminPanel/StudentDetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/gihan/components/adminPanel/studentDetalsStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/gihan/components/adminPanel/studentDetalsStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/gihan/components/header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/gihan/components/header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/AdminPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/AdminPanel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/gihan/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/gihan/models/User.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/gihan/routes/api/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/gihan/routes/api/Auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/gihan/routes/api/UserRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/gihan/routes/api/UserRoute.js" afterDir="false" />
     </list>
@@ -25,16 +25,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/StudentDetails.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="304" column="70" selection-start-line="304" selection-start-column="70" selection-end-line="304" selection-end-column="70" />
+            <state relative-caret-position="374">
+              <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
+                <element signature="n#!!block;n#constructor#0;n#StudentDetails#0" />
                 <element signature="n#!!block;n#componentDidMount#0;n#StudentDetails#0" />
-                <element signature="e#724#1214#0" />
+                <element signature="e#1274#1669#0" />
+                <element signature="e#1700#1833#0" />
+                <element signature="e#1880#3886#0" />
+                <element signature="e#2129#3877#0" />
+                <element signature="e#3915#4794#0" />
+                <element signature="e#3968#4005#0" />
+                <element signature="e#17928#18071#0" />
+                <element signature="n#!!block;n#renderTableData#0;n#StudentDetails#0" />
+                <element signature="e#18295#18815#0" />
+                <element signature="n#!!block;n#renderTableHeader#0;n#StudentDetails#0" />
+                <element signature="e#19896#21233#0" />
+                <element signature="e#21265#22608#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/pages/AdminPanel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -42,12 +75,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="98" selection-start-line="98" selection-end-line="102" selection-end-column="5" />
+            <state relative-caret-position="-1475">
+              <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#217#243#0" expanded="true" />
                 <element signature="n#!!block;n#constructor#0;n#CreateUser#0" />
+                <element signature="e#660#747#0" />
+                <element signature="e#685#740#0" />
+                <element signature="e#3184#3238#0" />
+                <element signature="e#3292#11130#0" />
               </folding>
             </state>
           </provider>
@@ -56,8 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/gihan/components/header/Header.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="115" column="55" lean-forward="true" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
+            <state relative-caret-position="1869">
+              <caret line="115" column="55" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -68,8 +105,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/studentDetalsStyles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-308">
-              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state relative-caret-position="66">
+              <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/LecturerDetails.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="362" column="77" selection-start-line="362" selection-start-column="71" selection-end-line="362" selection-end-column="77" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,8 +130,8 @@
       <list>
         <option value="React Page" />
         <option value="JavaScript File" />
-        <option value="React Component" />
         <option value="CSS File" />
+        <option value="React Component" />
       </list>
     </option>
   </component>
@@ -96,6 +145,8 @@
       <find>modal</find>
       <find>contaim</find>
       <find>onSubmitHandler</find>
+      <find>student</find>
+      <find>componentd</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -125,19 +176,20 @@
         <option value="$PROJECT_DIR$/middleware/auth.js" />
         <option value="$PROJECT_DIR$/client/src/gihan/components/Login/Login.js" />
         <option value="$PROJECT_DIR$/client/public/index.html" />
-        <option value="$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js" />
-        <option value="$PROJECT_DIR$/client/src/pages/AdminPanel.js" />
         <option value="$PROJECT_DIR$/client/src/gihan/components/header/Header.js" />
+        <option value="$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js" />
         <option value="$PROJECT_DIR$/client/src/gihan/components/adminPanel/studentDetalsStyles.css" />
         <option value="$PROJECT_DIR$/client/src/gihan/components/adminPanel/StudentDetails.js" />
+        <option value="$PROJECT_DIR$/client/src/pages/AdminPanel.js" />
+        <option value="$PROJECT_DIR$/client/src/gihan/components/adminPanel/LecturerDetails.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="144" />
-    <option name="y" value="-24" />
-    <option name="width" value="632" />
-    <option name="height" value="580" />
+    <option name="x" value="115" />
+    <option name="y" value="-20" />
+    <option name="width" value="507" />
+    <option name="height" value="465" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -179,6 +231,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="gihan" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="final_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="final_project" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gihan" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="adminPanel" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="final_project" type="b2602c69:ProjectViewProjectNode" />
@@ -257,23 +318,25 @@
       <workItem from="1560766085006" duration="41000" />
       <workItem from="1560766188359" duration="4183000" />
       <workItem from="1560772276212" duration="2191000" />
-      <workItem from="1560782586264" duration="6573000" />
+      <workItem from="1560782586264" duration="7539000" />
+      <workItem from="1560866829757" duration="5624000" />
+      <workItem from="1560932731884" duration="642000" />
+      <workItem from="1561005936771" duration="5440000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82205000" />
+    <option name="totallyTimeSpent" value="94877000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.13224447" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19497687" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="TypeScript" />
-      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.24377032" />
+      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.1855524" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -284,6 +347,7 @@
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -395,13 +459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14">
-          <caret line="19" column="4" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/gihan/routes/api/Auth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -461,34 +518,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/pages/AdminPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="54" column="93" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="93" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="98" selection-start-line="98" selection-end-line="102" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#217#243#0" expanded="true" />
-            <element signature="n#!!block;n#constructor#0;n#CreateUser#0" />
           </folding>
         </state>
       </provider>
@@ -500,16 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/gihan/components/header/Header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="115" column="55" lean-forward="true" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/gihan/components/createUser/createUserStyles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -517,21 +542,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/gihan/components/header/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1869">
+          <caret line="115" column="55" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/studentDetalsStyles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-308">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        <state relative-caret-position="66">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/StudentDetails.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="304" column="70" selection-start-line="304" selection-start-column="70" selection-end-line="304" selection-end-column="70" />
+        <state relative-caret-position="374">
+          <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="10" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#StudentDetails#0" />
             <element signature="n#!!block;n#componentDidMount#0;n#StudentDetails#0" />
-            <element signature="e#724#1214#0" />
+            <element signature="e#1274#1669#0" />
+            <element signature="e#1700#1833#0" />
+            <element signature="e#1880#3886#0" />
+            <element signature="e#2129#3877#0" />
+            <element signature="e#3915#4794#0" />
+            <element signature="e#3968#4005#0" />
+            <element signature="e#17928#18071#0" />
+            <element signature="n#!!block;n#renderTableData#0;n#StudentDetails#0" />
+            <element signature="e#18295#18815#0" />
+            <element signature="n#!!block;n#renderTableHeader#0;n#StudentDetails#0" />
+            <element signature="e#19896#21233#0" />
+            <element signature="e#21265#22608#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/gihan/components/createUser/CreateUser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1475">
+          <caret line="30" column="27" lean-forward="true" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#217#243#0" expanded="true" />
+            <element signature="n#!!block;n#constructor#0;n#CreateUser#0" />
+            <element signature="e#660#747#0" />
+            <element signature="e#685#740#0" />
+            <element signature="e#3184#3238#0" />
+            <element signature="e#3292#11130#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/gihan/components/adminPanel/LecturerDetails.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="362" column="77" selection-start-line="362" selection-start-column="71" selection-end-line="362" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/pages/AdminPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

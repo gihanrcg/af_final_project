@@ -1,8 +1,15 @@
 
+
+
 .search-input{
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
     width: 30%;
     margin-left: 5%;
     margin-bottom: 1%;
+}
+.search-input :focus{
+    width: 100%;
 }
 
 button:hover {

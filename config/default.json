@@ -1,4 +1,7 @@
 {
     "mongoURI" : "mongodb+srv://group:group123@cluster0-4riju.mongodb.net/sms?retryWrites=true",
-    "jwt_secret_key" : "AF_FINAL_PROJECT_JWT_KEY"
+    "jwt_secret_key" : "AF_FINAL_PROJECT_JWT_KEY",
+    "email_secret_key" : "EMAIL_SECRET_KEY",
+    "email" : "nodelearnersliit@gmail.com",
+    "password": "node@123"
 }

@@ -6,6 +6,7 @@ import {checkAuthAdmin} from "../gihan/functions/checkAuth";
 
 
 import StudentDetails from '../gihan/components/adminPanel/StudentDetails'
+import LecturerDetails from "../gihan/components/adminPanel/LecturerDetails";
 
 class AdminPanel extends React.Component {
 
@@ -31,6 +32,7 @@ class AdminPanel extends React.Component {
                     <BrowserRouter>
                         <Switch>
                             <PrivateRouteAdmin path="/admin/students" component={StudentDetails}/>
+                            <PrivateRouteAdmin path="/admin/lecturers" component={LecturerDetails}/>
                         </Switch>
                     </BrowserRouter>
                 {/*</div>*/}

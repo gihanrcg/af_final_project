@@ -5,23 +5,22 @@ import './studentDetalsStyles.css'
 import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import swal from "sweetalert";
 
-class StudentDetails extends React.Component {
+class LecturerDetails extends React.Component {
 
 
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
         this.state = { //state is by default an object
-            students: [],
+            lecturers: [],
             loading: false,
             sortByName: 0,
             sortByUserId: 0,
-            selectedStudent: null
+            selectedLecturer: null
         }
     }
 
     componentDidMount() {
         this.getUser()
-
     }
 
     getUser = () => {
@@ -32,14 +31,15 @@ class StudentDetails extends React.Component {
         console.log(jwt)
         axios({
             method: 'get',
-            url: '/api/users/students',
+            url: '/api/users/lecturers',
             headers: {
                 'jwt_token': jwt
             }
         }).then(res => {
 
+            console.log(res)
             this.setState({
-                students: res.data.students,
+                lecturers: res.data.lecturers,
                 loading: false
 
             })
@@ -51,24 +51,24 @@ class StudentDetails extends React.Component {
 
     onChangeHandler = e => {
 
-        if (this.state.selectedStudent !== null) {
-            const {selectedStudent} = {...this.state};
+        if (this.state.selectedLecturer !== null) {
+            const {selectedLecturer} = {...this.state};
 
-            const currentStudent = selectedStudent;
-            console.log(currentStudent)
+            const currentLEcturer = selectedLecturer;
+            console.log(currentLEcturer)
             const {name, value} = e.target;
-            currentStudent[name] = value
+            currentLEcturer[name] = value
 
 
             this.setState({
-                selectedStudent: currentStudent
+                selectedLecturer: currentLEcturer
             })
         }
     }
 
     fileUploadHandler = e => {
         this.setState({
-            selectedStudent: {
+            selectedLecturer: {
                 profilePic: e.target.files[0]
             }
         })
@@ -99,7 +99,7 @@ class StudentDetails extends React.Component {
                                 method: 'put',
                                 url: '/api/users/changePassword',
                                 data: {
-                                    email: this.state.selectedStudent.email,
+                                    email: this.state.selectedLecturer.email,
                                     password: name
                                 }
                             }).then(res => {
@@ -142,13 +142,12 @@ class StudentDetails extends React.Component {
             method: 'put',
             url: '/api/users/updateUser',
             headers: {},
-            data: this.state.selectedStudent
+            data: this.state.selectedLecturer
 
         }).then(response => {
             this.setState({
                 loading: false
             })
-            console.log(response);
             swal({
                 title: "Nice!",
                 text: "User updated successfully..!",
@@ -156,7 +155,7 @@ class StudentDetails extends React.Component {
                 button: "Go back to home",
             }).then((value) => {
                 if (value) {
-                    window.location.replace("/admin/students");
+                    window.location.replace("/admin/lecturers");
                 }
             });
         }).catch(error => {
@@ -189,9 +188,9 @@ class StudentDetails extends React.Component {
                             <Form style={{width: '50%', align: 'center', padding: '20px'}}
                                   className="main_form modal-content animate" onSubmit={this.onSubmitHandler}>
 
-                                {this.state.selectedStudent !== null && (
+                                {this.state.selectedLecturer !== null && (
 
-                                    <img src={"http://localhost:5000/" + this.state.selectedStudent.profilePic}
+                                    <img src={"http://localhost:5000/" + this.state.selectedLecturer.profilePic}
                                          style={{borderRadius: '50%', width: '30%', height: '30%'}} alt="userProfile"/>
                                 )}
 
@@ -201,7 +200,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">User Type</Label>
                                             <Input onChange={this.onChangeHandler}
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.userType : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.userType : ''}
                                                    type="select" name="userType"
                                                    id="userType">
                                                 <option>None</option>
@@ -216,7 +215,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">UserID</Label>
                                             <Input type="text" name="userId"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.userId : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.userId : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -224,7 +223,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Faculty</Label>
                                             <Input type="select" name="faculty"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.faculty : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.faculty : ''}
                                                    onChange={this.onChangeHandler}>
                                                 <option>None</option>
                                                 <option>Computing</option>
@@ -235,13 +234,13 @@ class StudentDetails extends React.Component {
                                     </Col>
                                 </Row>
                                 {
-                                    (this.state.selectedStudent !== null && this.state.selectedStudent.userType === 'Student') &&
+                                    (this.state.selectedLecturer !== null && this.state.selectedLecturer.userType === 'Student') &&
                                     <Row form>
                                         <Col md={12}>
                                             <FormGroup>
                                                 <Label for="">Course</Label>
                                                 <Input type="text" name="course"
-                                                       value={this.state.selectedStudent !== null ? this.state.selectedStudent.course : ''}
+                                                       value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.course : ''}
                                                        onChange={this.onChangeHandler}/>
                                                 {/* <Input onChange={this.userTypeChanged} type="select" name="userType" id="userType" >
                     <option>Lecturer</option>
@@ -254,13 +253,13 @@ class StudentDetails extends React.Component {
                                     </Row>
                                 }
                                 {
-                                    (this.state.selectedStudent !== null && (this.state.selectedStudent.userType === 'Lecturer' || this.state.selectedStudent.userType === "Instructor")) &&
+                                    (this.state.selectedLecturer !== null && (this.state.selectedLecturer.userType === 'Lecturer' || this.state.selectedLecturer.userType === "Instructor")) &&
                                     <Row form>
                                         <Col md={12}>
                                             <FormGroup>
                                                 <Label for="">Department</Label>
                                                 <Input type="text" name="department"
-                                                       value={this.state.selectedStudent !== null ? '' : ''}
+                                                       value={this.state.selectedLecturer !== null ? '' : ''}
                                                        onChange={this.onChangeHandler}/>
                                             </FormGroup>
                                         </Col>
@@ -272,7 +271,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">E-Mail</Label>
                                             <Input type="email" name="email" id="email"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.email : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.email : ''}
                                                    onChange={this.onChangeHandler}/>
 
                                         </FormGroup>
@@ -286,7 +285,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">First Name</Label>
                                             <Input type="text" name="firstName" id="firstName" placeholder="First Name"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.firstName : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.firstName : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -294,7 +293,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Last Name</Label>
                                             <Input type="text" name="lastName" id="lastName" placeholder="Last Name"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.lastName : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.lastName : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -302,7 +301,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">National ID Card No</Label>
                                             <Input type="text" name="nic" id="nic"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.nic : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.nic : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -312,7 +311,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Address Line 1</Label>
                                             <Input type="text" name="address1" id="address1"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.address1 : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.address1 : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -320,7 +319,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Address Line 2</Label>
                                             <Input type="text" name="address2" id="address2"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.address2 : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.address2 : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -328,7 +327,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">City</Label>
                                             <Input type="text" name="city" id="city"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.city : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.city : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -338,7 +337,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Land Line</Label>
                                             <Input type="text" name="landline" id="landline"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.landline : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.landline : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -346,7 +345,7 @@ class StudentDetails extends React.Component {
                                         <FormGroup>
                                             <Label for="">Mobile</Label>
                                             <Input type="text" name="mobile" id="mobile"
-                                                   value={this.state.selectedStudent !== null ? this.state.selectedStudent.mobile : ''}
+                                                   value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.mobile : ''}
                                                    onChange={this.onChangeHandler}/>
                                         </FormGroup>
                                     </Col>
@@ -358,16 +357,16 @@ class StudentDetails extends React.Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <Button size="lg" block color="primary">Update Student</Button>
+                                <Button size="lg" block color="primary">Update Lecturer</Button>
                                 <Button size="lg" block color="danger" type="button"
                                         onClick={this.forceChangePasswordOnClickHandler}>Force Change Password</Button>
-                                <Button size="lg" block color="danger">Delete Student</Button>
+                                <Button size="lg" block color="danger">Delete Lecturer</Button>
                             </Form>
 
                         </div>
                     </div>
 
-                    <h1 id='title'>Student Details</h1>
+                    <h1 id='title'>Lecturer Details</h1>
 
                     <div align="center">
 
@@ -378,7 +377,7 @@ class StudentDetails extends React.Component {
                                     <b>Search By : </b>
                                 </td>
                                 <td>
-                                    <Input  onChange={this.searchTypeChangeHandler}
+                                    <Input onChange={this.searchTypeChangeHandler}
                                            type="select" name="searchType"
                                            id="searchType" className="form-control">
                                         <option value={0} label="ID Number">ID Number</option>
@@ -413,14 +412,13 @@ class StudentDetails extends React.Component {
         )
     }
 
-    searchTypeChangeHandler = (e)=>{
+    searchTypeChangeHandler = (e) => {
 
         let input = document.getElementById("searchText");
 
-        if(input){
+        if (input) {
             var el = document.getElementById('searchType');
             var text = el.options[el.selectedIndex].innerHTML;
-
 
 
             input.placeholder = 'Search for ' + text;
@@ -429,16 +427,19 @@ class StudentDetails extends React.Component {
 
     }
 
-    onClickHandler = (student) => {
+    onClickHandler = (lecturer) => {
         document.getElementById('id01').style.display = 'block'
         this.setState({
-            selectedStudent: student
+            selectedLecturer: lecturer
         })
     }
 
     renderTableData() {
-        return this.state.students.map((student, index) => {
-            const {_id, userId, faculty, firstName, lastName, nic, email} = student //destructuring
+
+        console.log(this.state)
+
+        return this.state.lecturers.map((lecturer, index) => {
+            const {_id, userId, faculty, firstName, lastName, nic, email} = lecturer //destructuring
             return (
                 <tr key={_id}>
                     <td>{userId}</td>
@@ -448,8 +449,8 @@ class StudentDetails extends React.Component {
                     <td>{nic}</td>
                     <td>{email}</td>
                     <td>
-                        <button className="btn btn-secondary" value={student}
-                                onClick={() => this.onClickHandler(student)}> Edit Details
+                        <button className="btn btn-secondary" value={lecturer}
+                                onClick={() => this.onClickHandler(lecturer)}> Edit Details
                         </button>
                     </td>
                 </tr>
@@ -601,4 +602,4 @@ class StudentDetails extends React.Component {
 
 }
 
-export default StudentDetails;
+export default LecturerDetails;

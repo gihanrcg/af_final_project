@@ -66,8 +66,11 @@ const UserSchema = new Schema({
     },
     profilePic :{
         type : String
+    },
+    confirmed : {
+        type : Boolean,
+        default : false
     }
-
 });
 
 module.exports = User = mongoose.model('User', UserSchema);
