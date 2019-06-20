@@ -1,3 +1,6 @@
+//User Model
+//Defines all the properties of User (Admin, Student, Lecturer) 
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

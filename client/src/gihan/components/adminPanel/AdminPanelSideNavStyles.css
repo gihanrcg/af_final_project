@@ -1,55 +1,55 @@
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+}
 
 a{
     text-decoration: none;
 }
-.sidebar {
-    margin-top: 50px;
-    padding: 0;
-    width: 200px;
-    background-color: dimgrey;
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
     position: fixed;
-
-    overflow: auto;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
 }
 
-.sidebar a {
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    /*color: #818181;*/
     display: block;
-    color: black;
+    transition: 0.3s;
+    margin: 2px 2px 8px 8px;
+}
+
+.sidenav a:hover {
+    /*color: royalblue;*/
+    text-decoration: none;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
     padding: 16px;
-    text-decoration: none;
 }
 
-.sidebar a.active {
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-}
-
-.sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-    text-decoration: none;
-}
-
-div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-    .sidebar a {float: left;}
-    div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-    .sidebar a {
-        text-align: center;
-        float: none;
-    }
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }

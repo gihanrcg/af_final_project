@@ -8,6 +8,7 @@ const nodeMailer = require('nodemailer');
 
 const x = multer
 
+//Definig multer storage to file upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/users/profilePic');
@@ -17,6 +18,7 @@ const storage = multer.diskStorage({
     }
 });
 
+//Defining a filter to upload files
 const fileFilter = (req, file, cb) => {
     // reject a file
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
@@ -27,14 +29,19 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+//Initialize multer object
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter
 });
 
+//Initializing model user
 const User = require('../../models/User');
+
+//Initializing auth middleware function to be used to authorize users
 const auth = require('../../../../middleware/auth');
 
+//Initializr nodeMailer
 const transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -45,7 +52,7 @@ const transporter = nodeMailer.createTransport({
 
 //@route GET
 //@desc get all users
-//@access public
+//@access private
 router.get('/', auth, (req, res) => {
     console.log('find all');
     User.find()
@@ -57,7 +64,7 @@ router.get('/', auth, (req, res) => {
 
 //@route GET
 //@desc get all lecturers
-//@access public
+//@access private
 router.get('/lecturers', auth, (req, res) => {
 
     User.find({
@@ -128,7 +135,9 @@ router.get('/admins', auth, (req, res) => {
         .then(users => res.json(users))
 });
 
-
+//@route GET
+//@desc confirm sign up email
+//@access public
 router.get('/confirm/:token',(req,res)=>{
 
     try {
@@ -178,7 +187,7 @@ console.log('email',decoded.email)
 
 //@route POST
 //@desc add a user
-//@access public
+//@access private
 router.post('/createUser', upload.single('profilePic'), (req, res) => {
 
     User.findOne({
@@ -310,7 +319,7 @@ router.put('/changePassword', (req, res) => {
 
 
 //@route PUT
-//@desc add a user
+//@desc update a user
 //@access public
 router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
@@ -346,7 +355,7 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
 
 //@route PUT
-//@desc add a user
+//@desc update a user
 //@access public
 router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
@@ -379,64 +388,5 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
     })
 });
-
-
-// router.post('/isValidUser', (req, res) => {
-
-//     const em = req.body.email.toLowerCase();
-
-//     User.findOne({
-//         "email": em
-//     })
-//         .sort({ date: -1 })
-//         .then(users => {
-//             const u = users;
-//             console.log(u);
-
-//             if (u) {
-//                 if (u.password.trim().toUpperCase() === req.body.password.trim().toUpperCase()) {
-
-//                     jwt.sign({
-//                         email: u.email,
-//                         userId: u.userId,
-//                         userType: u.userType,
-//                         id: u._id
-//                     }, config.get('jwt_secret_key'), {
-//                             expiresIn: 30
-//                         }, (err, token) => {
-
-//                             if (err) throw err
-
-//                             res.status(200).send({
-//                                 data: true,
-//                                 message: 'valid user',
-//                                 token: jwtToken
-//                             })
-//                         });
-
-
-
-//                 } else {
-//                     res.status(200).send({
-//                         data: false,
-//                         message: 'invalid password'
-//                     })
-//                 }
-//             } else {
-//                 res.status(200).send({
-//                     data: false,
-//                     message: 'invalid email'
-//                 })
-//             }
-//         });
-
-
-
-
-//});
-
-
-
-
 
 module.exports = router;

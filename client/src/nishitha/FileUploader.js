@@ -15,7 +15,7 @@ class FileUploader extends React.Component {
         return (
             <div>
                 <label>Upload a file</label>
-                <input type="file" name="file" onChange={(e) => this.handleUpload(e)}/>
+                <input type="file" name="file" onChange={(e) => this.handleUpload(e)} />
                 <List
                     fileList={this.props.fileList}
                     handleDownload={this.props.handleDownload}
