@@ -84,7 +84,7 @@ class StudentDetails extends React.Component {
             },
         })
             .then(name => {
-                if (!name) throw null;
+                if (!name) throw new Error();
 
                 swal({
                     title: "Are you sure you want to update the password?",

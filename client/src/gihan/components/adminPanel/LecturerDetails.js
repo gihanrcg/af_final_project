@@ -7,10 +7,9 @@ import swal from "sweetalert";
 
 class LecturerDetails extends React.Component {
 
-
     constructor(props) {
-        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this.state = { //state is by default an object
+        super(props)
+        this.state = {
             lecturers: [],
             loading: false,
             sortByName: 0,
@@ -37,14 +36,16 @@ class LecturerDetails extends React.Component {
             }
         }).then(res => {
 
-            console.log(res)
             this.setState({
                 lecturers: res.data.lecturers,
                 loading: false
 
             })
         }).catch(err => {
-
+            this.setState({
+                loading: false
+            })
+            swal("Sorry..!", "Unknown server error occurred", "error");
 
         })
     }
@@ -84,7 +85,9 @@ class LecturerDetails extends React.Component {
             },
         })
             .then(name => {
-                if (!name) throw null;
+                if (!name) {
+                    throw new Error();
+                }
 
                 swal({
                     title: "Are you sure you want to update the password?",
@@ -113,8 +116,6 @@ class LecturerDetails extends React.Component {
                                         window.location.replace("/");
                                     }
                                 });
-
-
                             }).catch(err => {
                                 if (err) {
                                     swal("Oh noes!", "The AJAX request failed!", "error");
@@ -242,12 +243,6 @@ class LecturerDetails extends React.Component {
                                                 <Input type="text" name="course"
                                                        value={this.state.selectedLecturer !== null ? this.state.selectedLecturer.course : ''}
                                                        onChange={this.onChangeHandler}/>
-                                                {/* <Input onChange={this.userTypeChanged} type="select" name="userType" id="userType" >
-                    <option>Lecturer</option>
-                    <option>Instructor</option>
-                    <option>Student</option>
-                    <option>Admin</option>
-                  </Input> */}
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -417,8 +412,8 @@ class LecturerDetails extends React.Component {
         let input = document.getElementById("searchText");
 
         if (input) {
-            var el = document.getElementById('searchType');
-            var text = el.options[el.selectedIndex].innerHTML;
+            let el = document.getElementById('searchType');
+            let text = el.options[el.selectedIndex].innerHTML;
 
 
             input.placeholder = 'Search for ' + text;

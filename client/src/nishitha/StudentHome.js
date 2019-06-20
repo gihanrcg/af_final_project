@@ -1,7 +1,11 @@
 import React from 'react';
-import FileUploader from "./FileUploader";
+
+//Dependent libraries
 import axios from 'axios'
+
+//Custom Components
 import StudentCourse from "./StudentCourse";
+import FileUploader from "./FileUploader";
 
 class StudentHome extends React.Component {
 
@@ -12,7 +16,7 @@ class StudentHome extends React.Component {
             fileList: [],
             isOpen: false,
             isLoggedIn: false,
-            user:''
+            user: ''
         }
 
     }
@@ -22,7 +26,6 @@ class StudentHome extends React.Component {
         if (!jwt) {
             this.setState({
                 user: null
-
             });
             return;
         }
@@ -43,35 +46,34 @@ class StudentHome extends React.Component {
             })
 
         }).catch(err => {
-
-
+            throw new Error(err);
         })
     }
 
     componentDidMount() {
 
-         this.getUser();
-            axios.get('/api/files').then((res) => {
-                console.log(res.data);
-                //res.data.map((fileObj)=>{
-                //     nameArr.push(fileObj.file.split('\\').pop())
-                // });
+        this.getUser();
+        axios.get('/api/files').then((res) => {
+            console.log(res.data);
+            //res.data.map((fileObj)=>{
+            //     nameArr.push(fileObj.file.split('\\').pop())
+            // });
 
-                //console.log('**************')
-                // console.log(paths)
-                this.setState({
-                    fileList: res.data
-                }, () => {
-                    console.log(this.state.fileList)
-                })
+            //console.log('**************')
+            // console.log(paths)
+            this.setState({
+                fileList: res.data
+            }, () => {
+                console.log(this.state.fileList)
             })
+        })
         // const nameArr=[];
 
     }
 
     //delete documents
     handleDelete = (fileList, file) => {
-        fetch('/api/files/'+file._id, {
+        fetch('/api/files/' + file._id, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -80,12 +82,12 @@ class StudentHome extends React.Component {
             method: 'DELETE',
 
         })
-       .then(response => {
-                   console.log(response);
-                if (response.status == 204) {
+            .then(response => {
+                console.log(response);
+                if (response.status === 204) {
 
                     this.setState({
-                         fileList:  this.removeDoc(fileList, file)
+                        fileList: this.removeDoc(fileList, file)
                     })
                 }
 
@@ -93,8 +95,7 @@ class StudentHome extends React.Component {
 
             console.log(error);
 
-            this.setState({
-            })
+            this.setState({})
 
         })
 
@@ -104,7 +105,7 @@ class StudentHome extends React.Component {
     removeDoc = (docList, doc) => {
         console.log(doc);
         let newDocList = docList.filter(function (ele) {
-            return ele != doc;
+            return ele !== doc;
         });
         return newDocList;
     }
@@ -116,7 +117,7 @@ class StudentHome extends React.Component {
 
         files.forEach((file) => {
             formData.append("file", file);
-            formData.append("submitted",this.state.user.firstName+" "+this.state.user.lastName)
+            formData.append("submitted", this.state.user.firstName + " " + this.state.user.lastName)
         });
 
         fetch('/api/files/upload', {
@@ -133,18 +134,12 @@ class StudentHome extends React.Component {
             .then(response => {
                 let {fileList} = this.state;
                 fileList.push(response.data);
-                console.log(response.data);
-                console.log(response.data.file);
-
                 this.setState({
                     fileList: fileList
-
                 })
 
             }).catch(error => {
-            this.setState({
-
-            })
+                this.setState({})
         })
 
     };
@@ -153,7 +148,7 @@ class StudentHome extends React.Component {
     handleDownload = (fileName) => {
 
 
-        fetch('/api/files/download/'+fileName, {
+        fetch('/api/files/download/' + fileName, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -195,8 +190,8 @@ class StudentHome extends React.Component {
                         let fileObj = {
                             file: file.file,
                             _id: file._id,
-                            submittedBy:file.submittedBy,
-                            submittedDate:file.submittedDate
+                            submittedBy: file.submittedBy,
+                            submittedDate: file.submittedDate
                         };
                         return fileObj
 
