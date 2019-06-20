@@ -7,14 +7,16 @@ const config = require('config');
 
 const userRoutes = require('./server/gihan/routes/api/UserRoute');
 const AuthRoutes = require('./server/gihan/routes/api/Auth');
+const FileRoutes=require('./server/nishitha/routes/api/FileUploadRoute');
 
 const app = express();
 app.use(BodyParser.json());
 
 const db = config.get('mongoURI');
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
+app.use('/api/files',FileRoutes);
 
 mongoose
     .connect(db, { useNewUrlParser: true, useFindAndModify: false })

@@ -35,7 +35,7 @@ router.post('/getauthuser', (req, res) => {
 
 
     
-})
+});
 
 
 //@route POST
