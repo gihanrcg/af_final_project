@@ -20,6 +20,7 @@ class StudentHome extends React.Component {
             isLoggedIn: false,
             user: ''
         }
+    }
 
     getUser = () => {
         const jwt = localStorage.getItem('af_auth_token');

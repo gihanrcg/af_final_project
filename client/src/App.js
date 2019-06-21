@@ -52,7 +52,6 @@ class App extends React.Component {
                         <Route path="/login" component={Login}/>
                         <Route path="/studenthome" component={StudentHome}/>
                         <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
-                        <PrivateRouteStudent path="/test" component={TestPageAuthenticated}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                     </Switch>
                 </BrowserRouter>
