@@ -2,6 +2,7 @@ import React from 'react';
 import {Table} from 'reactstrap';
 import axios from "axios/index";
 import FileUploader from "./FileUploader";
+import './css/studenthomecss.css'
 
 class AssignmentSubmissionScreen extends React.Component {
 
@@ -106,14 +107,12 @@ class AssignmentSubmissionScreen extends React.Component {
 
     };
 
-//TODO FIX BUGS
+
 ////select assignment and make upload
     render() {
 
-
-        const {isSubmitted} = this.state;
         return (
-            <div>
+            <div className="container">
                 <div className="table-responsive">
                     <Table hover>
                         <thead>

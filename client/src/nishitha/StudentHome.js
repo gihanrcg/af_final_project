@@ -5,7 +5,8 @@ import axios from 'axios'
 import AddAssignmentSubmission from "./AddAssignmentSubmission";
 import StudentSubmissionList from "./StudentSubmissionList";
 import './css/studenthomecss.css'
-
+import submissionImage from "../nishitha/resources/submissions-banner.jpg";
+import assignmentImage from "./resources/assigments-banner.jpg";
 class StudentHome extends React.Component {
 
 
@@ -209,20 +210,22 @@ class StudentHome extends React.Component {
                     return <div class="container">
                         <div className={"row"}>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src="..." alt="Card image cap"/>
+                                <img className="card-img-top" src={assignmentImage} alt="Card image cap"/>
                                 <div className="card-body">
-                                    <p className="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
+                                    <p className="card-text">
+                                        View and mark submissions of students
+                                    </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
                                         className="btn btn-primary">Create Assignment Submissions
                                 </button>
                             </div>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src="..." alt="Card image cap"/>
+                                <img className="card-img-top" src={submissionImage} alt="Card image cap"/>
                                 <div className="card-body">
-                                    <p className="card-text">Some quick example text to build on the card title and make
-                                        up the bulk of the card's content.</p>
+                                    <p className="card-text">
+                                        Create Assignment submission for Student to Submit
+                                    </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}
                                         className="btn btn-primary">View Student Submissions

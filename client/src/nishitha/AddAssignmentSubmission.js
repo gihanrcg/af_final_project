@@ -121,7 +121,7 @@ class AddAssignmentSubmission extends React.Component {
         return (
             <div>
                 {this.state.isLoading && <LoadingScreen/>}
-                <div>
+                <div className="container">
                     <form onSubmit={this.handleSubmit}>
                         <Table hover>
                             <tbody>

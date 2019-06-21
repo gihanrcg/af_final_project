@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/studenthomecss.css'
 
 class FileUploader extends React.Component {
 
@@ -13,7 +14,8 @@ class FileUploader extends React.Component {
     render() {
         return (
             <div>
-                <input type="file" name="file" onChange={(e) => this.handleUpload(e)} disabled={this.props.disabled}/>
+                    <input type="file" name="file" onChange={(e) => this.handleUpload(e)} disabled={this.props.disabled}/>
+
             </div>
 
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table} from 'reactstrap';
+import './css/studenthomecss.css'
 
 class StudentSubmissionList extends React.Component {
 
@@ -17,10 +18,10 @@ class StudentSubmissionList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Table hover>
                     <thead>
-                    <tr>
+                    <tr style={{align:"center"}}>
                         <th>File</th>
                         <th>Uploaded By</th>
                         <th>Submitted Date</th>
