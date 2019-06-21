@@ -26,7 +26,6 @@ class AdminPanel extends React.Component {
         return (
 
             <div>
-
                     <AdminPanelSideNav/>
 
                 <div style={{padding: '5px 16px'}}>
