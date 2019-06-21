@@ -5,6 +5,8 @@ import axios from 'axios'
 
 //Custom Components
 import StudentCourse from "./StudentCourse";
+import AddAssignmentSubmission from "./AddAssignmentSubmission";
+import StudentSubmissionList from "./StudentSubmissionList";
 import FileUploader from "./FileUploader";
 
 class StudentHome extends React.Component {
@@ -18,7 +20,6 @@ class StudentHome extends React.Component {
             isLoggedIn: false,
             user: ''
         }
-
     }
 
     getUser = () => {
@@ -52,23 +53,15 @@ class StudentHome extends React.Component {
 
     componentDidMount() {
 
-        this.getUser();
+
         axios.get('/api/files').then((res) => {
             console.log(res.data);
-            //res.data.map((fileObj)=>{
-            //     nameArr.push(fileObj.file.split('\\').pop())
-            // });
-
-            //console.log('**************')
-            // console.log(paths)
             this.setState({
                 fileList: res.data
             }, () => {
                 console.log(this.state.fileList)
             })
         })
-        // const nameArr=[];
-
     }
 
     //delete documents
@@ -84,7 +77,7 @@ class StudentHome extends React.Component {
         })
             .then(response => {
                 console.log(response);
-                if (response.status === 204) {
+                if (response.status == 204) {
 
                     this.setState({
                         fileList: this.removeDoc(fileList, file)
@@ -160,7 +153,7 @@ class StudentHome extends React.Component {
                 this.setState({
                     //apiCallStatus: 'DOWNLOAD_COMPLETED',
                     // errors: false
-                })
+                });
 
                 const url = document.createElement('a');
                 url.href = window.URL.createObjectURL(blob);
@@ -169,9 +162,7 @@ class StudentHome extends React.Component {
 
             }).catch((error) => {
             this.setState({
-                // errorMessage: "ERROR : " + error,
-                // errors: true,
-                // apiCallStatus: 'DOWNLOAD_ERROR'
+
             })
         });
     };
@@ -182,8 +173,7 @@ class StudentHome extends React.Component {
         return (
             <div>
                 <StudentCourse/>
-                <FileUploader
-                    handleUpload={(e) => this.handleUpload(e)}
+                <StudentSubmissionList
                     handleDownload={this.handleDownload}
                     handleDelete={this.handleDelete}
                     fileList={this.state.fileList.map((file) => {
@@ -194,10 +184,10 @@ class StudentHome extends React.Component {
                             submittedDate: file.submittedDate
                         };
                         return fileObj
-
                     })
                     }
                 />
+                <AddAssignmentSubmission/>
             </div>
 
         );
