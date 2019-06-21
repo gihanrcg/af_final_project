@@ -18,7 +18,8 @@ class StudentHome extends React.Component {
             fileList: [],
             isOpen: false,
             isLoggedIn: false,
-            user: ''
+            user: '',
+            page:'',
         }
     }
 
@@ -52,8 +53,6 @@ class StudentHome extends React.Component {
     }
 
     componentDidMount() {
-
-
         axios.get('/api/files').then((res) => {
             console.log(res.data);
             this.setState({
@@ -167,29 +166,77 @@ class StudentHome extends React.Component {
         });
     };
 
+    renderPage=(page)=>{
+
+       if(page=='CREATE_ASSIGNMENT_SUBMISSION'){
+           this.setState({
+               page:'CREATE_ASSIGNMENT_SUBMISSION'
+           })
+       }else if(page=='VIEW_STUDENT_SUBMISSION'){
+           this.setState({
+               page:'VIEW_STUDENT_SUBMISSION'
+           })
+       }
+    };
+
+    renderDefaultPage=()=>{
+        this.setState({
+            page:''
+        })
+    };
 
     //this will be the container
     render() {
+
+        const PageContent = () => {
+
+            switch (this.state.page) {
+                case 'CREATE_ASSIGNMENT_SUBMISSION':
+                    return  <AddAssignmentSubmission renderDefaultPage={this.renderDefaultPage}/>
+                case 'VIEW_STUDENT_SUBMISSION':
+                    return <StudentSubmissionList
+                        renderDefaultPage={this.renderDefaultPage}
+                        handleDownload={this.handleDownload}
+                        handleDelete={this.handleDelete}
+                        fileList={this.state.fileList.map((file) => {
+                            let fileObj = {
+                                file: file.file,
+                                _id: file._id,
+                                submittedBy: file.submittedBy,
+                                submittedDate: file.submittedDate
+                            };
+                            return fileObj
+                        })
+                        }
+                    />
+                default:
+                    return<div className={"row"}>
+                    <div className="card" style={{width: '18rem'}}>
+                        <img className="card-img-top" src="..." alt="Card image cap" />
+                        <div className="card-body">
+                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <button type="button" onClick={(e)=>this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
+                                className="btn btn-primary">Create Assignment Submissions
+                        </button>
+                    </div>
+                        <div className="card" style={{width: '18rem'}}>
+                            <img className="card-img-top" src="..." alt="Card image cap" />
+                            <div className="card-body">
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                            <button type="button" onClick={(e)=>this.renderPage("VIEW_STUDENT_SUBMISSION")}
+                                    className="btn btn-primary">View Student Submissions
+                            </button>
+                        </div>
+                    </div>
+
+            }
+        }
         return (
             <div>
-                <StudentCourse/>
-                <StudentSubmissionList
-                    handleDownload={this.handleDownload}
-                    handleDelete={this.handleDelete}
-                    fileList={this.state.fileList.map((file) => {
-                        let fileObj = {
-                            file: file.file,
-                            _id: file._id,
-                            submittedBy: file.submittedBy,
-                            submittedDate: file.submittedDate
-                        };
-                        return fileObj
-                    })
-                    }
-                />
-                <AddAssignmentSubmission/>
+                {PageContent()}
             </div>
-
         );
     }
 

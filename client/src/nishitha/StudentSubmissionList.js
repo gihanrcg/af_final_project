@@ -1,7 +1,14 @@
 import React from 'react';
 import {Table,Button} from 'reactstrap';
+import LoadingScreen from '../gihan/components/LoadingScreen/LoadingScreen'
 class StudentSubmissionList extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            isLoading : false,
+        }
+    }
 
     handleDownload=(filename)=>{
         this.props.handleDownload(filename)
@@ -26,9 +33,6 @@ class StudentSubmissionList extends React.Component {
                             return (
                                 <tr key={index}>
                                     <td>
-                                        <a href="#" onClick={(e)=>this.handleDownload(filename)}
-                                        >{filename}</a>
-
                                         <button type="button" className="btn btn-link" onClick={(e)=>this.handleDownload(filename)}
                                         >{filename}</button>
                                     </td>
@@ -39,15 +43,15 @@ class StudentSubmissionList extends React.Component {
                                         {file.submittedDate}
                                     </td>
                                     <td>
-                                        <Button color="danger" onClick={(e)=>this.props.handleDelete(this.props.fileList,file)}>Delete</Button>
+                                        <button className="btn btn-danger" onClick={(e)=>this.props.handleDelete(this.props.fileList,file)}>Delete</button>
                                     </td>
                                 </tr>
                             );
                         })
                     }
-
                     </tbody>
                 </Table>
+                <button className="btn btn-primary" onClick={(e)=>this.props.renderDefaultPage()}>Back</button>
             </div>
 
         );

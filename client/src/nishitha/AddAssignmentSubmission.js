@@ -34,6 +34,7 @@ class AddAssignmentSubmission extends React.Component {
 
             this.setState({
                 isLoading : true
+
             })
             axios.post('/api/assignmentSubmissions/create', {assignmentName,moduleName,toBeSubmittedBy})
 
@@ -102,6 +103,21 @@ class AddAssignmentSubmission extends React.Component {
         })
    }
 
+    setDate(){
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        document.getElementById('datefield').attr('max', maxDate);
+    }
 
 
     render() {
@@ -130,13 +146,16 @@ class AddAssignmentSubmission extends React.Component {
                             <tr>
                                 <td>Select submission date</td>
                                 <td>
-                                    <input type="date"  min={0}
+                                    <input id="datefield" type="date"
                                            value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy" onChange={(e)=>this.handleChange(e)}/>
                                 </td>
                                 <td style={{color:"red"}}>{this.state.errors.toBeSubmittedBy}</td>
                             </tr>
                             <tr>
                                 <td><input type="submit" value="Add" className="btn btn-primary"/></td>
+                                <td>
+                                    <input onClick={(e)=>this.props.renderDefaultPage()} type="button" value="Back" className="btn btn-primary"/>
+                                </td>
                             </tr>
                             </tbody>
                         </Table>
