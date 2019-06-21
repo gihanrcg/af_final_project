@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table,Button} from 'reactstrap';
-class List extends React.Component {
+class StudentSubmissionList extends React.Component {
 
 
     handleDownload=(filename)=>{
@@ -26,7 +26,6 @@ class List extends React.Component {
                             return (
                                 <tr key={index}>
                                     <td>
-
                                         <a href="#" onClick={(e)=>this.handleDownload(filename)}
                                         >{filename}</a>
                                     </td>
@@ -54,4 +53,4 @@ class List extends React.Component {
 
 }
 
-export default List;
+export default StudentSubmissionList;

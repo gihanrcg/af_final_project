@@ -97,6 +97,10 @@ class Header extends React.Component {
                             <NavLink href='/studenthome/' style={{color: 'white'}}
                                      className="nav_link_styles">StudentHome</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href='/assignmentSubmission/' style={{color: 'white'}}
+                                     className="nav_link_styles">Submission</NavLink>
+                        </NavItem>
 
                     </Nav>
 

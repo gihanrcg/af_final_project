@@ -8,6 +8,7 @@ const config = require('config');
 const userRoutes = require('./server/gihan/routes/api/UserRoute');
 const AuthRoutes = require('./server/gihan/routes/api/Auth');
 const FileRoutes=require('./server/nishitha/routes/api/FileUploadRoute');
+const AssignmentRoutes=require('./server/nishitha/routes/api/AssignmentSubmisisonRoutes');
 
 const app = express();
 app.use(BodyParser.json());
@@ -17,6 +18,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
 app.use('/api/files',FileRoutes);
+app.use('/api/assignmentSubmissions',AssignmentRoutes);
 
 mongoose
     .connect(db, { useNewUrlParser: true, useFindAndModify: false })

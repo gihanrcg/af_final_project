@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
 
 import './App.css';
@@ -10,9 +10,10 @@ import Header from './gihan/components/header/Header';
 import HomePage from './pages/HomePage';
 import CreateUser from './gihan/components/createUser/CreateUser';
 import TestPageAuthenticated from './pages/TestPageAuthunticated';
-import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
+import {checkAuthAdmin, checkAuthStudent} from './gihan/functions/checkAuth';
 import AdminPanel from "./pages/AdminPanel";
 import StudentHome from "./nishitha/StudentHome";
+import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
 
 
 class App extends React.Component {
@@ -54,6 +55,7 @@ class App extends React.Component {
                         <Route path="/login/:from" component={Login}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/studenthome" component={StudentHome}/>
+                        <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
                         <PrivateRouteStudent path="/test" component={TestPageAuthenticated}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                         {/*<AuthComponent a={'test'}>*/}

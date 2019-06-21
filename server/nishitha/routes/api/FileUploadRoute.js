@@ -20,7 +20,7 @@ const upload = multer({
     storage: storage,
 });
 
-const User = require('../../../gihan/models/User');
+const AssignmentSubmission = require('../../../nishitha/models/AssignmentSubmission');
 const File = require('../../models/FileModel');
 const auth = require('../../../../middleware/auth');
 
@@ -55,8 +55,10 @@ router.get('/download/:filename',(req, res) => {
     console.log(fileLocation);
     res.download(fileLocation, file);
 });
-router.post('/upload', upload.single('file'), (req, res) => {
-        const newFile = new File({
+router.post('/upload/:id', upload.single('file'), (req, res) => {
+
+    const id=req.params.id;
+    const newFile = new File({
             file : req.file.path,
             submittedBy:req.body.submitted,
             submittedDate:new Date()
@@ -64,13 +66,23 @@ router.post('/upload', upload.single('file'), (req, res) => {
 
 
     try {
+
         newFile.save().
         then(file =>
             res.status(200).send({
                 message: 'File Upload successful',
-                data:file
+                data:file,
             })
-        );
+        ).then(()=>{
+            AssignmentSubmission.findOne({_id:id}).then((submission)=> {
+                console.log("************")
+                console.log(submission)
+                submission.isSubmitted=true;
+                submission.save();
+                console.log("************")
+                console.log(submission)
+            })
+        });
     } catch (err) {
         res.status(500).send({
             message: 'Unknown server error',

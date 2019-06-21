@@ -1,5 +1,5 @@
 import React from 'react';
-import List from "./List";
+import List from "./StudentSubmissionList";
 
 class FileUploader extends React.Component {
 
@@ -14,13 +14,7 @@ class FileUploader extends React.Component {
     render() {
         return (
             <div>
-                <label>Upload a file</label>
-                <input type="file" name="file" onChange={(e) => this.handleUpload(e)}/>
-                <List
-                    fileList={this.props.fileList}
-                    handleDownload={this.props.handleDownload}
-                    handleDelete={this.props.handleDelete}
-                />
+                <input type="file" name="file" onChange={(e) => this.handleUpload(e)} disabled={this.props.disabled}/>
             </div>
 
         );

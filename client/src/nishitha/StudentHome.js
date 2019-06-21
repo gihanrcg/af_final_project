@@ -1,7 +1,8 @@
 import React from 'react';
-import FileUploader from "./FileUploader";
 import axios from 'axios'
 import StudentCourse from "./StudentCourse";
+import AddAssignmentSubmission from "./AddAssignmentSubmission";
+import StudentSubmissionList from "./StudentSubmissionList";
 
 class StudentHome extends React.Component {
 
@@ -10,68 +11,26 @@ class StudentHome extends React.Component {
         super(props);
         this.state = {
             fileList: [],
-            isOpen: false,
-            isLoggedIn: false,
-            user:''
         }
 
-    }
-
-    getUser = () => {
-        const jwt = localStorage.getItem('af_auth_token');
-        if (!jwt) {
-            this.setState({
-                user: null
-
-            });
-            return;
-        }
-
-        axios({
-            method: 'post',
-            url: '/api/auth/getauthuser',
-            headers: {
-                jwt_token: jwt
-            },
-            data: {}
-
-        }).then(res => {
-            console.log(res.data.user);
-            this.setState({
-                user: res.data.user,
-                isLoggedIn: true
-            })
-
-        }).catch(err => {
-
-
-        })
     }
 
     componentDidMount() {
 
-         this.getUser();
-            axios.get('/api/files').then((res) => {
-                console.log(res.data);
-                //res.data.map((fileObj)=>{
-                //     nameArr.push(fileObj.file.split('\\').pop())
-                // });
 
-                //console.log('**************')
-                // console.log(paths)
-                this.setState({
-                    fileList: res.data
-                }, () => {
-                    console.log(this.state.fileList)
-                })
+        axios.get('/api/files').then((res) => {
+            console.log(res.data);
+            this.setState({
+                fileList: res.data
+            }, () => {
+                console.log(this.state.fileList)
             })
-        // const nameArr=[];
-
+        })
     }
 
     //delete documents
     handleDelete = (fileList, file) => {
-        fetch('/api/files/'+file._id, {
+        fetch('/api/files/' + file._id, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -80,12 +39,12 @@ class StudentHome extends React.Component {
             method: 'DELETE',
 
         })
-       .then(response => {
-                   console.log(response);
+            .then(response => {
+                console.log(response);
                 if (response.status == 204) {
 
                     this.setState({
-                         fileList:  this.removeDoc(fileList, file)
+                        fileList: this.removeDoc(fileList, file)
                     })
                 }
 
@@ -93,8 +52,7 @@ class StudentHome extends React.Component {
 
             console.log(error);
 
-            this.setState({
-            })
+            this.setState({})
 
         })
 
@@ -107,53 +65,13 @@ class StudentHome extends React.Component {
             return ele != doc;
         });
         return newDocList;
-    }
-
-    //upload documents
-    handleUpload = (e) => {
-        const files = Array.from(e.target.files);
-        const formData = new FormData();
-
-        files.forEach((file) => {
-            formData.append("file", file);
-            formData.append("submitted",this.state.user.firstName+" "+this.state.user.lastName)
-        });
-
-        fetch('/api/files/upload', {
-
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-
-            },
-            method: 'POST',
-            body: formData,
-
-        })
-            .then(res => res.json())
-            .then(response => {
-                let {fileList} = this.state;
-                fileList.push(response.data);
-                console.log(response.data);
-                console.log(response.data.file);
-
-                this.setState({
-                    fileList: fileList
-
-                })
-
-            }).catch(error => {
-            this.setState({
-
-            })
-        })
-
     };
 
     //download documents
     handleDownload = (fileName) => {
 
 
-        fetch('/api/files/download/'+fileName, {
+        fetch('/api/files/download/' + fileName, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -165,7 +83,7 @@ class StudentHome extends React.Component {
                 this.setState({
                     //apiCallStatus: 'DOWNLOAD_COMPLETED',
                     // errors: false
-                })
+                });
 
                 const url = document.createElement('a');
                 url.href = window.URL.createObjectURL(blob);
@@ -174,9 +92,7 @@ class StudentHome extends React.Component {
 
             }).catch((error) => {
             this.setState({
-                // errorMessage: "ERROR : " + error,
-                // errors: true,
-                // apiCallStatus: 'DOWNLOAD_ERROR'
+
             })
         });
     };
@@ -187,22 +103,21 @@ class StudentHome extends React.Component {
         return (
             <div>
                 <StudentCourse/>
-                <FileUploader
-                    handleUpload={(e) => this.handleUpload(e)}
+                <StudentSubmissionList
                     handleDownload={this.handleDownload}
                     handleDelete={this.handleDelete}
                     fileList={this.state.fileList.map((file) => {
                         let fileObj = {
                             file: file.file,
                             _id: file._id,
-                            submittedBy:file.submittedBy,
-                            submittedDate:file.submittedDate
+                            submittedBy: file.submittedBy,
+                            submittedDate: file.submittedDate
                         };
                         return fileObj
-
                     })
                     }
                 />
+                <AddAssignmentSubmission/>
             </div>
 
         );
