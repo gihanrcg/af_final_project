@@ -3,20 +3,28 @@ import './AdminPanelSideNavStyles.css';
 
 class AdminPanelSideNav extends React.Component {
 
+    //Open admin Nav Bar
+    openNav = () => {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+
+    //Close admin Nav Bar
+    closeNav = () => {
+        document.getElementById("mySidenav").style.width = "0";
+        document.body.style.backgroundColor = "white";
+    }
+
     render() {
         return (
             <div>
-                <div className="sidebar">
-                    <a href="#home">Home</a>
-                    <a href="/admin/students">Students</a>
-                    <a href="#contact">Lecturers</a>
-                    <a href="#about">Instructors</a>
-                    <a href="#about">Administrators</a>
-                    <a href="#about">Instructors</a>
-                    <a href="#about">Instructors</a>
+                <div id="mySidenav" className="sidenav">
+                    <button type="button" className="btn btn-link closebtn"  onClick={this.closeNav}>&times;</button>
+                    <a href="/admin/students" className="btn btn-success">Manage Students</a>
+                    <a href="/admin/lecturers" className="btn btn-success">Manage Lecturers</a>
                 </div>
+                <span style={{fontSize: '30px', cursor: 'pointer'}} onClick={this.openNav}>&#9776; open</span>
             </div>
-
         );
 
     }

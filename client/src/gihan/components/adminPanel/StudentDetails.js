@@ -84,7 +84,7 @@ class StudentDetails extends React.Component {
             },
         })
             .then(name => {
-                if (!name) throw null;
+                if (!name) throw new Error();
 
                 swal({
                     title: "Are you sure you want to update the password?",
@@ -179,11 +179,11 @@ class StudentDetails extends React.Component {
         }
 
         return (
-            <div>
+            <div className="table-responsive">
                 {this.state.loading && <LoadingScreen/>}
                 <div>
 
-                    <div width="50%" style={{width: '50%', align: 'center'}}>
+                    <div  style={{width: '50%', align: 'center'}}>
                         <div id="id01" className="modal" align="center">
 
                             <Form style={{width: '50%', align: 'center', padding: '20px'}}
@@ -191,8 +191,8 @@ class StudentDetails extends React.Component {
 
                                 {this.state.selectedStudent !== null && (
 
-                                    <img src={"http://localhost:5000/" + this.state.selectedStudent.profilePic}
-                                         style={{borderRadius: '50%', width: '30%', height: '30%'}} alt="userProfile"/>
+                                    <img  className="img-fluid" src={"http://localhost:5000/" + this.state.selectedStudent.profilePic}
+                                         style={{borderRadius: '50%', width: '30%', height: 'auto'}} alt="userProfile"/>
                                 )}
 
 
@@ -400,14 +400,16 @@ class StudentDetails extends React.Component {
 
                     </div>
 
-                    <table id='students' className="table table-bordered table-hover table-dark">
-                        <thead>
-                        {this.renderTableHeader()}
-                        </thead>
-                        <tbody>
-                        {this.renderTableData()}
-                        </tbody>
-                    </table>
+                    <div className="table-responsive">
+                        <table id='students' className="table table-bordered table-hover table-dark">
+                            <thead>
+                            {this.renderTableHeader()}
+                            </thead>
+                            <tbody>
+                            {this.renderTableData()}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         )
@@ -422,7 +424,7 @@ class StudentDetails extends React.Component {
             var text = el.options[el.selectedIndex].innerHTML;
 
 
-
+            console.log(text);
             input.placeholder = 'Search for ' + text;
             this.searchTable();
         }

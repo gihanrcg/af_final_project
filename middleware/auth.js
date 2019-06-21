@@ -1,6 +1,11 @@
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+
+/*
+ * Authenticate user. Having a valid token is enough.
+ * Does not check for user level
+ */ 
 function auth(req,res,next){
 
 
@@ -13,8 +18,6 @@ function auth(req,res,next){
     }
 
     try {
-
-
         res.user = jwt.verify(token, config.get('jwt_secret_key'));
         next();
     } catch (error) {

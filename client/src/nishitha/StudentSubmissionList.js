@@ -28,6 +28,9 @@ class StudentSubmissionList extends React.Component {
                                     <td>
                                         <a href="#" onClick={(e)=>this.handleDownload(filename)}
                                         >{filename}</a>
+
+                                        <button type="button" className="btn btn-link" onClick={(e)=>this.handleDownload(filename)}
+                                        >{filename}</button>
                                     </td>
                                     <td>
                                         {file.submittedBy}

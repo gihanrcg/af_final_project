@@ -4,27 +4,33 @@ const BodyParser = require('body-parser');
 const path = require('path');
 const config = require('config');
 
-
+//Initializing Routes to the server
 const userRoutes = require('./server/gihan/routes/api/UserRoute');
 const AuthRoutes = require('./server/gihan/routes/api/Auth');
 const FileRoutes=require('./server/nishitha/routes/api/FileUploadRoute');
 const AssignmentRoutes=require('./server/nishitha/routes/api/AssignmentSubmisisonRoutes');
 
+//Setting up express app 
 const app = express();
 app.use(BodyParser.json());
 
-const db = config.get('mongoURI');
+//Assigning routes to urls
 app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
 app.use('/api/files',FileRoutes);
 app.use('/api/assignmentSubmissions',AssignmentRoutes);
 
+//Creating mongo instance
+const db = config.get('mongoURI');
 mongoose
     .connect(db, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => console.log("Mongo database connected"))
     .catch(err => console.log(err));
 
+
+//Setting up port
+//Production for hosting server    
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     app.get('*', (req, res) => {
@@ -35,4 +41,5 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000;
 
+//starting server
 app.listen(port, () => console.log('Server is listening on port ' + port));

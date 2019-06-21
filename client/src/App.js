@@ -1,36 +1,33 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
-import './App.css';
-
-
+//Custom Components
 import Login from './gihan/components/Login/Login';
 import Header from './gihan/components/header/Header';
 import HomePage from './pages/HomePage';
 import CreateUser from './gihan/components/createUser/CreateUser';
-import TestPageAuthenticated from './pages/TestPageAuthunticated';
-import {checkAuthAdmin, checkAuthStudent} from './gihan/functions/checkAuth';
 import AdminPanel from "./pages/AdminPanel";
 import StudentHome from "./nishitha/StudentHome";
 import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
 
-
+//Auth Functions
+import {checkAuthAdmin} from './gihan/functions/checkAuth';
+// import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
 
     render() {
-
-        const PrivateRouteStudent = ({component: Component, ...rest}) => (
-            <Route {...rest} render={(props) => (
-                checkAuthStudent()
-                    ? <Component {...props} />
-                    : <Redirect to={{
-                        pathname: '/login',
-                        state: {from: props.location}
-                    }}/>
-            )}/>
-        )
+        // const PrivateRouteStudent = ({component: Component, ...rest}) => (
+        //     <Route {...rest} render={(props) => (
+        //         checkAuthStudent()
+        //             ? <Component {...props} />
+        //             : <Redirect to={{
+        //                 pathname: '/login',
+        //                 state: {from: props.location}
+        //             }}/>
+        //     )}/>
+        // )
 
         const PrivateRouteAdmin = ({component: Component, ...rest}) => (
             <Route {...rest} render={(props) => (
@@ -48,7 +45,6 @@ class App extends React.Component {
             <div>
                 <Header/>
                 <BrowserRouter>
-
                     <Switch>
                         <Route path={'/'} exact component={HomePage}/>
                         <Route path="/createUser" component={CreateUser}/>
@@ -58,17 +54,10 @@ class App extends React.Component {
                         <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
                         <PrivateRouteStudent path="/test" component={TestPageAuthenticated}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
-                        {/*<AuthComponent a={'test'}>*/}
-                        {/*<Route path="/test" component={TestPageAuthenticated}/>*/}
-                        {/*</AuthComponent>*/}
                     </Switch>
                 </BrowserRouter>
             </div>
         );
-
     }
-
-
 }
-
 export default App;

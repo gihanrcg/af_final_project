@@ -6,7 +6,9 @@ const config = require('config');
 
 const User = require('../../models/User');
 
-
+//@route POST
+//@desc check and verify a JWT token and returns the details of the user
+//@access public
 router.post('/getauthuser', (req, res) => {
 
     const token = req.headers.jwt_token;
@@ -39,7 +41,7 @@ router.post('/getauthuser', (req, res) => {
 
 
 //@route POST
-//@desc add a user
+//@desc get jwt token for a paricular login
 //@access public
 router.post('/getauth', (req, res) => {
     User.findOne({

@@ -1,8 +1,13 @@
 import React from 'react';
+
+//Dependent libraries
 import axios from 'axios'
+
+//Custom Components
 import StudentCourse from "./StudentCourse";
 import AddAssignmentSubmission from "./AddAssignmentSubmission";
 import StudentSubmissionList from "./StudentSubmissionList";
+import FileUploader from "./FileUploader";
 
 class StudentHome extends React.Component {
 
@@ -11,8 +16,38 @@ class StudentHome extends React.Component {
         super(props);
         this.state = {
             fileList: [],
+            isOpen: false,
+            isLoggedIn: false,
+            user: ''
         }
 
+    getUser = () => {
+        const jwt = localStorage.getItem('af_auth_token');
+        if (!jwt) {
+            this.setState({
+                user: null
+            });
+            return;
+        }
+
+        axios({
+            method: 'post',
+            url: '/api/auth/getauthuser',
+            headers: {
+                jwt_token: jwt
+            },
+            data: {}
+
+        }).then(res => {
+            console.log(res.data.user);
+            this.setState({
+                user: res.data.user,
+                isLoggedIn: true
+            })
+
+        }).catch(err => {
+            throw new Error(err);
+        })
     }
 
     componentDidMount() {
@@ -62,9 +97,43 @@ class StudentHome extends React.Component {
     removeDoc = (docList, doc) => {
         console.log(doc);
         let newDocList = docList.filter(function (ele) {
-            return ele != doc;
+            return ele !== doc;
         });
         return newDocList;
+    }
+
+    //upload documents
+    handleUpload = (e) => {
+        const files = Array.from(e.target.files);
+        const formData = new FormData();
+
+        files.forEach((file) => {
+            formData.append("file", file);
+            formData.append("submitted", this.state.user.firstName + " " + this.state.user.lastName)
+        });
+
+        fetch('/api/files/upload', {
+
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+
+            },
+            method: 'POST',
+            body: formData,
+
+        })
+            .then(res => res.json())
+            .then(response => {
+                let {fileList} = this.state;
+                fileList.push(response.data);
+                this.setState({
+                    fileList: fileList
+                })
+
+            }).catch(error => {
+                this.setState({})
+        })
+
     };
 
     //download documents

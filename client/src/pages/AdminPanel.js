@@ -4,7 +4,6 @@ import AdminPanelSideNav from "../gihan/components/adminPanel/AdminPanelSideNav"
 import {checkAuthAdmin} from "../gihan/functions/checkAuth";
 
 
-
 import StudentDetails from '../gihan/components/adminPanel/StudentDetails'
 import LecturerDetails from "../gihan/components/adminPanel/LecturerDetails";
 
@@ -27,15 +26,17 @@ class AdminPanel extends React.Component {
         return (
 
             <div>
-                {/*<AdminPanelSideNav/>*/}
-                {/*<div style={{marginLeft: '200px', padding: '5px 16px'}}>*/}
+
+                    <AdminPanelSideNav/>
+
+                <div style={{padding: '5px 16px'}}>
                     <BrowserRouter>
                         <Switch>
                             <PrivateRouteAdmin path="/admin/students" component={StudentDetails}/>
                             <PrivateRouteAdmin path="/admin/lecturers" component={LecturerDetails}/>
                         </Switch>
                     </BrowserRouter>
-                {/*</div>*/}
+                </div>
             </div>
         )
     }
