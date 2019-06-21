@@ -321,7 +321,7 @@ router.put('/changePassword', (req, res) => {
 //@route PUT
 //@desc update a user
 //@access public
-router.put('/updateUser', upload.single('profilePic'), (req, res) => {
+router.put('/updateUser', upload.single('profilePic'), (req, res) => { 
 
     User.findOne({
         email: req.body.email
@@ -329,7 +329,6 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
         if (user) {
 
             User.findByIdAndUpdate({ _id: user._id }, req.body, (err, doc) => {
-
                 if (err) {
                     return res.status(400).send({
                         message: err

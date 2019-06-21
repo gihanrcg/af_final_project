@@ -148,7 +148,6 @@ class StudentDetails extends React.Component {
             this.setState({
                 loading: false
             })
-            console.log(response);
             swal({
                 title: "Nice!",
                 text: "User updated successfully..!",
