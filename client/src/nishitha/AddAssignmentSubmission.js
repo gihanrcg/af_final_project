@@ -1,60 +1,56 @@
 import React from 'react';
-import '../nishitha/css/searchbox.css';
-import {Table,Button} from 'reactstrap';
+import {Table} from 'reactstrap';
 import axios from 'axios';
 import swal from 'sweetalert';
 import LoadingScreen from '../gihan/components/LoadingScreen/LoadingScreen'
 
 class AddAssignmentSubmission extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            isLoading : false,
-            assignmentName:'',
-            moduleName:'',
-            isSubmitted:false,
-            toBeSubmittedBy:'',
-            isOverdue:false,
-            fields:{},
-            errors:{}
-
+        this.state = {
+            isLoading: false,
+            assignmentName: '',
+            moduleName: '',
+            isSubmitted: false,
+            toBeSubmittedBy: '',
+            isOverdue: false,
+            fields: {},
+            errors: {}
 
 
         };
 
     }
 
-    handleSubmit=(event)=>{
+    handleSubmit = (event) => {
 
         event.preventDefault();
-        const {assignmentName,moduleName,toBeSubmittedBy}=this.state;
+        const {assignmentName, moduleName, toBeSubmittedBy} = this.state;
 
-        if(this.validateForm()) {
+        if (this.validateForm()) {
 
             this.setState({
-                isLoading : true
+                isLoading: true
 
             })
-            axios.post('/api/assignmentSubmissions/create', {assignmentName,moduleName,toBeSubmittedBy})
+            axios.post('/api/assignmentSubmissions/create', {assignmentName, moduleName, toBeSubmittedBy})
 
                 .then(response => {
 
                     this.setState({
-                        isLoading : false
+                        isLoading: false
                     })
 
                     if (response.status == 201) {
-                        this.setState({
-
-                        });
+                        this.setState({});
                         swal({
                             title: "Nice",
-                            text : "Assignment Created Successfully",
-                            icon : "success",
-                            button : "Done"
+                            text: "Assignment Created Successfully",
+                            icon: "success",
+                            button: "Done"
                         }).then((value) => {
-                            if(value){
+                            if (value) {
                                 window.location.replace('/studenthome/');
                             }
                         })
@@ -62,13 +58,13 @@ class AddAssignmentSubmission extends React.Component {
                     }
                 }).catch((err) => {
                 this.setState({
-                    isLoading : false
+                    isLoading: false
                 })
             });
         }
     }
 
-    validateForm(){
+    validateForm() {
         let fields = this.state.fields;
         let errors = {};
         let formIsValid = true;
@@ -94,25 +90,25 @@ class AddAssignmentSubmission extends React.Component {
         return formIsValid;
     }
 
-   handleChange=(e)=>{
-        let fields=this.state.fields;
-        fields[e.target.name]=e.target.value;
+    handleChange = (e) => {
+        let fields = this.state.fields;
+        fields[e.target.name] = e.target.value;
         this.setState({
             fields,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         })
-   }
+    }
 
-    setDate(){
+    setDate() {
         var dtToday = new Date();
 
         var month = dtToday.getMonth() + 1;
         var day = dtToday.getDate();
         var year = dtToday.getFullYear();
 
-        if(month < 10)
+        if (month < 10)
             month = '0' + month.toString();
-        if(day < 10)
+        if (day < 10)
             day = '0' + day.toString();
 
         var maxDate = year + '-' + month + '-' + day;
@@ -121,7 +117,7 @@ class AddAssignmentSubmission extends React.Component {
 
 
     render() {
-        const {assignmentName,moduleName,toBeSubmittedBy}=this.state;
+        const {assignmentName, moduleName, toBeSubmittedBy} = this.state;
         return (
             <div>
                 {this.state.isLoading && <LoadingScreen/>}
@@ -132,29 +128,33 @@ class AddAssignmentSubmission extends React.Component {
                             <tr>
                                 <td>Enter Assignment Name</td>
                                 <td>
-                                    <input type="text" value={assignmentName} id="assignmentName" name="assignmentName" onChange={(e)=>this.handleChange(e)}/>
+                                    <input type="text" value={assignmentName} id="assignmentName" name="assignmentName"
+                                           onChange={(e) => this.handleChange(e)}/>
                                 </td>
-                                <td style={{color:"red"}}>{this.state.errors.assignmentName}</td>
+                                <td style={{color: "red"}}>{this.state.errors.assignmentName}</td>
                             </tr>
                             <tr>
                                 <td>Enter Module Name</td>
                                 <td>
-                                    <input type="text" value={moduleName} id="moduleName" name="moduleName" onChange={(e)=>this.handleChange(e)}/>
+                                    <input type="text" value={moduleName} id="moduleName" name="moduleName"
+                                           onChange={(e) => this.handleChange(e)}/>
                                 </td>
-                                <td style={{color:"red"}}>{this.state.errors.moduleName}</td>
+                                <td style={{color: "red"}}>{this.state.errors.moduleName}</td>
                             </tr>
                             <tr>
                                 <td>Select submission date</td>
                                 <td>
                                     <input id="datefield" type="date"
-                                           value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy" onChange={(e)=>this.handleChange(e)}/>
+                                           value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy"
+                                           onChange={(e) => this.handleChange(e)}/>
                                 </td>
-                                <td style={{color:"red"}}>{this.state.errors.toBeSubmittedBy}</td>
+                                <td style={{color: "red"}}>{this.state.errors.toBeSubmittedBy}</td>
                             </tr>
                             <tr>
                                 <td><input type="submit" value="Add" className="btn btn-primary"/></td>
                                 <td>
-                                    <input onClick={(e)=>this.props.renderDefaultPage()} type="button" value="Back" className="btn btn-primary"/>
+                                    <input onClick={(e) => this.props.renderDefaultPage()} type="button" value="Back"
+                                           className="btn btn-primary"/>
                                 </td>
                             </tr>
                             </tbody>

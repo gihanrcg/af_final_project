@@ -1,5 +1,4 @@
 import React from 'react';
-import List from "./StudentSubmissionList";
 
 class FileUploader extends React.Component {
 

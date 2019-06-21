@@ -1,13 +1,10 @@
 import React from 'react';
-
 //Dependent libraries
 import axios from 'axios'
-
 //Custom Components
-import StudentCourse from "./StudentCourse";
 import AddAssignmentSubmission from "./AddAssignmentSubmission";
 import StudentSubmissionList from "./StudentSubmissionList";
-import FileUploader from "./FileUploader";
+import './css/studenthomecss.css'
 
 class StudentHome extends React.Component {
 
@@ -19,7 +16,7 @@ class StudentHome extends React.Component {
             isOpen: false,
             isLoggedIn: false,
             user: '',
-            page:'',
+            page: '',
         }
     }
 
@@ -131,7 +128,7 @@ class StudentHome extends React.Component {
                 })
 
             }).catch(error => {
-                this.setState({})
+            this.setState({})
         })
 
     };
@@ -160,28 +157,26 @@ class StudentHome extends React.Component {
                 url.click();
 
             }).catch((error) => {
-            this.setState({
-
-            })
+            this.setState({})
         });
     };
 
-    renderPage=(page)=>{
+    renderPage = (page) => {
 
-       if(page=='CREATE_ASSIGNMENT_SUBMISSION'){
-           this.setState({
-               page:'CREATE_ASSIGNMENT_SUBMISSION'
-           })
-       }else if(page=='VIEW_STUDENT_SUBMISSION'){
-           this.setState({
-               page:'VIEW_STUDENT_SUBMISSION'
-           })
-       }
+        if (page == 'CREATE_ASSIGNMENT_SUBMISSION') {
+            this.setState({
+                page: 'CREATE_ASSIGNMENT_SUBMISSION'
+            })
+        } else if (page == 'VIEW_STUDENT_SUBMISSION') {
+            this.setState({
+                page: 'VIEW_STUDENT_SUBMISSION'
+            })
+        }
     };
 
-    renderDefaultPage=()=>{
+    renderDefaultPage = () => {
         this.setState({
-            page:''
+            page: ''
         })
     };
 
@@ -192,7 +187,7 @@ class StudentHome extends React.Component {
 
             switch (this.state.page) {
                 case 'CREATE_ASSIGNMENT_SUBMISSION':
-                    return  <AddAssignmentSubmission renderDefaultPage={this.renderDefaultPage}/>
+                    return <AddAssignmentSubmission renderDefaultPage={this.renderDefaultPage}/>
                 case 'VIEW_STUDENT_SUBMISSION':
                     return <StudentSubmissionList
                         renderDefaultPage={this.renderDefaultPage}
@@ -210,26 +205,32 @@ class StudentHome extends React.Component {
                         }
                     />
                 default:
-                    return<div className={"row"}>
-                    <div className="card" style={{width: '18rem'}}>
-                        <img className="card-img-top" src="..." alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                        <button type="button" onClick={(e)=>this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
-                                className="btn btn-primary">Create Assignment Submissions
-                        </button>
-                    </div>
-                        <div className="card" style={{width: '18rem'}}>
-                            <img className="card-img-top" src="..." alt="Card image cap" />
-                            <div className="card-body">
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                    return <div class="container">
+                        <div className={"row"}>
+                            <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
+                                <img className="card-img-top" src="..." alt="Card image cap"/>
+                                <div className="card-body">
+                                    <p className="card-text">Some quick example text to build on the card title and make
+                                        up the bulk of the card's content.</p>
+                                </div>
+                                <button type="button" onClick={(e) => this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
+                                        className="btn btn-primary">Create Assignment Submissions
+                                </button>
                             </div>
-                            <button type="button" onClick={(e)=>this.renderPage("VIEW_STUDENT_SUBMISSION")}
-                                    className="btn btn-primary">View Student Submissions
-                            </button>
+                            <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
+                                <img className="card-img-top" src="..." alt="Card image cap"/>
+                                <div className="card-body">
+                                    <p className="card-text">Some quick example text to build on the card title and make
+                                        up the bulk of the card's content.</p>
+                                </div>
+                                <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}
+                                        className="btn btn-primary">View Student Submissions
+                                </button>
+                            </div>
                         </div>
                     </div>
+
 
             }
         }

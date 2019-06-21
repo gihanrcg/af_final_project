@@ -1,19 +1,19 @@
 import React from 'react';
-import '../nishitha/css/searchbox.css';
-import {Table,Button} from 'reactstrap';
+import {Table} from 'reactstrap';
 import axios from "axios/index";
 import FileUploader from "./FileUploader";
+
 class AssignmentSubmissionScreen extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            submissionList:[],
-            isOverdue:false,
-            isSubmitted:"",
+        this.state = {
+            submissionList: [],
+            isOverdue: false,
+            isSubmitted: "",
             isOpen: false,
             isLoggedIn: false,
-            user:''
+            user: ''
 
         }
     }
@@ -55,7 +55,7 @@ class AssignmentSubmissionScreen extends React.Component {
             console.log(res.data);
 
             this.setState({
-                submissionList:res.data
+                submissionList: res.data
             }, () => {
                 console.log(this.state.submissionList)
             })
@@ -63,16 +63,16 @@ class AssignmentSubmissionScreen extends React.Component {
     }
 
     //upload documents
-    handleUpload = (e,assignmentId) => {
+    handleUpload = (e, assignmentId) => {
         const files = Array.from(e.target.files);
         const formData = new FormData();
 
         files.forEach((file) => {
             formData.append("file", file);
-            formData.append("submitted",this.state.user.firstName+" "+this.state.user.lastName)
+            formData.append("submitted", this.state.user.firstName + " " + this.state.user.lastName)
         });
 
-        fetch('/api/files/upload/'+ assignmentId, {
+        fetch('/api/files/upload/' + assignmentId, {
 
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -85,24 +85,24 @@ class AssignmentSubmissionScreen extends React.Component {
             .then(res => res.json())
             .then(response => {
                 this.setState({
-                    isSubmitted:true
+                    isSubmitted: true
                 })
                 window.location.replace('/assignmentSubmission/');
             }).catch(error => {
             this.setState({
-                isSubmitted:false
+                isSubmitted: false
             })
         })
 
 
     };
-    checkOverDue=(dueDate)=>{
-            const dateLimit = new Date(dueDate);
-            const now = new Date();
-            return now>dateLimit;
+    checkOverDue = (dueDate) => {
+        const dateLimit = new Date(dueDate);
+        const now = new Date();
+        return now > dateLimit;
     };
 
-    checkSubmitted=()=>{
+    checkSubmitted = () => {
 
     };
 
@@ -111,7 +111,7 @@ class AssignmentSubmissionScreen extends React.Component {
     render() {
 
 
-        const {isSubmitted}=this.state;
+        const {isSubmitted} = this.state;
         return (
             <div>
                 <div className="table-responsive">
@@ -140,15 +140,15 @@ class AssignmentSubmissionScreen extends React.Component {
                                             {submission.toBeSubmittedBy}
                                         </td>
                                         <td>
-                                            {(this.checkOverDue(submission.toBeSubmittedBy))? "Overdue":"Due"}
+                                            {(this.checkOverDue(submission.toBeSubmittedBy)) ? "Overdue" : "Due"}
                                         </td>
                                         <td>
-                                            {submission.isSubmitted ? "Submitted":"Not Submitted"}
+                                            {submission.isSubmitted ? "Submitted" : "Not Submitted"}
                                         </td>
                                         <td>
-                                           <FileUploader
-                                               disabled={(this.checkOverDue(submission.toBeSubmittedBy))}
-                                               handleUpload={(e)=>this.handleUpload(e,submission._id)}/>
+                                            <FileUploader
+                                                disabled={(this.checkOverDue(submission.toBeSubmittedBy))}
+                                                handleUpload={(e) => this.handleUpload(e, submission._id)}/>
                                         </td>
                                     </tr>
                                 );

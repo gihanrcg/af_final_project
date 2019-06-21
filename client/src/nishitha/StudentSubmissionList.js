@@ -1,16 +1,16 @@
 import React from 'react';
-import {Table,Button} from 'reactstrap';
-import LoadingScreen from '../gihan/components/LoadingScreen/LoadingScreen'
+import {Table} from 'reactstrap';
+
 class StudentSubmissionList extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            isLoading : false,
+        this.state = {
+            isLoading: false,
         }
     }
 
-    handleDownload=(filename)=>{
+    handleDownload = (filename) => {
         this.props.handleDownload(filename)
     };
 
@@ -29,11 +29,12 @@ class StudentSubmissionList extends React.Component {
                     <tbody>
                     {
                         this.props.fileList.map((file, index) => {
-                            const filename=file.file.split('\\').pop();
+                            const filename = file.file.split('\\').pop();
                             return (
                                 <tr key={index}>
                                     <td>
-                                        <button type="button" className="btn btn-link" onClick={(e)=>this.handleDownload(filename)}
+                                        <button type="button" className="btn btn-link"
+                                                onClick={(e) => this.handleDownload(filename)}
                                         >{filename}</button>
                                     </td>
                                     <td>
@@ -43,7 +44,9 @@ class StudentSubmissionList extends React.Component {
                                         {file.submittedDate}
                                     </td>
                                     <td>
-                                        <button className="btn btn-danger" onClick={(e)=>this.props.handleDelete(this.props.fileList,file)}>Delete</button>
+                                        <button className="btn btn-danger"
+                                                onClick={(e) => this.props.handleDelete(this.props.fileList, file)}>Delete
+                                        </button>
                                     </td>
                                 </tr>
                             );
@@ -51,7 +54,7 @@ class StudentSubmissionList extends React.Component {
                     }
                     </tbody>
                 </Table>
-                <button className="btn btn-primary" onClick={(e)=>this.props.renderDefaultPage()}>Back</button>
+                <button className="btn btn-primary" onClick={(e) => this.props.renderDefaultPage()}>Back</button>
             </div>
 
         );
