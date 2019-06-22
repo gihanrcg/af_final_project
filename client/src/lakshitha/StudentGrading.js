@@ -31,7 +31,7 @@ class StudentGrading extends React.Component {
                 isLoading: true
 
             })
-            axios.post('/api/assignmentGrading/create/'+this.props.id, {instructorName, details, mark})
+            axios.post('/api/assignmentGrading/create/'+this.props.submittedUser+'/'+this.props.assignmentName+'/'+this.props.moduleName, {instructorName, details, mark})
 
                 .then(response => {
 
@@ -120,6 +120,19 @@ class StudentGrading extends React.Component {
                                                    onChange={(e) => this.handleChange(e)}/>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Assignment</td>
+                                        <td>
+                                            {this.props.assignmentName}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module</td>
+                                        <td>
+                                            {this.props.moduleName}
+                                        </td>
+                                    </tr>
+
                                     <tr>
                                         <td>Marks/Grade</td>
                                         <td>

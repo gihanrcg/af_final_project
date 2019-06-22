@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 
 const StudentSubmissionGradingSchema = new Schema({
 
-
     instructorName :{
         type : String
     },
@@ -14,6 +13,15 @@ const StudentSubmissionGradingSchema = new Schema({
     mark:{
         type:String
     },
+    allocatedAssignment:{
+        type:String
+    },
+    allocatedModule:{
+        type:String
+    },
+    allocatedStudent:{
+        type:String
+    }
 
 });
 

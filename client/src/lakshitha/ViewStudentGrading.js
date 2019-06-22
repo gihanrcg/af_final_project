@@ -71,6 +71,9 @@ class ViewStudentGrading extends React.Component {
                                 <tr>
                                     <th>Instructor Name</th>
                                     <th>Details</th>
+                                    <th>Assignment</th>
+                                    <th>Module Name</th>
+                                    <th>StudentName</th>
                                     <th>Mark</th>
                                 </tr>
                                 </thead>
@@ -85,6 +88,15 @@ class ViewStudentGrading extends React.Component {
                                                 </td>
                                                 <td>
                                                     {grading.details}
+                                                </td>
+                                                <td>
+                                                    {grading.allocatedAssignment}
+                                                </td>
+                                                <td>
+                                                    {grading.allocatedModule}
+                                                </td>
+                                                <td>
+                                                    {grading.allocatedStudent}
                                                 </td>
                                                 <td>
                                                     {grading.mark}
