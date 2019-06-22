@@ -242,13 +242,7 @@ class StudentDetails extends React.Component {
                                                 <Input type="text" name="course"
                                                        value={this.state.selectedStudent !== null ? this.state.selectedStudent.course : ''}
                                                        onChange={this.onChangeHandler}/>
-                                                {/* <Input onChange={this.userTypeChanged} type="select" name="userType" id="userType" >
-                    <option>Lecturer</option>
-                    <option>Instructor</option>
-                    <option>Student</option>
-                    <option>Admin</option>
-                  </Input> */}
-                                            </FormGroup>
+                                                              </FormGroup>
                                         </Col>
                                     </Row>
                                 }

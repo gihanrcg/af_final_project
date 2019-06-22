@@ -10,13 +10,18 @@ import CreateUser from './gihan/components/createUser/CreateUser';
 import AdminPanel from "./pages/AdminPanel";
 import LecturerHome from "./nishitha/LecturerHome";
 import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
+import Profile from './pages/Profile';
 
 //Auth Functions
 import {checkAuthAdmin} from './gihan/functions/checkAuth';
 import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
+<<<<<<< HEAD
 import ModuleCreator from './moduleManager/ModuleCreator';
+=======
+import StudentHome from "./nishitha/StudentHome";
+>>>>>>> 4428af21030825a0b580a642592e0ba7ab61eb58
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
@@ -59,8 +64,13 @@ class App extends React.Component {
                         <Route path="/PaperQuestionCreator" component={PaperQuestionCreator}/>
                         <Route path="/Paper" component={Paper}/>
                         <Route path="/PaperCreator" component={PaperCreator}/>
+<<<<<<< HEAD
                         <Route path="/ModuleCreator" component={ModuleCreator}/>
+=======
+                        <Route path="/student" component={StudentHome}/>
+>>>>>>> 4428af21030825a0b580a642592e0ba7ab61eb58
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
+                        <Route path="/userProfile" component={Profile}/>
                     </Switch>
                 </BrowserRouter>
             </div>

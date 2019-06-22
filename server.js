@@ -10,6 +10,11 @@ const AuthRoutes = require('./server/gihan/routes/api/Auth');
 const FileRoutes=require('./server/nishitha/routes/api/FileUploadRoute');
 const AssignmentRoutes=require('./server/nishitha/routes/api/AssignmentSubmisisonRoutes');
 const ModuleRouter=require('./server/moduleManager/ModuleRouter');
+const NotificationRoute =require('./server/gihan/routes/api/NotificationRoute')
+const AssignmentGradingRoutes=require('./server/lakshitha/routes/api/StudentSubmissionGradingRoute');
+
+
+
 //Setting up express app 
 const app = express();
 app.use(BodyParser.json());
@@ -22,6 +27,8 @@ app.use('/api/files',FileRoutes);
 app.use('/api/assignmentSubmissions',AssignmentRoutes);
 app.use('/api/assignmentSubmissions',AssignmentRoutes);
 app.use('/api/module',ModuleRouter);
+app.use('/api/notification',NotificationRoute);
+app.use('/api/assignmentGrading',AssignmentGradingRoutes);
 
 //Creating mongo instance
 const db = config.get('mongoURI');
