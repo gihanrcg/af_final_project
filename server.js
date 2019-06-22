@@ -9,7 +9,7 @@ const userRoutes = require('./server/gihan/routes/api/UserRoute');
 const AuthRoutes = require('./server/gihan/routes/api/Auth');
 const FileRoutes=require('./server/nishitha/routes/api/FileUploadRoute');
 const AssignmentRoutes=require('./server/nishitha/routes/api/AssignmentSubmisisonRoutes');
-
+const ModuleRouter=require('./server/moduleManager/ModuleRouter');
 //Setting up express app 
 const app = express();
 app.use(BodyParser.json());
@@ -20,6 +20,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', AuthRoutes);
 app.use('/api/files',FileRoutes);
 app.use('/api/assignmentSubmissions',AssignmentRoutes);
+app.use('/api/assignmentSubmissions',AssignmentRoutes);
+app.use('/api/module',ModuleRouter);
 
 //Creating mongo instance
 const db = config.get('mongoURI');
