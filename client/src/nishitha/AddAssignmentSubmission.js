@@ -43,7 +43,7 @@ class AddAssignmentSubmission extends React.Component {
                         isLoading: false
                     })
 
-                    if (response.status == 201) {
+                    if (response.status === 201) {
                         this.setState({});
                         swal({
                             title: "Nice",

@@ -26,8 +26,8 @@ class StudentSubmissionList extends React.Component {
         let day = date.getDate();
         let monthIndex = date.getMonth();
         let year = date.getFullYear();
-        let hours=date.getHours();
-        let minutes=date.getMinutes();
+        //let hours=date.getHours();
+        //let minutes=date.getMinutes();
 
         return day + ' ' + monthNames[monthIndex] + ' ' + year ;
     }
