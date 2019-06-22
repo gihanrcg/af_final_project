@@ -10,6 +10,7 @@ import CreateUser from './gihan/components/createUser/CreateUser';
 import AdminPanel from "./pages/AdminPanel";
 import StudentHome from "./nishitha/StudentHome";
 import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
+import Profile from './pages/Profile';
 
 //Auth Functions
 import {checkAuthAdmin} from './gihan/functions/checkAuth';
@@ -53,6 +54,7 @@ class App extends React.Component {
                         <Route path="/studenthome" component={StudentHome}/>
                         <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
+                        <Route path="/userProfile" component={Profile}/>
                     </Switch>
                 </BrowserRouter>
             </div>

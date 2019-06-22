@@ -138,13 +138,13 @@ router.get('/admins', auth, (req, res) => {
 //@route GET
 //@desc confirm sign up email
 //@access public
-router.get('/confirm/:token',(req,res)=>{
+router.get('/confirm/:token', (req, res) => {
 
     try {
         const decoded = jwt.verify(req.params.token, config.get('email_secret_key'));
-console.log('email',decoded.email)
-        
-        User.findOneAndUpdate({ email: decoded.email }, {confirm:true}, (err, doc) => {
+        console.log('email', decoded.email)
+
+        User.findOneAndUpdate({ email: decoded.email }, { confirm: true }, (err, doc) => {
 
             if (err) {
                 return res.status(400).send({
@@ -162,12 +162,12 @@ console.log('email',decoded.email)
         //     email : decoded.email
         // }).then(user => {
         //     if (!user) {
-                
+
         //         return res.status(400).send({
         //             message: 'User does not exsists'
         //         });
         //     }else{
-               
+
         //         user.confirm = true;
         //         user.save().then(user =>{
         //             return res.status(200).send({
@@ -321,7 +321,7 @@ router.put('/changePassword', (req, res) => {
 //@route PUT
 //@desc update a user
 //@access public
-router.put('/updateUser', upload.single('profilePic'), (req, res) => { 
+router.put('/updateUser', upload.single('profilePic'), (req, res) => {
 
     User.findOne({
         email: req.body.email
@@ -329,6 +329,7 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
         if (user) {
 
             User.findByIdAndUpdate({ _id: user._id }, req.body, (err, doc) => {
+
                 if (err) {
                     return res.status(400).send({
                         message: err
@@ -352,40 +353,17 @@ router.put('/updateUser', upload.single('profilePic'), (req, res) => {
     })
 });
 
-
-//@route PUT
-//@desc update a user
+//@route GET
+//@desc match and compare encrypted text
 //@access public
-router.put('/updateUser', upload.single('profilePic'), (req, res) => {
+router.post('/checkPasswords', (req, res) => {
 
-    User.findOne({
-        email: req.body.email
-    }).then(user => {
-        if (user) {
-
-            User.findByIdAndUpdate({ _id: user._id }, req.body, (err, doc) => {
-
-                if(err) {
-                    return res.status(400).send({
-                        message: err
-                    });
-                }    else{
-                    return res.status(200).send({
-                        message: 'updated'
-                    });
-                }          
-                  
-                
+    bcrypt.compare(req.body.newPassword, req.body.currentPassword)
+        .then(isMatch => {
+            res.status(200).send({
+                passwordMatch: isMatch
             })
-
-
-        } else {
-            return res.status(400).send({
-                message: 'Invalid user'
-            });
-        }
-
-    })
+        })
 });
 
 module.exports = router;

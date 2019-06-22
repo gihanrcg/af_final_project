@@ -11,6 +11,8 @@ import {
     NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
 import axios from "axios";
+import NavBarNotification from "./NavBarNotification";
+import Profile from "../profile/Profile";
 
 
 class Header extends React.Component {
@@ -34,6 +36,9 @@ class Header extends React.Component {
 
     componentDidMount() {
         this.getUser();
+    }
+    profilePopup =e =>{
+
     }
 
     logoutOnClick = e =>{
@@ -80,19 +85,11 @@ class Header extends React.Component {
             <Navbar className="nav_styles" expand="lg" color="primary" light>
                 <NavbarBrand href="/" className="navbar-brand" style={{color: 'white'}}>School Management
                     System</NavbarBrand>
-                {/*<div className="navbar-dark navbar-toggler-icon navbar-toggler" style={{color:'white',background:'white'}}/>*/}
+
                 <NavbarToggler onClick={this.toggle} className="navbar-dark" style={{color: 'white'}}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
 
                     <Nav className="" navbar>
-                        <NavItem>
-                            <NavLink href="/components/" style={{color: 'white'}}
-                                     className="nav_link_styles">Components</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/reactstrap/reactstrap" style={{color: 'white'}}
-                                     className="nav_link_styles">GitHub</NavLink>
-                        </NavItem>
                         <NavItem>
                             <NavLink href='/studenthome/' style={{color: 'white'}}
                                      className="nav_link_styles">StudentHome</NavLink>
@@ -108,6 +105,8 @@ class Header extends React.Component {
                     {this.state.isLoggedIn &&
                     <Nav className="ml-auto" navbar>
 
+
+
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{color: 'white'}}>
                                 Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
@@ -118,8 +117,9 @@ class Header extends React.Component {
                                 <DropdownItem>
                                     Option 1
                                 </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
+                                <DropdownItem onClick={this.profilePopup}>
+                                    Profile
+
                                 </DropdownItem>
                                 <DropdownItem divider/>
                                 <DropdownItem onClick={this.logoutOnClick}>
@@ -127,10 +127,13 @@ class Header extends React.Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
+                        <NavBarNotification/>
                     </Nav>
+
                     }
 
                     {!this.state.isLoggedIn &&
+
                     <Nav className="ml-auto" navbar>
                         <NavItem>
                             <NavLink href="/createUser" className="nav_link_styles"

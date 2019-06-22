@@ -34,7 +34,13 @@ router.get('/getNotifications/:userType',auth,(req,res)=>{
 
         let notificationArr = [];
 
-        Notification.find().then(notifications => {
-
+        Notification.find({
+            audience : req.params.userType          
+        }).then(notifications => {
+            res.status(200).send({
+                notifications : notifications
+            })
         })
 })
+
+module.exports = router
