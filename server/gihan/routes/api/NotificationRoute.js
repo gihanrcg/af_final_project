@@ -13,6 +13,7 @@ router.post('/createNotification', auth, (req, res) => {
         audience: req.body.audience,
         title: req.body.title,
         message: req.body.message,
+        expire:req.body.expire
     });
 
     try {

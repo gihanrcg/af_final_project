@@ -18,6 +18,7 @@ import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCr
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
 import StudentHome from "./nishitha/StudentHome";
+import Footer from './gihan/components/temp/Footer/FooterPage';
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
@@ -65,6 +66,7 @@ class App extends React.Component {
                         <Route path="/userProfile" component={Profile}/>
                     </Switch>
                 </BrowserRouter>
+                <Footer/>
             </div>
         );
     }

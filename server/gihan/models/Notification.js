@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const NotificationSchema = new Schema({
-
     
     notificationType : {
         type : String,
@@ -21,8 +20,7 @@ const NotificationSchema = new Schema({
         required : true
     },
     expire : {
-        type : Boolean,
-        default : false
+        type : Date,               
     },
     date:{
         type : Date,
