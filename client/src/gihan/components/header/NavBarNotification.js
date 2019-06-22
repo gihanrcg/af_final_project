@@ -16,19 +16,24 @@ class NavBarNotification extends React.Component {
     }
 
 
+
+
     componentDidMount() {
         this.getUserNotifications();
+
     }
+
 
     getUserNotifications = () => {
         const jwt = localStorage.getItem('af_auth_token');
         axios({
             method: 'get',
-            url: '/api/notification/getNotifications/student',
+            url: '/api/notification/getNotifications/' + this.props.userType,
             headers: {
                 'jwt_token': jwt
             }
         }).then(res => {
+            console.log(res.data)
             this.setState({
                 notifications: res.data.notifications,
                 loading: false
@@ -44,7 +49,7 @@ class NavBarNotification extends React.Component {
         return this.state.notifications.map((note, index) => {
 
             return (
-                <DropdownItem key={index}>
+                <DropdownItem key={index} >
                     <div className="card mb-3" key={index}>
 
                         <div className="row no-gutters" style={{height: '100px'}}>
@@ -74,10 +79,18 @@ class NavBarNotification extends React.Component {
 
     render() {
         return (
-            <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret style={{color: 'white'}}>
+            <UncontrolledDropdown nav inNavbar >
+                {this.state.notifications.length !== 0 &&
+                <DropdownToggle nav caret>
                     <img src={notificationImage} width="40px" height="40px" alt=""/>
                 </DropdownToggle>
+                }
+                {this.state.notifications.length === 0 &&
+                <DropdownToggle nav caret disabled={true}>
+                    <img src={notificationImage} width="40px" height="40px" alt="" style={{opacity:'0.2'}}/>
+                </DropdownToggle>
+                }
+
                 <DropdownMenu right>
                     {this.renderNotificationRows()}
                 </DropdownMenu>

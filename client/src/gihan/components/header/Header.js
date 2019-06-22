@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 import NavBarNotification from "./NavBarNotification";
-import Profile from "../profile/Profile";
+import ReactDOM from "react-dom";
 
 
 class Header extends React.Component {
@@ -23,8 +23,10 @@ class Header extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            isLoggedIn: false
+            isLoggedIn: false,
+            notificationsAvailable : true
         };
+        this.available = this.available.bind(this);
 
     }
 
@@ -78,6 +80,11 @@ class Header extends React.Component {
 
 
         })
+    }
+    available(){
+
+        ReactDOM.unmountComponentAtNode(document.getElementById('notification'));
+
     }
 
     render() {
@@ -139,7 +146,8 @@ class Header extends React.Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <NavBarNotification/>
+
+                        <NavBarNotification   userType={this.state.user.userType} available={this.available}/>
                     </Nav>
 
                     }

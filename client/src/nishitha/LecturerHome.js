@@ -207,7 +207,7 @@ class LecturerHome extends React.Component {
                     return <div class="container">
                         <div className={"row"}>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src={assignmentImage}/>
+                                <img className="card-img-top" src={assignmentImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
                                         View and mark submissions of students
@@ -218,7 +218,7 @@ class LecturerHome extends React.Component {
                                 </button>
                             </div>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src={submissionImage}/>
+                                <img className="card-img-top" src={submissionImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
                                         Create assignment submissions for students to submit
