@@ -52,7 +52,7 @@ class AddAssignmentSubmission extends React.Component {
                             button: "Done"
                         }).then((value) => {
                             if (value) {
-                                window.location.replace('/studenthome/');
+                                window.location.replace('/instructor/');
                             }
                         })
 
@@ -161,7 +161,7 @@ class AddAssignmentSubmission extends React.Component {
                                     <tr>
                                         <td>Assignment Details and Instructions</td>
                                         <td>
-                                            <textarea value={details} name="details"></textarea>
+                                            <textarea value={details} name="details" onChange={(e) => this.handleChange(e)}/>
                                         </td>
                                     </tr>
                                     <tr>

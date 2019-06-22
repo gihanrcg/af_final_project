@@ -224,7 +224,7 @@ class LecturerHome extends React.Component {
                                 <img className="card-img-top" src={submissionImage} alt="Card image cap"/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        Create Assignment submission for Student to Submit
+                                        Create assignment submissions for students to submit
                                     </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}

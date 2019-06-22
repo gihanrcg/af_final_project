@@ -15,12 +15,28 @@ class StudentSubmissionList extends React.Component {
         this.props.handleDownload(filename)
     };
 
+    formatDate(date) {
+        let monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+        ];
+
+        let day = date.getDate();
+        let monthIndex = date.getMonth();
+        let year = date.getFullYear();
+        let hours=date.getHours();
+        let minutes=date.getMinutes();
+
+        return day + ' ' + monthNames[monthIndex] + ' ' + year ;
+    }
 
     render() {
         return (
             <div className="container">
                 <div className={"card"}>
-                    <div className="card-header">
+                    <div className="card-header" align="center">
                         <b>File Submissions made by students</b>
                     </div>
                     <div className="card-body">
@@ -28,7 +44,7 @@ class StudentSubmissionList extends React.Component {
                             <thead>
                             <tr style={{align: "center"}}>
                                 <th>File</th>
-                                <th>Uploaded By</th>
+                                <th>Submitted By</th>
                                 <th>Submitted Date</th>
                             </tr>
                             </thead>
@@ -47,7 +63,7 @@ class StudentSubmissionList extends React.Component {
                                                 {file.submittedBy}
                                             </td>
                                             <td>
-                                                {file.submittedDate}
+                                                {this.formatDate(new Date(file.submittedDate))}
                                             </td>
                                             <td>
                                                 <button className="btn btn-danger"

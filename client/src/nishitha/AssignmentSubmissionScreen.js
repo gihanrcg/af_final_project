@@ -103,10 +103,22 @@ class AssignmentSubmissionScreen extends React.Component {
         return now > dateLimit;
     };
 
-    checkSubmitted = () => {
+    formatDate(date) {
+        let monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+        ];
 
-    };
+        let day = date.getDate();
+        let monthIndex = date.getMonth();
+        let year = date.getFullYear();
+        let hours=date.getHours();
+        let minutes=date.getMinutes();
 
+        return day + ' ' + monthNames[monthIndex] + ' ' + year ;
+    }
 
 ////select assignment and make upload
     render() {
@@ -125,7 +137,9 @@ class AssignmentSubmissionScreen extends React.Component {
                             <th>Assignment Name</th>
                             <th>Module Name</th>
                             <th>Due Date</th>
-                            <th>Status</th>
+                            <th>Assignment Status</th>
+                            <th>Submission Status</th>
+                            <th>Details</th>
                             <th>Add Submission</th>
                         </tr>
                         </thead>
@@ -133,7 +147,8 @@ class AssignmentSubmissionScreen extends React.Component {
                         {
                             this.state.submissionList.map((submission, index) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr key={index}
+                                    >
                                         <td>
                                             {submission.assignmentName}
                                         </td>
@@ -141,13 +156,16 @@ class AssignmentSubmissionScreen extends React.Component {
                                             {submission.moduleName}
                                         </td>
                                         <td>
-                                            {submission.toBeSubmittedBy}
+                                            {this.formatDate(new Date(submission.toBeSubmittedBy))}
                                         </td>
                                         <td>
-                                            {(this.checkOverDue(submission.toBeSubmittedBy)) ? "Overdue" : "Due"}
+                                            {(this.checkOverDue(submission.toBeSubmittedBy)) ? <p style={{color:"red"}}>Overdue</p> : "Due"}
                                         </td>
                                         <td>
                                             {submission.isSubmitted ? "Submitted" : "Not Submitted"}
+                                        </td>
+                                        <td>
+                                            {submission.details}
                                         </td>
                                         <td>
                                             <FileUploader
