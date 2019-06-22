@@ -15,6 +15,7 @@ class AddAssignmentSubmission extends React.Component {
             isSubmitted: false,
             toBeSubmittedBy: '',
             isOverdue: false,
+            details: '',
             fields: {},
             errors: {}
 
@@ -26,7 +27,7 @@ class AddAssignmentSubmission extends React.Component {
     handleSubmit = (event) => {
 
         event.preventDefault();
-        const {assignmentName, moduleName, toBeSubmittedBy} = this.state;
+        const {assignmentName, moduleName, toBeSubmittedBy, details} = this.state;
 
         if (this.validateForm()) {
 
@@ -34,7 +35,7 @@ class AddAssignmentSubmission extends React.Component {
                 isLoading: true
 
             })
-            axios.post('/api/assignmentSubmissions/create', {assignmentName, moduleName, toBeSubmittedBy})
+            axios.post('/api/assignmentSubmissions/create', {assignmentName, moduleName, toBeSubmittedBy, details})
 
                 .then(response => {
 
@@ -117,49 +118,65 @@ class AddAssignmentSubmission extends React.Component {
 
 
     render() {
-        const {assignmentName, moduleName, toBeSubmittedBy} = this.state;
+        const {assignmentName, moduleName, toBeSubmittedBy, details, errors} = this.state;
         return (
             <div>
                 {this.state.isLoading && <LoadingScreen/>}
                 <div className="container">
-                    <form onSubmit={this.handleSubmit}>
-                        <Table hover>
-                            <tbody>
-                            <tr>
-                                <td>Enter Assignment Name</td>
-                                <td>
-                                    <input type="text" value={assignmentName} id="assignmentName" name="assignmentName"
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </td>
-                                <td style={{color: "red"}}>{this.state.errors.assignmentName}</td>
-                            </tr>
-                            <tr>
-                                <td>Enter Module Name</td>
-                                <td>
-                                    <input type="text" value={moduleName} id="moduleName" name="moduleName"
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </td>
-                                <td style={{color: "red"}}>{this.state.errors.moduleName}</td>
-                            </tr>
-                            <tr>
-                                <td>Select submission date</td>
-                                <td>
-                                    <input id="datefield" type="date"
-                                           value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy"
-                                           onChange={(e) => this.handleChange(e)}/>
-                                </td>
-                                <td style={{color: "red"}}>{this.state.errors.toBeSubmittedBy}</td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" value="Add" className="btn btn-primary"/></td>
-                                <td>
-                                    <input onClick={(e) => this.props.renderDefaultPage()} type="button" value="Back"
-                                           className="btn btn-primary"/>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </Table>
-                    </form>
+
+                    <div className={"card"}>
+                        <div className="card-header" align="center">
+                            <b>Add New Assignment Submissions</b>
+                        </div>
+                        <div class="card-body">
+                            <form onSubmit={this.handleSubmit}>
+                                <Table hover>
+                                    <tbody>
+                                    <tr>
+                                        <td>Enter Assignment Name</td>
+                                        <td>
+                                            <input type="text" value={assignmentName} id="assignmentName"
+                                                   name="assignmentName"
+                                                   onChange={(e) => this.handleChange(e)}/>
+                                        </td>
+                                        <td style={{color: "red"}}>{errors.assignmentName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enter Module Name</td>
+                                        <td>
+                                            <input type="text" value={moduleName} id="moduleName" name="moduleName"
+                                                   onChange={(e) => this.handleChange(e)}/>
+                                        </td>
+                                        <td style={{color: "red"}}>{errors.moduleName}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Select submission date</td>
+                                        <td>
+                                            <input type="date"
+                                                   value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy"
+                                                   onChange={(e) => this.handleChange(e)}/>
+                                        </td>
+                                        <td style={{color: "red"}}>{errors.toBeSubmittedBy}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Assignment Details and Instructions</td>
+                                        <td>
+                                            <textarea value={details} name="details"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" value="Add" className="btn btn-primary"/></td>
+                                        <td>
+                                            <input onClick={(e) => this.props.renderDefaultPage()} type="button"
+                                                   value="Back"
+                                                   className="btn btn-primary"/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </Table>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 

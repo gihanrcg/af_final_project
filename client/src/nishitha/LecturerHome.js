@@ -7,7 +7,7 @@ import StudentSubmissionList from "./StudentSubmissionList";
 import './css/studenthomecss.css'
 import submissionImage from "../nishitha/resources/submissions-banner.jpg";
 import assignmentImage from "./resources/assigments-banner.jpg";
-class StudentHome extends React.Component {
+class LecturerHome extends React.Component {
 
 
     constructor(props) {
@@ -247,4 +247,4 @@ class StudentHome extends React.Component {
 
 }
 
-export default StudentHome;
+export default LecturerHome;

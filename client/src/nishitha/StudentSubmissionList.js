@@ -19,43 +19,51 @@ class StudentSubmissionList extends React.Component {
     render() {
         return (
             <div className="container">
-                <Table hover>
-                    <thead>
-                    <tr style={{align:"center"}}>
-                        <th>File</th>
-                        <th>Uploaded By</th>
-                        <th>Submitted Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.props.fileList.map((file, index) => {
-                            const filename = file.file.split('\\').pop();
-                            return (
-                                <tr key={index}>
-                                    <td>
-                                        <button type="button" className="btn btn-link"
-                                                onClick={(e) => this.handleDownload(filename)}
-                                        >{filename}</button>
-                                    </td>
-                                    <td>
-                                        {file.submittedBy}
-                                    </td>
-                                    <td>
-                                        {file.submittedDate}
-                                    </td>
-                                    <td>
-                                        <button className="btn btn-danger"
-                                                onClick={(e) => this.props.handleDelete(this.props.fileList, file)}>Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            );
-                        })
-                    }
-                    </tbody>
-                </Table>
-                <button className="btn btn-primary" onClick={(e) => this.props.renderDefaultPage()}>Back</button>
+                <div className={"card"}>
+                    <div className="card-header">
+                        <b>File Submissions made by students</b>
+                    </div>
+                    <div className="card-body">
+                        <Table hover>
+                            <thead>
+                            <tr style={{align: "center"}}>
+                                <th>File</th>
+                                <th>Uploaded By</th>
+                                <th>Submitted Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.props.fileList.map((file, index) => {
+                                    const filename = file.file.split('\\').pop();
+                                    return (
+                                        <tr key={index}>
+                                            <td>
+                                                <button type="button" className="btn btn-link"
+                                                        onClick={(e) => this.handleDownload(filename)}
+                                                >{filename}</button>
+                                            </td>
+                                            <td>
+                                                {file.submittedBy}
+                                            </td>
+                                            <td>
+                                                {file.submittedDate}
+                                            </td>
+                                            <td>
+                                                <button className="btn btn-danger"
+                                                        onClick={(e) => this.props.handleDelete(this.props.fileList, file)}>Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                            </tbody>
+                        </Table>
+                        <button className="btn btn-primary" onClick={(e) => this.props.renderDefaultPage()}>Back
+                        </button>
+                    </div>
+                </div>
             </div>
 
         );

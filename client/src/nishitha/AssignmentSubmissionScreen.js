@@ -113,6 +113,11 @@ class AssignmentSubmissionScreen extends React.Component {
 
         return (
             <div className="container">
+                <div className={"card"}>
+                    <div className="card-header" align="center">
+                        <b>Assignment Submissions</b>
+                    </div>
+                    <div className="card-body">
                 <div className="table-responsive">
                     <Table hover>
                         <thead>
@@ -155,6 +160,8 @@ class AssignmentSubmissionScreen extends React.Component {
                         }
                         </tbody>
                     </Table>
+                </div>
+                    </div>
                 </div>
             </div>
 
