@@ -16,6 +16,8 @@ import {checkAuthAdmin} from './gihan/functions/checkAuth';
 import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
+import ViewStudentGrading from "./lakshitha/ViewStudentGrading";
+import StudentHome from "./nishitha/StudentHome";
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
@@ -58,6 +60,7 @@ class App extends React.Component {
                         <Route path="/PaperQuestionCreator" component={PaperQuestionCreator}/>
                         <Route path="/Paper" component={Paper}/>
                         <Route path="/PaperCreator" component={PaperCreator}/>
+                        <Route path="/student" component={StudentHome}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                     </Switch>
                 </BrowserRouter>

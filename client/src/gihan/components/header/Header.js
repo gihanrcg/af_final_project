@@ -98,10 +98,9 @@ class Header extends React.Component {
                                      className="nav_link_styles">Instructors</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href='/assignmentSubmission/' style={{color: 'white'}}
-                                     className="nav_link_styles">Submissions</NavLink>
+                            <NavLink href='/student/' style={{color: 'white'}}
+                                     className="nav_link_styles">Students</NavLink>
                         </NavItem>
-
                     </Nav>
 
                     {/*logged in state*/}
