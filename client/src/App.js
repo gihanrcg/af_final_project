@@ -13,6 +13,9 @@ import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
 
 //Auth Functions
 import {checkAuthAdmin} from './gihan/functions/checkAuth';
+import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
+import Paper from './sanjaya/paper/Paper';
+import PaperCreator from './sanjaya/paperCreator/PaperCreator';
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
@@ -52,6 +55,9 @@ class App extends React.Component {
                         <Route path="/login" component={Login}/>
                         <Route path="/instructor" component={LecturerHome}/>
                         <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
+                        <Route path="/PaperQuestionCreator" component={PaperQuestionCreator}/>
+                        <Route path="/Paper" component={Paper}/>
+                        <Route path="/PaperCreator" component={PaperCreator}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                     </Switch>
                 </BrowserRouter>
