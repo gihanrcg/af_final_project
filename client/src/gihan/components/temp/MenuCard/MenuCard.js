@@ -13,11 +13,11 @@ class MenuCard extends Component {
                 <div className="w3-card-4" style={{width: width}}>
                     {/*<img className="menuCardContainer" src={image} alt="Alps" style={{width: '100%'}}/>*/}
                     <div className="card" style={{width: width}}>
-                        <img className="card-img-top" src={image} alt="Card image cap"/>
+                        <img className="card-img-top" src={image} alt="Card cap"/>
                             <div className="card-body">
                                 <h5 className="card-title">{title}</h5>
                                 <p className="card-text">{text}</p>
-                                <a href="" className="btn btn-primary">Go somewhere</a>
+                                <a href="/" className="btn btn-primary">Go somewhere</a>
                             </div>
                     </div>
 

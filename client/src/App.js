@@ -17,7 +17,6 @@ import {checkAuthAdmin} from './gihan/functions/checkAuth';
 import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
-import ViewStudentGrading from "./lakshitha/ViewStudentGrading";
 import StudentHome from "./nishitha/StudentHome";
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {

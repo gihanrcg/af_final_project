@@ -172,7 +172,7 @@ class StudentHome extends React.Component {
                     return <div class="container">
                         <div className={"row"}>
                             <div className="card" style={{width: '18rem', padding: "10px", margin: "20px"}}>
-                                <img className="card-img-top" src={gradeImage}/>
+                                <img className="card-img-top" src={gradeImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
                                         View Published Grades
@@ -183,7 +183,7 @@ class StudentHome extends React.Component {
                                 </button>
                             </div>
                             <div className="card" style={{width: '18rem', padding: "10px", margin: "20px"}}>
-                                <img className="card-img-top" src={studentSubmissionImage}/>
+                                <img className="card-img-top" src={studentSubmissionImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
                                         Make assignment Submissions

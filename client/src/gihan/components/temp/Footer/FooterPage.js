@@ -66,9 +66,9 @@ class FooterPage extends Component {
                         <div className="footer-icons">
 
                             <a href="https://www.facebook.com"><i className="fa fa-facebook"/></a>
-                            <a href="#"><i className="fa fa-twitter"/></a>
-                            <a href="#"><i className="fa fa-linkedin"/></a>
-                            <a href="#"><i className="fa fa-github"/></a>
+                            <a href="/"><i className="fa fa-twitter"/></a>
+                            <a href="/"><i className="fa fa-linkedin"/></a>
+                            <a href="/"><i className="fa fa-github"/></a>
 
                         </div>
 
