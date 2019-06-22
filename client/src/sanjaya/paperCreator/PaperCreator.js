@@ -15,11 +15,11 @@ class PaperCreator extends React.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
-      this.state = {questions:[{question:'q1',answers:['a1s','a2s','a3s','a4s'],answer:'a2',userAnswer:''},{question:'q2',answers:['a1s','a2s','a3s','a4s'],answer:'a1',userAnswer:''},{question:'q3',answers:['a1s','a2s','a3s','a4s'],answer:'a4',userAnswer:''}]};
+      this.state = {};
     }
   
     handleChange(e) {
-      this.setState({temperature: e.target.value});
+      this.setState({[e.target.id]: e.target.value});
     }
 
     setAnswer=(index,answer)=>{

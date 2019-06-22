@@ -17,9 +17,11 @@ import {checkAuthAdmin} from './gihan/functions/checkAuth';
 import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
+import ModuleCreator from './moduleManager/ModuleCreator';
 import StudentHome from "./nishitha/StudentHome";
 import Footer from './gihan/components/temp/Footer/FooterPage';
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
+
 class App extends React.Component {
 
 
@@ -61,6 +63,7 @@ class App extends React.Component {
                         <Route path="/PaperQuestionCreator" component={PaperQuestionCreator}/>
                         <Route path="/Paper" component={Paper}/>
                         <Route path="/PaperCreator" component={PaperCreator}/>
+                        <Route path="/ModuleCreator" component={ModuleCreator}/>
                         <Route path="/student" component={StudentHome}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                         <Route path="/userProfile" component={Profile}/>

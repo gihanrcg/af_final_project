@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios'
 //Custom Components
 import './css/studenthomecss.css'
-import studentSubmissionImage from "../nishitha/resources/studentsubmissions-banner.jpg";
+import studentSubmissionImage from "../nishitha/resources/studentsubmissions-banner_225x225.jpg";
 import gradeImage from "./resources/grades-banner.png";
 import AssignmentSubmissionScreen from "./AssignmentSubmissionScreen";
 import ViewStudentGrading from "../lakshitha/ViewStudentGrading";

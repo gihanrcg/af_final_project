@@ -35,7 +35,7 @@ class MenuCardBar extends Component {
         }
 
         return (
-            <div align="center" style={{top: '-300px'}}>
+            <div align="center" style={{top: '-300px'}} className="table-responsive">
                 <table style={tableStyles} cellSpacing="20px" align="center">
                     <tbody>
                     <tr>

@@ -10,7 +10,9 @@ class StudentSubmissionList extends React.Component {
         this.state = {
             isLoading: false,
             page: '',
-            fileId:''
+            submittedUser:'',
+            assignmentName:'',
+            moduleName:''
         }
     }
 
@@ -24,13 +26,17 @@ class StudentSubmissionList extends React.Component {
         })
     }
 
-    renderPage = (page,id) => {
-         console.log(id)
+    renderPage = (page,user,assignmentName,moduleName) => {
         if (page === 'ASSIGNMENT_GRADING') {
             this.setState({
                 page: 'ASSIGNMENT_GRADING',
-                fileId:id
+                submittedUser:user,
+                assignmentName:assignmentName,
+                moduleName:moduleName
+
             })
+            console.log(assignmentName)
+            console.log(moduleName)
         }
     };
 
@@ -57,7 +63,9 @@ class StudentSubmissionList extends React.Component {
             switch (this.state.page) {
                 case 'ASSIGNMENT_GRADING':
                     return <StudentGrading renderDefaultPage={this.renderDefaultPage}
-                            id={this.state.fileId}
+                            submittedUser={this.state.submittedUser}
+                            assignmentName={this.state.assignmentName}
+                                           moduleName={this.state.moduleName}
                     />;
                 default:
                     return <div className="container">
@@ -92,8 +100,8 @@ class StudentSubmissionList extends React.Component {
                                                         {this.formatDate(new Date(file.submittedDate))}
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-dark"
-                                                                onClick={(e) => this.renderPage('ASSIGNMENT_GRADING', file._id)}>Grade
+                                                        <button className="btn btn-success"
+                                                                onClick={(e) => this.renderPage('ASSIGNMENT_GRADING', file.submittedBy,file.assignmentName,file.moduleName)}>Grade
                                                             Submission
                                                         </button>
                                                     </td>
@@ -110,7 +118,6 @@ class StudentSubmissionList extends React.Component {
                                 </Table>
                                 <button className="btn btn-primary" onClick={(e) => this.props.renderDefaultPage()}>Back
                                 </button>
-
                             </div>
                         </div>
                     </div>
