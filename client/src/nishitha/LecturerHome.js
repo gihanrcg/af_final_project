@@ -2,13 +2,12 @@ import React from 'react';
 //Dependent libraries
 import axios from 'axios'
 //Custom Components
+import AddAssignmentSubmission from "./AddAssignmentSubmission";
+import StudentSubmissionList from "./StudentSubmissionList";
 import './css/studenthomecss.css'
-import studentSubmissionImage from "../nishitha/resources/studentsubmissions-banner.jpg";
-import gradeImage from "./resources/grades-banner.png";
-import AssignmentSubmissionScreen from "./AssignmentSubmissionScreen";
-import ViewStudentGrading from "../lakshitha/ViewStudentGrading";
-
-class StudentHome extends React.Component {
+import submissionImage from "../nishitha/resources/submissions-banner.jpg";
+import assignmentImage from "./resources/assigments-banner.jpg";
+class LecturerHome extends React.Component {
 
 
     constructor(props) {
@@ -52,7 +51,6 @@ class StudentHome extends React.Component {
     }
 
     componentDidMount() {
-        this.getUser();
         axios.get('/api/files').then((res) => {
             console.log(res.data);
             this.setState({
@@ -136,15 +134,43 @@ class StudentHome extends React.Component {
 
     };
 
+    //download documents
+    handleDownload = (fileName) => {
+
+
+        fetch('/api/files/download/' + fileName, {
+
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+
+                this.setState({
+                    //apiCallStatus: 'DOWNLOAD_COMPLETED',
+                    // errors: false
+                });
+
+                const url = document.createElement('a');
+                url.href = window.URL.createObjectURL(blob);
+                url.download = fileName;
+                url.click();
+
+            }).catch((error) => {
+            this.setState({})
+        });
+    };
+
     renderPage = (page) => {
 
-        if (page === 'VIEW_GRADES') {
+        if (page === 'CREATE_ASSIGNMENT_SUBMISSION') {
             this.setState({
-                page: 'VIEW_GRADES'
+                page: 'CREATE_ASSIGNMENT_SUBMISSION'
             })
-        } else if (page === 'MAKE_SUBMISSION') {
+        } else if (page === 'VIEW_STUDENT_SUBMISSION') {
             this.setState({
-                page: 'MAKE_SUBMISSION'
+                page: 'VIEW_STUDENT_SUBMISSION'
             })
         }
     };
@@ -161,36 +187,48 @@ class StudentHome extends React.Component {
         const PageContent = () => {
 
             switch (this.state.page) {
-                case 'VIEW_GRADES':
-                    return <ViewStudentGrading renderDefaultPage={this.renderDefaultPage}/>
-                case 'MAKE_SUBMISSION':
-                    return <AssignmentSubmissionScreen
+                case 'CREATE_ASSIGNMENT_SUBMISSION':
+                    return <AddAssignmentSubmission renderDefaultPage={this.renderDefaultPage}/>
+                case 'VIEW_STUDENT_SUBMISSION':
+                    return <StudentSubmissionList
                         renderDefaultPage={this.renderDefaultPage}
+                        handleDownload={this.handleDownload}
+                        handleDelete={this.handleDelete}
+                        fileList={this.state.fileList.map((file) => {
+                            let fileObj = {
+                                file: file.file,
+                                _id: file._id,
+                                submittedBy: file.submittedBy,
+                                submittedDate: file.submittedDate
+                            };
+                            return fileObj
+                        })
+                        }
                     />
                 default:
 
                     return <div class="container">
                         <div className={"row"}>
-                            <div className="card" style={{width: '18rem', padding: "10px", margin: "20px"}}>
-                                <img className="card-img-top" src={gradeImage}/>
+                            <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
+                                <img className="card-img-top" src={assignmentImage}/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        View Published Grades
+                                        View and mark submissions of students
                                     </p>
                                 </div>
-                                <button type="button" onClick={(e) => this.renderPage("VIEW_GRADES")}
-                                        className="btn btn-primary"> View Published Grades
+                                <button type="button" onClick={(e) => this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
+                                        className="btn btn-primary">Create Assignment Submissions
                                 </button>
                             </div>
-                            <div className="card" style={{width: '18rem', padding: "10px", margin: "20px"}}>
-                                <img className="card-img-top" src={studentSubmissionImage}/>
+                            <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
+                                <img className="card-img-top" src={submissionImage}/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        Make assignment Submissions
+                                        Create assignment submissions for students to submit
                                     </p>
                                 </div>
-                                <button type="button" onClick={(e) => this.renderPage("MAKE_SUBMISSION")}
-                                        className="btn btn-primary"> Make assignment Submissions
+                                <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}
+                                        className="btn btn-primary">View Student Submissions
                                 </button>
                             </div>
                         </div>
@@ -209,4 +247,4 @@ class StudentHome extends React.Component {
 
 }
 
-export default StudentHome;
+export default LecturerHome;

@@ -37,15 +37,16 @@ class Header extends React.Component {
     componentDidMount() {
         this.getUser();
     }
-    profilePopup =e =>{
+
+    profilePopup = e => {
 
     }
 
-    logoutOnClick = e =>{
+    logoutOnClick = e => {
         localStorage.removeItem('af_auth_token');
         this.setState({
-            isLoggedIn : false,
-            user : ''
+            isLoggedIn: false,
+            user: ''
         })
         window.location.replace('/')
     }
@@ -91,14 +92,24 @@ class Header extends React.Component {
 
                     <Nav className="" navbar>
                         <NavItem>
+
                             <NavLink href='/studenthome/' style={{color: 'white'}}
                                      className="nav_link_styles">StudentHome</NavLink>
+
                         </NavItem>
                         <NavItem>
-                            <NavLink href='/assignmentSubmission/' style={{color: 'white'}}
-                                     className="nav_link_styles">Submission</NavLink>
+                            <NavLink href="https://github.com/gihanrcg/af_final_project" style={{color: 'white'}}
+                                     className="nav_link_styles">GitHub</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href='/instructor/' style={{color: 'white'}}
+                                     className="nav_link_styles">Instructors</NavLink>
 
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href='/student/' style={{color: 'white'}}
+                                     className="nav_link_styles">Students</NavLink>
+                        </NavItem>
                     </Nav>
 
                     {/*logged in state*/}
@@ -106,11 +117,12 @@ class Header extends React.Component {
                     <Nav className="ml-auto" navbar>
 
 
-
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret style={{color: 'white'}}>
                                 Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
-                                <Avatar style={{marginLeft:'20px'}} size="50" round={true} name={this.state.user.firstName + " " + this.state.user.firstName} src={this.state.user.profilePic} />
+                                <Avatar style={{marginLeft: '20px'}} size="50" round={true}
+                                        name={this.state.user.firstName + " " + this.state.user.firstName}
+                                        src={this.state.user.profilePic}/>
 
                             </DropdownToggle>
                             <DropdownMenu right>

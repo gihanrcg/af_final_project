@@ -10,11 +10,17 @@ class FileUploader extends React.Component {
         e.target.value = null;
     };
 
-
     render() {
         return (
             <div>
-                    <input type="file" name="file" onChange={(e) => this.handleUpload(e)} disabled={this.props.disabled}/>
+                <div className="wrapper">
+                    {!this.props.disabled &&
+                    <div className="file-upload">
+                        <input type="file" name="file" onChange={(e) => this.handleUpload(e)} disabled={this.props.disabled}/>
+                        <i className="fa fa-arrow-up"></i>
+                    </div>
+                    }
+                </div>
 
             </div>
 

@@ -8,12 +8,17 @@ import Header from './gihan/components/header/Header';
 import HomePage from './pages/HomePage';
 import CreateUser from './gihan/components/createUser/CreateUser';
 import AdminPanel from "./pages/AdminPanel";
-import StudentHome from "./nishitha/StudentHome";
+import LecturerHome from "./nishitha/LecturerHome";
 import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
 import Profile from './pages/Profile';
 
 //Auth Functions
 import {checkAuthAdmin} from './gihan/functions/checkAuth';
+import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
+import Paper from './sanjaya/paper/Paper';
+import PaperCreator from './sanjaya/paperCreator/PaperCreator';
+import ViewStudentGrading from "./lakshitha/ViewStudentGrading";
+import StudentHome from "./nishitha/StudentHome";
 // import {checkAuthStudent, checkAuthAdmin} from './gihan/functions/checkAuth';
 class App extends React.Component {
 
@@ -51,8 +56,12 @@ class App extends React.Component {
                         <Route path="/createUser" component={CreateUser}/>
                         <Route path="/login/:from" component={Login}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/studenthome" component={StudentHome}/>
+                        <Route path="/instructor" component={LecturerHome}/>
                         <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
+                        <Route path="/PaperQuestionCreator" component={PaperQuestionCreator}/>
+                        <Route path="/Paper" component={Paper}/>
+                        <Route path="/PaperCreator" component={PaperCreator}/>
+                        <Route path="/student" component={StudentHome}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
                         <Route path="/userProfile" component={Profile}/>
                     </Switch>

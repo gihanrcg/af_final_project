@@ -19,6 +19,9 @@ const AssignmentSubmissionSchema = new Schema({
     },
     isOverdue:{
         type:Boolean
+    },
+    details:{
+        type:String
     }
 
 });

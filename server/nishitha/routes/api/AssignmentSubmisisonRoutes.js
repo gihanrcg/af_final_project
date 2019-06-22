@@ -57,12 +57,12 @@ router.post('/create',(req, res) => {
     const data=req.body;
 
     const newAssignmentSubmission = new AssignmentSubmission({
-       //TODO
         assignmentName : data.assignmentName,
         moduleName:data.moduleName,
         isSubmitted:false,
         toBeSubmittedBy:data.toBeSubmittedBy,
-        isOverdue:false,//check is overdue compare dates
+        isOverdue:false,
+        details:data.details
     });
 
 
