@@ -17,39 +17,39 @@ class FooterPage extends Component {
 
                     <div className="footer-left">
 
-                        <h3>Travellers<span>Hub</span></h3>
+                        <h3>Campus<span>Hub</span></h3>
 
                         <p className="footer-links">
-                            <a href="#">Home</a>
+                            <a href="/">Home</a>
                             ·
-                            <a href="#">Blog</a>
+                            <a href="/">Blog</a>
                             ·
-                            <a href="#">Pricing</a>
+                            <a href="/">Pricing</a>
                             ·
-                            <a href="#">About</a>
+                            <a href="/">About</a>
                             ·
-                            <a href="#">Faq</a>
+                            <a href="/">Faq</a>
                             ·
-                            <a href="#">Contact</a>
+                            <a href="/">Contact</a>
                         </p>
 
-                        <p className="footer-company-name">Travellers' HUB &copy; 2019</p>
+                        <p className="footer-company-name">CampusHub &copy; 2019</p>
                     </div>
 
                     <div className="footer-center">
 
                         <div>
-                            <i className="fa fa-map-marker"></i>
+                            <i className="fa fa-map-marker"/>
                             <p><span>SLIIT , New Kandy Road</span> Malabe, Sri Lanka</p>
                         </div>
 
                         <div>
-                            <i className="fa fa-phone"></i>
+                            <i className="fa fa-phone"/>
                             <p>+94 (0) 714914133</p>
                         </div>
 
                         <div>
-                            <i className="fa fa-envelope"></i>
+                            <i className="fa fa-envelope"/>
                             <p><a href="mailto:gihanrcg1997@gmail.com">gihanrcg1997@gmail.com</a></p>
                         </div>
 
@@ -59,16 +59,16 @@ class FooterPage extends Component {
 
                         <p className="footer-company-about">
                             <span>About the company</span>
-                            Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu
-                            auctor lacus vehicula sit amet.
+                            A web application to manage all the functions and cater all the requirements
+                            of an  educational institute.
                         </p>
 
                         <div className="footer-icons">
 
-                            <a href="https://www.facebook.com"><i className="fa fa-facebook"></i></a>
-                            <a href="#"><i className="fa fa-twitter"></i></a>
-                            <a href="#"><i className="fa fa-linkedin"></i></a>
-                            <a href="#"><i className="fa fa-github"></i></a>
+                            <a href="https://www.facebook.com"><i className="fa fa-facebook"/></a>
+                            <a href="#"><i className="fa fa-twitter"/></a>
+                            <a href="#"><i className="fa fa-linkedin"/></a>
+                            <a href="#"><i className="fa fa-github"/></a>
 
                         </div>
 

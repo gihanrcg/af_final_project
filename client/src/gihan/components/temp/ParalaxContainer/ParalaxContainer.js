@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import image1 from '../SlideShow/1.jpg'
+import image1 from '../SlideShow/caps.jpg'
 import './ParalaxStyles.css'
 
 class ParalaxContainer extends Component {
