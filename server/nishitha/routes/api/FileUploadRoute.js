@@ -56,12 +56,16 @@ router.get('/download/:filename',(req, res) => {
     res.download(fileLocation, file);
 });
 router.post('/upload/:id', upload.single('file'), (req, res) => {
+console.log(req.body.assignmentName);
+    console.log(req.body.moduleName);
 
     const id=req.params.id;
     const newFile = new File({
             file : req.file.path,
-            submittedBy:req.body.submitted,
-            submittedDate:new Date()
+            submittedBy:req.body.submittedBy,
+            submittedDate:new Date(),
+            assignmentName:req.body.assignmentName,
+            moduleName:req.body.moduleName
         });
 
 

@@ -16,13 +16,16 @@ router.get('/', (req, res) => {
         .then(submissions => res.json(submissions))
 });
 
-router.post('/create/:id',(req, res) => {
+router.post('/create/:submittedBy/:assignmentName/:moduleName',(req, res) => {
     const data=req.body;
-    console.log(req.params.id);
+
     const newStudentSubmissionGrading = new StudentSubmissionGrading({
         instructorName:data.instructorName,
         details:data.details,
         mark:data.mark,
+        allocatedAssignment:req.params.assignmentName,
+        allocatedModule:req.params.moduleName,
+        allocatedStudent:req.params.submittedBy
     });
 
 

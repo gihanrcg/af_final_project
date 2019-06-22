@@ -147,11 +147,6 @@ class LecturerHome extends React.Component {
             .then((response) => response.blob())
             .then((blob) => {
 
-                this.setState({
-                    //apiCallStatus: 'DOWNLOAD_COMPLETED',
-                    // errors: false
-                });
-
                 const url = document.createElement('a');
                 url.href = window.URL.createObjectURL(blob);
                 url.download = fileName;
@@ -199,7 +194,9 @@ class LecturerHome extends React.Component {
                                 file: file.file,
                                 _id: file._id,
                                 submittedBy: file.submittedBy,
-                                submittedDate: file.submittedDate
+                                submittedDate: file.submittedDate,
+                                assignmentName:file.assignmentName,
+                                moduleName:file.moduleName
                             };
                             return fileObj
                         })
