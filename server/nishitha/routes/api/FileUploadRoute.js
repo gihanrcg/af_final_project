@@ -75,12 +75,8 @@ router.post('/upload/:id', upload.single('file'), (req, res) => {
             })
         ).then(()=>{
             AssignmentSubmission.findOne({_id:id}).then((submission)=> {
-                console.log("************")
-                console.log(submission)
                 submission.isSubmitted=true;
                 submission.save();
-                console.log("************")
-                console.log(submission)
             })
         });
     } catch (err) {

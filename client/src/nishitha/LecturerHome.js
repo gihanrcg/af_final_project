@@ -74,7 +74,7 @@ class LecturerHome extends React.Component {
         })
             .then(response => {
                 console.log(response);
-                if (response.status == 204) {
+                if (response.status === 204) {
 
                     this.setState({
                         fileList: this.removeDoc(fileList, file)
@@ -164,11 +164,11 @@ class LecturerHome extends React.Component {
 
     renderPage = (page) => {
 
-        if (page == 'CREATE_ASSIGNMENT_SUBMISSION') {
+        if (page === 'CREATE_ASSIGNMENT_SUBMISSION') {
             this.setState({
                 page: 'CREATE_ASSIGNMENT_SUBMISSION'
             })
-        } else if (page == 'VIEW_STUDENT_SUBMISSION') {
+        } else if (page === 'VIEW_STUDENT_SUBMISSION') {
             this.setState({
                 page: 'VIEW_STUDENT_SUBMISSION'
             })
@@ -210,7 +210,7 @@ class LecturerHome extends React.Component {
                     return <div class="container">
                         <div className={"row"}>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src={assignmentImage} alt="Card image cap"/>
+                                <img className="card-img-top" src={assignmentImage}/>
                                 <div className="card-body">
                                     <p className="card-text">
                                         View and mark submissions of students
@@ -221,10 +221,10 @@ class LecturerHome extends React.Component {
                                 </button>
                             </div>
                             <div className="card" style={{width: '18rem',padding:"10px",margin:"20px"}}>
-                                <img className="card-img-top" src={submissionImage} alt="Card image cap"/>
+                                <img className="card-img-top" src={submissionImage}/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        Create Assignment submission for Student to Submit
+                                        Create assignment submissions for students to submit
                                     </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}
