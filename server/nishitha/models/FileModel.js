@@ -19,6 +19,9 @@ const FileSchema = new Schema({
     },
     moduleName:{
         type:String
+    },
+    isGraded:{
+        type:Boolean
     }
 
 

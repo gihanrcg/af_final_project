@@ -27,7 +27,7 @@ const auth = require('../../../../middleware/auth');
 
 router.get('/', (req, res) => {
     console.log('all files');
-    File.find()
+    File.find({isGraded:false})
         .sort({ date: -1 })
         .then(files => res.json(files))
 });
@@ -65,7 +65,8 @@ console.log(req.body.assignmentName);
             submittedBy:req.body.submittedBy,
             submittedDate:new Date(),
             assignmentName:req.body.assignmentName,
-            moduleName:req.body.moduleName
+            moduleName:req.body.moduleName,
+            isGraded:false
         });
 
 
