@@ -66,7 +66,7 @@ class App extends React.Component {
                         <Route path="/ModuleCreator" component={ModuleCreator}/>
                         <Route path="/student" component={StudentHome}/>
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
-                        <Route path="/userProfile" component={Profile}/>
+                        <Route path="/student/userProfile" component={Profile}/>
                     </Switch>
                 </BrowserRouter>
                 <Footer/>

@@ -41,7 +41,7 @@ class Header extends React.Component {
     }
 
     profilePopup = e => {
-
+        window.location.replace('/student/userProfile');
     }
 
     logoutOnClick = e => {
@@ -130,6 +130,7 @@ class Header extends React.Component {
                                 <Avatar style={{marginLeft: '20px'}} size="50" round={true}
                                         name={this.state.user.firstName + " " + this.state.user.firstName}
                                         src={this.state.user.profilePic}/>
+
 
                             </DropdownToggle>
                             <DropdownMenu right>
