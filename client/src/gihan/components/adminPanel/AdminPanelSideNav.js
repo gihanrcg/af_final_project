@@ -23,6 +23,8 @@ class AdminPanelSideNav extends React.Component {
                     <br/><br/><br/><br/>
                     <a href="/admin/students" className="btn btn-success">Manage Students</a>
                     <a href="/admin/lecturers" className="btn btn-success">Manage Lecturers</a>
+                    <a href="/admin/notifications" className="btn btn-success">Manage Notifications</a>
+
                 </div>
                 <span style={{fontSize: '30px', cursor: 'pointer'}} onClick={this.openNav}>&#9776; open</span>
             </div>
