@@ -239,14 +239,13 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
                                         throw err
                                     }
                                     else {
-                                        const url = 'http://localhost:5000/api/users/confirm/' + token;
-
-                                        console.log('url', url);
+                                        const url = 'https://sms-af.herokuapp.com/api/users/confirm/' + token;
+                                        
                                         transporter.sendMail({
                                             to: user.email,
                                             subject: 'Email Confirmation',
-                                            html: 'Please click this url to confirm your email address : <a href="' + url + '">' + url + '</a>'
-
+                                            html: '<b>Thank you</b> for joining with our School Management System <br/>'+
+                                            'Please click this url to confirm your email address : <a href="' + url + '">' + url + '</a>'
                                         });
                                         return res.status(200).send({
                                             data: true,

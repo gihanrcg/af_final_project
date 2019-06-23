@@ -38,7 +38,10 @@ class App extends React.Component {
                     : <Redirect to={{
                         pathname: '/login',
                         state: {from: props.location}
-                    }}/>
+
+                    }}
+
+                    />
             )}/>
         )
 
@@ -70,7 +73,6 @@ class App extends React.Component {
                 <Header/>
                 <BrowserRouter>
                     <Switch>
-
                         <Route path={'/'} exact component={HomePage}/>
 
                         {/*Access authorized for - (Everyone)*/}
@@ -79,7 +81,7 @@ class App extends React.Component {
                         <Route path="/createUser" component={CreateUser}/>
 
                         {/*Access authorized for - (Lecturer)*/}
-                        <PrivateRouteLecturer path="/lecturer"  exac component={LecturerHome}/>
+                        <PrivateRouteLecturer path="/lecturer"  exac component={LecturerHome} location="/lecturer"/>
                         <PrivateRouteLecturer path="/lecturer/moduleCreator" component={ModuleCreator}/>
                         <PrivateRouteLecturer path="/lecturer/paperCreator" component={PaperCreator}/>
                         <PrivateRouteLecturer path="/lecturer/paperQuestionCreator/:paperId" component={PaperQuestionCreator}/>

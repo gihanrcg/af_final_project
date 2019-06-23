@@ -98,20 +98,10 @@ class Header extends React.Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
 
                     <Nav className="" navbar>
-                        <NavItem>
 
-                            <NavLink href='/studenthome/' style={{color: 'white'}}
-                                     className="nav_link_styles">StudentHome</NavLink>
-
-                        </NavItem>
                         <NavItem>
-                            <NavLink href="https://github.com/gihanrcg/af_final_project" style={{color: 'white'}}
-                                     className="nav_link_styles">GitHub</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href='/instructor/' style={{color: 'white'}}
+                            <NavLink href='/lecturer/' style={{color: 'white'}}
                                      className="nav_link_styles">Instructors</NavLink>
-
                         </NavItem>
                         <NavItem>
                             <NavLink href='/student/' style={{color: 'white'}}
@@ -128,7 +118,7 @@ class Header extends React.Component {
                             <DropdownToggle nav caret style={{color: 'white'}}>
                                 Logged In as {this.state.user.firstName + " " + this.state.user.lastName}
                                 <Avatar style={{marginLeft: '20px'}} size="50" round={true}
-                                        name={this.state.user.firstName + " " + this.state.user.firstName}
+                                        name={this.state.user.firstName + " " + this.state.user.lastName}
                                         src={this.state.user.profilePic}/>
 
 

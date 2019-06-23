@@ -11,11 +11,18 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false
+            isLoading: false,
+            reloaded : false,
         }
     }
+
+    componentDidMount() {
+        console.log(this.props)
+    }
+
     componentWillMount() {
         localStorage.removeItem('af_auth_token');
+
     }
 
     onChangeHandler = e => {
@@ -51,8 +58,8 @@ class Login extends React.Component {
             }).then((value) => {
                 if (value) {
                     console.log(this.props)
-                    if (this.props.match.params.from) {
-                        window.location.replace("/" + this.props.match.params.from);
+                    if (this.props.location.state.from) {
+                        window.location.replace(this.props.location.state.from.pathname);
                     } else {
                         window.location.replace("/");
                     }
