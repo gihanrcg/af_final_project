@@ -35,7 +35,7 @@ class ModuleCreator extends React.Component {
         data:this.state
         
     }).then(res => {
-      swal("Successfull","You are Succesfully added "+res.data.module.moduleId , "success");
+      swal("Successfull","You are Succesfully added module ID:"+res.data.module.moduleId , "success");
         
     }).catch(err => {
         this.setState({

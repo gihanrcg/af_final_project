@@ -25,6 +25,7 @@ router.post('/add', (req, res) => {
     newModule.save().then((module)=>res.json({succesful:true,module:module})).catch((e)=>res.status(400).json({messege:'Duplicate module id',succesful:false,eror:e}));
     }catch(e){
         console.log(e);
+        res.status(403).json({messege:'',succesful:false,eror:e});
     }
 
     // AssignmentSubmission.find()
@@ -33,6 +34,52 @@ router.post('/add', (req, res) => {
 });
 
 
+router.get('/all', (req, res) => {
+    
+    try{
+
+    Module.find().then((data)=>res.json(data)).catch((e)=>res.status(404).json({messege:'method not found',succesful:false,eror:e}));
+    }catch(e){
+        console.log(e);
+        res.status(403).render({messege:'',succesful:false,eror:e});
+    }
+
+    // AssignmentSubmission.find()
+    //     .sort({ date: -1 })
+    //     .then(submissions => res.json(submissions))
+});
+
+router.get('/:moduleId', (req, res) => {
+    
+    try{
+
+    Module.findOne({moduleId:req.params.moduleId}).then((data)=>{if(data!=null) {return res.json(data)} else {return res.status(404).json({messege:'module not found',succesful:false,eror:e})} }).catch((e)=>res.status(404).json({messege:'module not found',succesful:false,eror:e}));
+    }catch(e){
+        console.log(e);
+        res.status(404).json({messege:'module not found',succesful:false,eror:e});
+    }
+
+    
+    // AssignmentSubmission.find()
+    //     .sort({ date: -1 })
+    //     .then(submissions => res.json(submissions))
+});
+
+router.delete('/:moduleId', (req, res) => {
+    
+    try{
+
+    Module.findByIdAndRemove(req.params.moduleId).then((data)=>{if(data!=null) {return res.json(data)} else {return res.status(404).json({messege:'module not found',succesful:false,eror:e})} }).catch((e)=>res.status(404).json({messege:'module not found',succesful:false,eror:e}));
+    }catch(e){
+        console.log(e);
+        res.status(404).json({messege:'module not found',succesful:false,eror:e});
+    }
+
+    
+    // AssignmentSubmission.find()
+    //     .sort({ date: -1 })
+    //     .then(submissions => res.json(submissions))
+});
 
 
 module.exports = router;

@@ -14,7 +14,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 const questions = (questions, removeQuestion) => {
   let l = questions.length;
   //console.log('inside question',questions);
-  return questions.map((question) => <tr><Row>
+  return questions.map((question,qkey) => <tr><Row>
     <td  style={{ textAlign: 'left',width:'100%' }}>
     <Col  style={{ textAlign: 'left' }}>
       {l--}.{question.question}{console.log('answer', question.answer)}
@@ -30,7 +30,7 @@ const questions = (questions, removeQuestion) => {
 
         })}
       </ol>
-      <Button onClick={removeQuestion} className="btn btn-danger">Delete</Button>
+      <Button onClick={()=>removeQuestion(qkey)} className="btn btn-danger">Delete</Button>
     </Col>
     </td>
   </Row></tr>)

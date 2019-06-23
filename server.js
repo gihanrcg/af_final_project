@@ -12,6 +12,8 @@ const AssignmentRoutes=require('./server/nishitha/routes/api/AssignmentSubmisiso
 const ModuleRouter=require('./server/moduleManager/ModuleRouter');
 const NotificationRoute =require('./server/gihan/routes/api/NotificationRoute')
 const AssignmentGradingRoutes=require('./server/lakshitha/routes/api/StudentSubmissionGradingRoute');
+const PaperRoutes=require('./server/sanjaya/routes/PaperRoutes');
+const PaperQustionRoutes=require('./server/sanjaya/routes/PaperQustionRoutes');
 
 
 
@@ -29,7 +31,8 @@ app.use('/api/assignmentSubmissions',AssignmentRoutes);
 app.use('/api/module',ModuleRouter);
 app.use('/api/notification',NotificationRoute);
 app.use('/api/assignmentGrading',AssignmentGradingRoutes);
-
+app.use('/api/paper',PaperRoutes);
+app.use('/api/paperQuestion',PaperQustionRoutes);
 //Creating mongo instance
 const db = config.get('mongoURI');
 mongoose
