@@ -48,7 +48,7 @@ class StudentGrading extends React.Component {
                             button: "Done"
                         }).then((value) => {
                             if (value) {
-                                window.location.replace('/instructor/');
+                                window.location.replace('/lecturer/');
                             }
                         })
 
