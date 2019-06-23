@@ -6,6 +6,8 @@ import { Form, Button } from 'bootstrap-4-react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import swal from "sweetalert";
+import axios from 'axios';
 import { textAlign } from '@material-ui/system';
 
 
@@ -15,7 +17,7 @@ class PaperCreator extends React.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
-      this.state = {};
+      this.state = {moduleID:'',examDisplyName:'',enrollkey:'',startDate:'',startTime:'',endTime:'',timeDuration:''};
     }
   
     handleChange(e) {
@@ -30,72 +32,54 @@ class PaperCreator extends React.Component {
     }
 
     click=(e)=>{
-        console.log('state',this.state)
+      e.preventDefault();
+
+      axios({
+        method: 'post',
+        url: `/api/paper/add/${this.state.moduleID}`,
+        data:this.state
+        
+    }).then(res => {
+      swal("Successfull","You are Succesfully added Paper Name:"+res.data.paper.examDisplyName , "success");
+        
+    }).catch(err => {
+        this.setState({
+            loading: false
+        })
+        swal("Sorry..!", "Unknown server error occurred", "error");
+        console.log(err);
+
+    })
+        console.log('state',this.state);
     }
   
     render() {
       
       return <div>
           
-          <Form>
+          <Form onSubmit={this.click}>
         
        
 
    
         <Container >
         <table style={{width:'100%'}} >
-  <Row >
-  <Col sm={12} lg={4} md={12}>     <Form.Group>
-          <label htmlFor="Field">Field</label>
-          <Form.Select id="field">
-            <option>IT</option>
-            <option>BM</option>
-            <option>ENG</option>
-           
-          </Form.Select>
-        </Form.Group></Col>
+  
 
-
-    <Col sm={12} lg={4} md={6}>     <Form.Group>
-          <label htmlFor="Year">Year</label>
-          <Form.Select id="year">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-           
-          </Form.Select>
-        </Form.Group></Col>
-    <Col sm={12} lg={4} md={6}>     <Form.Group>
-          <label htmlFor="semester">Semester</label>
-          <Form.Select id="semester">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </Form.Select>
-        </Form.Group></Col>
-
-        
-
-  </Row>
-
-
-    <Row>
-    <Col>     <Form.Group>
-          <label htmlFor="module">Module</label>
-          <Form.Select id="module">
-            <option>SE</option>
-           
-          </Form.Select>
+ <Row>
+    <Col>    <Form.Group>
+          <label htmlFor="ModuleID">Module ID</label>
+          <Form.Input type="text" id="moduleID" placeholder="IT3080" onChange={this.handleChange}/>
+         
         </Form.Group></Col>
   </Row>
+
+
 
    <Row>
     <Col>    <Form.Group>
           <label htmlFor="examDisplyName">Exam Disply name</label>
-          <Form.Input type="text" id="examDisplyName" placeholder="Disply Name" />
+          <Form.Input type="text" id="examDisplyName" placeholder="Disply Name" onChange={this.handleChange} />
          
         </Form.Group></Col>
   </Row>
@@ -103,26 +87,26 @@ class PaperCreator extends React.Component {
    <Row>
     <Col>    <Form.Group>
           <label htmlFor="enrollkey">Enroll Key</label>
-          <Form.Input type="text" id="enrollkey" placeholder="Enroll Key" />
+          <Form.Input type="text" id="enrollkey" placeholder="Enroll Key" onChange={this.handleChange} />
          
         </Form.Group></Col>
   </Row>
 
  <Row>
     <Col lg={6} md={12}>    <Form.Group>
-          <label htmlFor="enrollkey">Start Date</label>
-          <Form.Input type="date" id="startDate" placeholder="Start Date" />
+          <label htmlFor="date">Start Date</label>
+          <Form.Input type="date" id="startDate" placeholder="Start Date" onChange={this.handleChange} />
          
         </Form.Group></Col>
 
         <Col lg={3} md={6}><Form.Group >
           <label htmlFor="startTime">Start Time</label>
-          <Form.Input type="time" id="startTime" placeholder="Start Time" />
+          <Form.Input type="time" id="startTime" onChange={this.handleChange}/>
          
         </Form.Group></Col>
         <Col lg={3} md={6}><Form.Group>
           <label htmlFor="endTime">End Time</label>
-          <Form.Input type="time" id="endTime" placeholder="End Time" />
+          <Form.Input type="time" id="endTime"  onChange={this.handleChange}/>
          
         </Form.Group></Col>
 
@@ -132,7 +116,7 @@ class PaperCreator extends React.Component {
   <Row >
   <Col lg={3} md={6}  alignSelf="center"><Form.Group  >
           <label htmlFor="timeDuration">Time Duration</label>
-          <Form.Input type="time" id="endTime" placeholder="End Time" />
+          <Form.Input type="number" id="timeDuration" onChange={this.handleChange}/>
           <Form.Text text="muted">You Should enter duration in minute!</Form.Text>
         </Form.Group></Col>
       </Row>

@@ -4,6 +4,8 @@ import { Form, Button } from 'bootstrap-4-react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
+import swal from "sweetalert";
 
 
 import FinalPaper from './FinalPaper';
@@ -58,7 +60,28 @@ class PaperQuestionCreator extends React.Component {
   }
 
   removeQuestion = (index) => {
+    let questionId=this.state.questions[index]._id;
+    axios({
+      method: 'delete',
+      url: `/api/paperQuestion/delete/${questionId}`,
+
+      
+  }).then(() => {
+    
     this.setState((state => state.questions.splice(index, 1)));
+    //swal("Successfull","You are Succesfully added Paper Name:"+res.data.paper.examDisplyName , "success");
+      
+  }).catch(err => {
+      this.setState({
+          loading: false
+      })
+      swal("Sorry..!", "Unknown server error occurred", "error");
+      console.log(err);
+
+  })
+
+    
+    
   }
 
   addQuestion = (e) => {
@@ -84,11 +107,35 @@ class PaperQuestionCreator extends React.Component {
 
     }
     console.log('q', nQuestions, 'na', nAnswer, 'a', answer, answer.substring(1, 2));
+    const { match: { params } } = this.props;
+    let obj = {paperId:params.paperId, question: nQuestions, answers: nAnswer, answer: answer, userAnswer: '' };
+    
+    axios({
+      method: 'post',
+      url: `/api/paperQuestion/add/${params.paperId}`,
+      data:obj
+      
+  }).then(res => {
+    this.setState((state) => state.questions.unshift(res.data.question));
+    //swal("Successfull","You are Succesfully added Paper Name:"+res.data.paper.examDisplyName , "success");
+      
+  }).catch(err => {
+      this.setState({
+          loading: false
+      })
+      swal("Sorry..!", "Unknown server error occurred", "error");
+      console.log(err);
 
-    let obj = { question: nQuestions, answers: nAnswer, answer: answer, userAnswer: '' };
-
+  })
     console.log('obj', obj);
-    this.setState((state) => state.questions.unshift(obj));
+    this.setState({nQuestion:''});
+    this.setState({nAnswer1: ''});
+    this.setState({nAnswer2: ''});
+    this.setState({nAnswer3: ''});
+    this.setState({nAnswer4: ''});
+    this.setState({nAnswer5: ''});
+    //this.setState({answer: ''});
+     
 
 
 
@@ -110,7 +157,7 @@ class PaperQuestionCreator extends React.Component {
 
             <Col >   <Form.Group>
               <label htmlFor="question">Question</label>
-              <Form.Textarea id="question" rows="3"  name="nQuestion" onChange={this.handleChange}></Form.Textarea>
+              <Form.Textarea id="question" rows="3" value={this.state.nQuestion} name="nQuestion" onChange={this.handleChange}></Form.Textarea>
             </Form.Group>  </Col>
 
 
@@ -122,26 +169,26 @@ class PaperQuestionCreator extends React.Component {
           <Row>
             <Col >
 
-              <Form.Group onChange={this.handleChange}>
+              <Form.Group onChange={this.handleChange} >
                 <Form.Check>
                   <Form.Radio id="inlineRadio1" name="answer" value="a1" />
-                  <Form.CheckLabel htmlFor="inlineRadio1"><Form.Input type="text" id="examDisplyName1" name="nAnswer1" placeholder="Disply Name" /></Form.CheckLabel>
+                  <Form.CheckLabel htmlFor="inlineRadio1"><Form.Input type="text" id="examDisplyName1" value={this.state.nAnswer1} name="nAnswer1" placeholder="Disply Name" /></Form.CheckLabel>
                 </Form.Check>
                 <Form.Check >
                   <Form.Radio id="inlineRadio2" name="answer" value="a2" />
-                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName2" name="nAnswer2" placeholder="Disply Name" /></Form.CheckLabel>
+                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName2" value={this.state.nAnswer2} name="nAnswer2" placeholder="Disply Name" /></Form.CheckLabel>
                 </Form.Check>
                 <Form.Check >
                   <Form.Radio id="inlineRadio3" name="answer" value="a3" />
-                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName3" name="nAnswer3" placeholder="Disply Name" /></Form.CheckLabel>
+                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName3" value={this.state.nAnswer3} name="nAnswer3" placeholder="Disply Name" /></Form.CheckLabel>
                 </Form.Check>
                 <Form.Check >
                   <Form.Radio id="inlineRadio4" name="answer" value="a4" />
-                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName4" name="nAnswer4" placeholder="Disply Name" /></Form.CheckLabel>
+                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName4" value={this.state.nAnswer4} name="nAnswer4" placeholder="Disply Name" /></Form.CheckLabel>
                 </Form.Check>
                 <Form.Check >
                   <Form.Radio id="inlineRadio5" name="answer" value="a5" />
-                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName5" name="nAnswer5" placeholder="Disply Name" /></Form.CheckLabel>
+                  <Form.CheckLabel htmlFor="inlineRadio2"><Form.Input type="text" id="examDisplyName5" value={this.state.nAnswer5} name="nAnswer5" placeholder="Disply Name" /></Form.CheckLabel>
                 </Form.Check>
 
               </Form.Group>

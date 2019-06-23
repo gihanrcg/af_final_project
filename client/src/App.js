@@ -19,6 +19,10 @@ import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCr
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
 import ModuleCreator from './moduleManager/ModuleCreator';
+
+import ModulesTree from './moduleManager/ModulesTree';
+
+
 import StudentHome from "./nishitha/StudentHome";
 import Footer from './gihan/components/temp/Footer/FooterPage';
 
@@ -78,8 +82,8 @@ class App extends React.Component {
                         <PrivateRouteLecturer path="/lecturer"  exac component={LecturerHome}/>
                         <PrivateRouteLecturer path="/lecturer/moduleCreator" component={ModuleCreator}/>
                         <PrivateRouteLecturer path="/lecturer/paperCreator" component={PaperCreator}/>
-                        <PrivateRouteLecturer path="/lecturer/paperQuestionCreator" component={PaperQuestionCreator}/>
-
+                        <PrivateRouteLecturer path="/lecturer/paperQuestionCreator/:paperId" component={PaperQuestionCreator}/>
+                        <PrivateRouteLecturer path="/lecturer/modulesTree" component={ModulesTree}/>
 
                         {/*Access authorized for - (Student)*/}
                         <PrivateRouteStudent path="/student" exact component={StudentHome}/>

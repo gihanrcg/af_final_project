@@ -5,23 +5,26 @@ const Schema = mongoose.Schema;
 const PaperSchema = new Schema({
 
 
-    assignmentName :{
+    moduleID:{
         type : String
     },
-    moduleName :{
+    examDisplyName :{
         type : String
     },
-    isSubmitted:{
-        type:Boolean
-    },
-    toBeSubmittedBy:{
-        type:Date
-    },
-    isOverdue:{
-        type:Boolean
-    },
-    details:{
+    enrollkey:{
         type:String
+    },
+    startDate:{
+        type:String
+    },
+    startTime:{
+        type:String
+    },
+    endTime:{
+        type:String
+    },
+    timeDuration:{
+        type:Number
     }
 
 });
