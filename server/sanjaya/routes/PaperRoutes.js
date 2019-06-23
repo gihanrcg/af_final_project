@@ -56,6 +56,9 @@ router.get('/all', (req, res) => {
         res.status(403).render({messege:'',succesful:false,eror:e});
     }
 
+
+
+
     // AssignmentSubmission.find()
     //     .sort({ date: -1 })
     //     .then(submissions => res.json(submissions))
@@ -66,6 +69,22 @@ router.get('/:paperId', (req, res) => {
     try{
 
     Paper.findOne({_id:req.params.paperId}).then((data)=>{if(data!=null) {return res.json(data)} else {return res.status(404).json({messege:'paper not found',succesful:false,eror:e})} }).catch((e)=>res.status(404).json({messege:'paper not found',succesful:false,eror:e}));
+    }catch(e){
+        console.log(e);
+        res.status(404).json({messege:'paper not found',succesful:false,eror:e});
+    }
+
+    
+    // AssignmentSubmission.find()
+    //     .sort({ date: -1 })
+    //     .then(submissions => res.json(submissions))
+});
+
+router.get('/findByModuleId/:moduleId', (req, res) => {
+    
+    try{
+
+    Paper.findOne({moduleId:req.params.moduleId}).then((data)=>{if(data!=null) {return res.json(data)} else {return res.status(404).json({messege:'paper not found',succesful:false,eror:e})} }).catch((e)=>res.status(404).json({messege:'paper not found',succesful:false,eror:e}));
     }catch(e){
         console.log(e);
         res.status(404).json({messege:'paper not found',succesful:false,eror:e});

@@ -17,7 +17,7 @@ class PaperCreator extends React.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
-      this.state = {moduleID:'',examDisplyName:'',enrollkey:'',startDate:'',startTime:'',endTime:'',timeDuration:''};
+      this.state = {moduleId:'',examDisplyName:'',enrollkey:'',startDate:'',startTime:'',endTime:'',timeDuration:''};
     }
   
     handleChange(e) {
@@ -36,7 +36,7 @@ class PaperCreator extends React.Component {
 
       axios({
         method: 'post',
-        url: `/api/paper/add/${this.state.moduleID}`,
+        url: `/api/paper/add/${this.state.moduleId}`,
         data:this.state
         
     }).then(res => {
@@ -69,7 +69,7 @@ class PaperCreator extends React.Component {
  <Row>
     <Col>    <Form.Group>
           <label htmlFor="ModuleID">Module ID</label>
-          <Form.Input type="text" id="moduleID" placeholder="IT3080" onChange={this.handleChange}/>
+          <Form.Input type="text" id="moduleId" placeholder="IT3080" onChange={this.handleChange}/>
          
         </Form.Group></Col>
   </Row>

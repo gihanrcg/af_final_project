@@ -49,6 +49,22 @@ router.get('/all', (req, res) => {
     //     .then(submissions => res.json(submissions))
 });
 
+
+router.post('/findModules', (req, res) => {
+        console.log('findmodule');
+        console.log('body',req.body);
+    try{
+
+    Module.find({field:req.body.field}).then((data)=>res.json(data)).catch((e)=>res.status(404).json({messege:'method not found',succesful:false,eror:e}));
+    }catch(e){
+       
+        res.status(403).render({messege:'',succesful:false,eror:e});
+    }
+
+    // AssignmentSubmission.find()
+    //     .sort({ date: -1 })
+    //     .then(submissions => res.json(submissions))
+});
 router.get('/:moduleId', (req, res) => {
     
     try{

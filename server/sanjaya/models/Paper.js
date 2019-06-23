@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const PaperSchema = new Schema({
 
 
-    moduleID:{
+    moduleId:{
         type : String
     },
     examDisplyName :{

@@ -6,8 +6,7 @@ const ModuleSchema = new Schema({
 
 
     moduleId:{
-        type : String,
-        unique:true
+        type : String
     },
     field:{
         type : String

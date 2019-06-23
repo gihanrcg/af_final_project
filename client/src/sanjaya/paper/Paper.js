@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
+import axios from 'axios';
+import swal from "sweetalert";
 
 const questions=function(state,setAnswer,add,sub){
     
@@ -21,9 +23,36 @@ class Paper extends React.Component {
     constructor(props) {
       super(props);
     //  this.handleChange = this.handleChange.bind(this);
-      this.state = {questions:[{question:'q1',answers:['a1s','a2s','a3s','a4s'],answer:'a2',userAnswer:''},{question:'q2',answers:['a1s','a2s','a3s','a4s'],answer:'a1',userAnswer:''},{question:'q3',answers:['a1s','a2s','a3s','a4s'],answer:'a4',userAnswer:''}]};
+      this.state = {questions:[],user:''};
+      this.getUser();
     }
   
+    componentWillMount(){
+      
+      console.log('user',this.state.user);
+      const { match: { params } } = this.props;
+
+      axios({
+        method: 'get',
+        url: `/api/paperQuestion/questions/${params.paperId}`,
+      
+        
+    }).then(res => {
+          
+
+
+      //this.setState((state) => state.questions.unshift(res.data.question));
+      //swal("Successfull","You are Succesfully added Paper Name:"+res.data.paper.examDisplyName , "success");
+        this.setState({questions:res.data});
+    }).catch(err => {
+        this.setState({
+            loading: false
+        })
+        swal("Sorry..!", "Unknown server error occurred", "error");
+        console.log(err);
+  
+    })
+    }
   
 
     setAnswer=(index,answer)=>{
@@ -33,7 +62,60 @@ class Paper extends React.Component {
       this.setState({questions:questions});
     }
 
+    getUser = () => {
+      const jwt = localStorage.getItem('af_auth_token');
+      if (!jwt) {
+          this.setState({
+              user: null
+          });
+          return;
+      }
+
+      axios({
+          method: 'post',
+          url: '/api/auth/getauthuser',
+          headers: {
+              jwt_token: jwt
+          },
+          data: {}
+
+      }).then(res => {
+          this.setState({
+              user: res.data.user,
+              isLoggedIn: true
+          })
+
+      }).catch(err => {
+
+
+      })
+  }
+
     click=(e)=>{
+      const { match: { params } } = this.props;
+      const user=this.state.user.userId;
+      console.log('nuser',user);
+      axios({
+        method: 'post',
+        url: `/api/paperQuestion/checkAnswer/${params.paperId}/${user.userId}`,
+        data:this.state.questions
+      
+        
+    }).then(res => {
+      
+      //this.setState((state) => state.questions.unshift(res.data.question));totalCount:totalCount,marksCount:marksCount
+      swal("Successfull","You are Succesfully Finished the Paper,Total marks:"+Math.round(res.data.marksCount/res.data.totalCount*100)+"%" , "success");
+        
+
+
+    }).catch(err => {
+        this.setState({
+            loading: false
+        })
+        swal("Sorry..!", "Unknown server error occurred", "error");
+        console.log(err);
+  
+    })
         console.log('state',this.state)
     }
   
