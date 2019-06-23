@@ -10,9 +10,7 @@ class StudentSubmissionList extends React.Component {
         this.state = {
             isLoading: false,
             page: '',
-            submittedUser:'',
-            assignmentName:'',
-            moduleName:''
+            file:null
         }
     }
 
@@ -26,17 +24,14 @@ class StudentSubmissionList extends React.Component {
         })
     }
 
-    renderPage = (page,user,assignmentName,moduleName) => {
+    renderPage = (page,file) => {
         if (page === 'ASSIGNMENT_GRADING') {
             this.setState({
                 page: 'ASSIGNMENT_GRADING',
-                submittedUser:user,
-                assignmentName:assignmentName,
-                moduleName:moduleName
+                file:file,
 
             })
-            console.log(assignmentName)
-            console.log(moduleName)
+
         }
     };
 
@@ -63,15 +58,13 @@ class StudentSubmissionList extends React.Component {
             switch (this.state.page) {
                 case 'ASSIGNMENT_GRADING':
                     return <StudentGrading renderDefaultPage={this.renderDefaultPage}
-                            submittedUser={this.state.submittedUser}
-                            assignmentName={this.state.assignmentName}
-                                           moduleName={this.state.moduleName}
+                            file={this.state.file}
                     />;
                 default:
                     return <div className="container">
                         <div className={"card"}>
                             <div className="card-header" align="center">
-                                <b>File Submissions made by students</b>
+                                <b>Ungraded file Submissions made by students</b>
                             </div>
                             <div className="card-body">
                                 <Table hover>
@@ -80,6 +73,8 @@ class StudentSubmissionList extends React.Component {
                                         <th>File</th>
                                         <th>Submitted By</th>
                                         <th>Submitted Date</th>
+                                        <th>Assignment Name</th>
+                                        <th>Module Name</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -100,8 +95,14 @@ class StudentSubmissionList extends React.Component {
                                                         {this.formatDate(new Date(file.submittedDate))}
                                                     </td>
                                                     <td>
+                                                        {file.assignmentName}
+                                                    </td>
+                                                    <td>
+                                                        {file.moduleName}
+                                                    </td>
+                                                    <td>
                                                         <button className="btn btn-success"
-                                                                onClick={(e) => this.renderPage('ASSIGNMENT_GRADING', file.submittedBy,file.assignmentName,file.moduleName)}>Grade
+                                                                onClick={(e) => this.renderPage('ASSIGNMENT_GRADING', file)}>Grade
                                                             Submission
                                                         </button>
                                                     </td>

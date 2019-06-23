@@ -196,12 +196,13 @@ class LecturerHome extends React.Component {
                                 submittedBy: file.submittedBy,
                                 submittedDate: file.submittedDate,
                                 assignmentName:file.assignmentName,
-                                moduleName:file.moduleName
+                                moduleName:file.moduleName,
+                                isGraded:file.isGraded
                             };
                             return fileObj
                         })
                         }
-                    />
+                    />;
                 default:
 
                     return <div class="container">
