@@ -12,7 +12,6 @@ class NotificationCreater extends React.Component {
             audience:'',
             expire:'',
             notificationType:''
-
         }
     }
 

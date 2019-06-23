@@ -11,11 +11,18 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false
+            isLoading: false,
+            reloaded : false,
         }
     }
+
+    componentDidMount() {
+        console.log(this.props)
+    }
+
     componentWillMount() {
         localStorage.removeItem('af_auth_token');
+
     }
 
     onChangeHandler = e => {
@@ -41,23 +48,32 @@ class Login extends React.Component {
                 }
 
         }).then(res => {
-            console.log(res.data)
-            localStorage.setItem('af_auth_token', res.data.token);
-            swal({
-                title: "Nice!",
-                text: "You are Logged in successfully..!",
-                icon: "success",
-                button: "Go back where you left",
-            }).then((value) => {
-                if (value) {
-                    console.log(this.props)
-                    if (this.props.match.params.from) {
-                        window.location.replace("/" + this.props.match.params.from);
-                    } else {
-                        window.location.replace("/");
+
+            if(!res.data.confirm){
+                NotificationManager.error("You need to confirm your email first..!!!", "Sorry", 2500);
+            }else{
+                localStorage.setItem('af_auth_token', res.data.token);
+                swal({
+                    title: "Nice!",
+                    text: "You are Logged in successfully..!",
+                    icon: "success",
+                    button: "Go back where you left",
+                }).then((value) => {
+                    if (value) {
+
+                        if (this.props.location.state) {
+                            if(this.props.location.state.from){
+                                window.location.replace(this.props.location.state.from.pathname);
+                            }else {
+                                window.location.replace("/");
+                            }
+
+                        } else {
+                            window.location.replace("/");
+                        }
                     }
-                }
-            });
+                });
+            }
 
         }).catch(err => {
             NotificationManager.error("Invalid Credentials", "Try Again", 2500);

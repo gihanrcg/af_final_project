@@ -211,7 +211,7 @@ class LecturerHome extends React.Component {
                                 <img className="card-img-top" src={assignmentImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        View and mark submissions of students
+                                        Create assignment submissions for students to submit
                                     </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("CREATE_ASSIGNMENT_SUBMISSION")}
@@ -222,7 +222,7 @@ class LecturerHome extends React.Component {
                                 <img className="card-img-top" src={submissionImage} alt="non"/>
                                 <div className="card-body">
                                     <p className="card-text">
-                                        Create assignment submissions for students to submit
+                                        View and mark submissions of students
                                     </p>
                                 </div>
                                 <button type="button" onClick={(e) => this.renderPage("VIEW_STUDENT_SUBMISSION")}

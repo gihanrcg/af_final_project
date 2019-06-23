@@ -86,7 +86,7 @@ class AssignmentSubmissionScreen extends React.Component {
         })
             .then(res => res.json())
             .then(response => {
-                window.location.replace('/assignmentSubmission/');
+                window.location.replace('/student/');
             }).catch(error => {
             this.setState({
             })

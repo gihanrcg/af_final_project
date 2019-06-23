@@ -1,12 +1,7 @@
-
-
-import FormControl from '@material-ui/core/FormControl';
-import React, { Component,PureComponent} from 'react';
-import { Form, Button } from 'bootstrap-4-react';
+import React, {PureComponent} from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { textAlign } from '@material-ui/system';
 import axios from 'axios';
 import swal from "sweetalert";
 import {Treebeard} from 'react-treebeard';

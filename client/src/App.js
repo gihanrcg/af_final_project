@@ -13,7 +13,8 @@ import AssignmentSubmissionScreen from "./nishitha/AssignmentSubmissionScreen";
 import Profile from './pages/Profile';
 
 //Auth Functions
-import {checkAuthAdmin} from './gihan/functions/checkAuth';
+import {checkAuthAdmin, checkAuthStudent, checkAuthLecturer} from './gihan/functions/checkAuth';
+
 import PaperQuestionCreator from './sanjaya/paperQuestionCreator/PaperQuestionCreator';
 import Paper from './sanjaya/paper/Paper';
 import PaperCreator from './sanjaya/paperCreator/PaperCreator';
@@ -28,20 +29,34 @@ class App extends React.Component {
 
 
     render() {
-        // const PrivateRouteStudent = ({component: Component, ...rest}) => (
-        //     <Route {...rest} render={(props) => (
-        //         checkAuthStudent()
-        //             ? <Component {...props} />
-        //             : <Redirect to={{
-        //                 pathname: '/login',
-        //                 state: {from: props.location}
-        //             }}/>
-        //     )}/>
-        // )
+        const PrivateRouteStudent = ({component: Component, ...rest}) => (
+            <Route {...rest} render={(props) => (
+                checkAuthStudent()
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: {from: props.location}
+
+                    }}
+
+                    />
+            )}/>
+        )
 
         const PrivateRouteAdmin = ({component: Component, ...rest}) => (
             <Route {...rest} render={(props) => (
                 checkAuthAdmin()
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: {from: props.location}
+                    }}/>
+            )}/>
+        )
+
+        const PrivateRouteLecturer = ({component: Component, ...rest}) => (
+            <Route {...rest} render={(props) => (
+                checkAuthLecturer()
                     ? <Component {...props} />
                     : <Redirect to={{
                         pathname: '/login',
@@ -57,20 +72,28 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Switch>
                         <Route path={'/'} exact component={HomePage}/>
-                        <Route path="/createUser" component={CreateUser}/>
+
+                        {/*Access authorized for - (Everyone)*/}
                         <Route path="/login/:from" component={Login}/>
                         <Route path="/login" component={Login}/>
-                        <Route path="/instructor" component={LecturerHome}/>
-                        <Route path="/assignmentSubmission" component={AssignmentSubmissionScreen}/>
-                        <Route path="/PaperQuestionCreator/:paperId" component={PaperQuestionCreator}/>
-                        <Route path="/Paper/:paperId" component={Paper}/>
-                        <Route path="/PaperCreator" component={PaperCreator}/>
-                        <Route path="/ModuleCreator" component={ModuleCreator}/>
+                        <Route path="/createUser" component={CreateUser}/>
+
+                        {/*Access authorized for - (Lecturer)*/}
+                        <PrivateRouteLecturer path="/lecturer"  exac component={LecturerHome} location="/lecturer"/>
+                        <PrivateRouteLecturer path="/lecturer/moduleCreator" component={ModuleCreator}/>
+                        <PrivateRouteLecturer path="/lecturer/paperCreator" component={PaperCreator}/>
+                        <PrivateRouteLecturer path="/lecturer/paperQuestionCreator/:paperId" component={PaperQuestionCreator}/>
+                        <PrivateRouteLecturer path="/lecturer/modulesTree" component={ModulesTree}/>
+
+                        {/*Access authorized for - (Student)*/}
+                        <PrivateRouteStudent path="/student" exact component={StudentHome}/>
+                        <PrivateRouteStudent path="/student/userProfile" component={Profile}/>
+                        <PrivateRouteStudent path="/student/assignmentSubmission" component={AssignmentSubmissionScreen}/>
+                        <PrivateRouteStudent path="/student/paper" component={Paper}/>
                         <Route path="/PaperSearch" component={PaperSearch}/>
-                        <Route path="/student" component={StudentHome}/>
-                        <Route path="/ModulesTree" component={ModulesTree}/>
+                        {/*Access authorized for - (Admin)*/}
                         <PrivateRouteAdmin path="/admin" component={AdminPanel}/>
-                        <Route path="/student/userProfile" component={Profile}/>
+
                     </Switch>
                 </BrowserRouter>
                 <Footer/>

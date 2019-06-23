@@ -57,29 +57,12 @@ class CreateUser extends React.Component {
             method: 'post',
             url: '/api/users/createUser',
             headers: {},
-
             data: frmData
-                //{
-                    // "userType": this.state.userType,
-                    // "userId": this.state.userId,
-                    // "course": this.state.course,
-                    // "faculty":this.state.faculty,
-                    // "firstName":this.state.firstName,
-                    // "lastName":this.state.lastName,
-                    // "email":this.state.email,
-                    // "nic":this.state.nic,
-                    // "address1":this.state.address1,
-                    // "address2":this.state.address2,
-                    // "city":this.state.city,
-                    // "landline":this.state.landline,
-                    // "mobile":this.state.mobile,
-               // }
 
         }).then(response => {
             this.setState({
                 isLoading: false
             })
-            console.log(response);
             swal({
                 title: "Nice!",
                 text: "You are registered successfully..!",
@@ -100,7 +83,7 @@ class CreateUser extends React.Component {
 
     fileUploadHandler = e => {
         this.setState({
-            profilePic : e.target.files[0]
+            profilePic: e.target.files[0]
         })
     }
 
@@ -154,12 +137,6 @@ class CreateUser extends React.Component {
                                     <FormGroup>
                                         <Label for="">Course</Label>
                                         <Input type="text" name="course" onChange={this.onChangeHandler}/>
-                                        {/* <Input onChange={this.userTypeChanged} type="select" name="userType" id="userType" >
-                    <option>Lecturer</option>
-                    <option>Instructor</option>
-                    <option>Student</option>
-                    <option>Admin</option>
-                  </Input> */}
                                     </FormGroup>
                                 </Col>
                             </Row>

@@ -5,7 +5,7 @@ class AdminPanelSideNav extends React.Component {
 
     //Open admin Nav Bar
     openNav = () => {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "300px";
         document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     }
 
@@ -20,6 +20,7 @@ class AdminPanelSideNav extends React.Component {
             <div>
                 <div id="mySidenav" className="sidenav">
                     <button type="button" className="btn btn-link closebtn"  onClick={this.closeNav}>&times;</button>
+                    <br/><br/><br/><br/>
                     <a href="/admin/students" className="btn btn-success">Manage Students</a>
                     <a href="/admin/lecturers" className="btn btn-success">Manage Lecturers</a>
                 </div>

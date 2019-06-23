@@ -26,6 +26,19 @@ export function checkAuthAdmin() {
     }
 }
 
+export function checkAuthLecturer() {
+    const jwt = localStorage.getItem('af_auth_token');
+    if (jwt) {
+        const token = parseJwt(jwt);
+        if(token.userType === 'Lecturer'){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
 
 function parseJwt(token) {
     var base64Url = token.split('.')[1];
