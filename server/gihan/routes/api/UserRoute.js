@@ -144,38 +144,16 @@ router.get('/confirm/:token', (req, res) => {
         const decoded = jwt.verify(req.params.token, config.get('email_secret_key'));
         console.log('email', decoded.email)
 
-        User.findOneAndUpdate({ email: decoded.email }, { confirm: true }, (err, doc) => {
+        User.findOneAndUpdate({ email: decoded.email }, { $set:{confirm: true} }, (err, doc) => {
 
             if (err) {
                 return res.status(400).send({
                     message: err
                 });
             } else {
-                return res.status(200).send({
-                    message: 'updated'
-                });
+                return res.redirect('/');
             }
         })
-
-
-        // User.findOne({
-        //     email : decoded.email
-        // }).then(user => {
-        //     if (!user) {
-
-        //         return res.status(400).send({
-        //             message: 'User does not exsists'
-        //         });
-        //     }else{
-
-        //         user.confirm = true;
-        //         user.save().then(user =>{
-        //             return res.status(200).send({
-        //                 user : user
-        //             })
-        //         })             
-        //     }
-        // })
     } catch (err) {
         return res.status(401).send({
             message: 'invalid token'
@@ -259,8 +237,7 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
 
                             return res.status(200).send({
                                 data: true,
-                                message: 'valid user',
-                                token: token,
+                                message: 'valid user',                              
                                 userId: u.userId,
                                 userType: u.userType
                             })

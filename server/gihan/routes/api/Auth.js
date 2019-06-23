@@ -68,17 +68,18 @@ router.post('/getauth', (req, res) => {
                     userType: u.userType,
                     id: u._id
                 }, config.get('jwt_secret_key'), {
-                        expiresIn: 360000
+                        expiresIn: 3600
                     }, (err, token) => {
 
                         if (err) throw err
-                        console.log('here');
+                        
                         return res.status(200).send({
                             data: true,
                             message: 'valid user',
                             token: token,
                             userId:u.userId,
-                            userType:u.userType
+                            userType:u.userType,
+                            confirm : u.confirmed
                         })
                     });
             })
