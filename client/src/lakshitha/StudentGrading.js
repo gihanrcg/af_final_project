@@ -24,14 +24,14 @@ class StudentGrading extends React.Component {
 
         event.preventDefault();
         const {instructorName, details, mark} = this.state;
-
+        const {file}=this.props;
         if (this.validateForm()) {
 
             this.setState({
                 isLoading: true
 
             })
-            axios.post('/api/assignmentGrading/create/'+this.props.id, {instructorName, details, mark})
+            axios.post('/api/assignmentGrading/create/', {instructorName, details, mark,file})
 
                 .then(response => {
 
@@ -120,6 +120,19 @@ class StudentGrading extends React.Component {
                                                    onChange={(e) => this.handleChange(e)}/>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>Assignment</td>
+                                        <td>
+                                            {this.props.file.assignmentName}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Module</td>
+                                        <td>
+                                            {this.props.file.moduleName}
+                                        </td>
+                                    </tr>
+
                                     <tr>
                                         <td>Marks/Grade</td>
                                         <td>

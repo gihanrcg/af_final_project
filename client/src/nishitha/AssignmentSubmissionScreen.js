@@ -11,7 +11,6 @@ class AssignmentSubmissionScreen extends React.Component {
         this.state = {
             submissionList: [],
             isOverdue: false,
-            isSubmitted: "",
             isOpen: false,
             isLoggedIn: false,
             user: ''
@@ -64,13 +63,15 @@ class AssignmentSubmissionScreen extends React.Component {
     }
 
     //upload documents
-    handleUpload = (e, assignmentId) => {
+    handleUpload = (e, assignmentId,assignmentName,moduleName) => {
         const files = Array.from(e.target.files);
         const formData = new FormData();
 
         files.forEach((file) => {
             formData.append("file", file);
-            formData.append("submitted", this.state.user.firstName + " " + this.state.user.lastName)
+            formData.append("submittedBy", this.state.user.firstName + " " + this.state.user.lastName);
+            formData.append("assignmentName",assignmentName);
+            formData.append("moduleName",moduleName);
         });
 
         fetch('/api/files/upload/' + assignmentId, {
@@ -85,13 +86,9 @@ class AssignmentSubmissionScreen extends React.Component {
         })
             .then(res => res.json())
             .then(response => {
-                this.setState({
-                    isSubmitted: true
-                })
                 window.location.replace('/assignmentSubmission/');
             }).catch(error => {
             this.setState({
-                isSubmitted: false
             })
         })
 
@@ -170,7 +167,7 @@ class AssignmentSubmissionScreen extends React.Component {
                                         <td>
                                             <FileUploader
                                                 disabled={(this.checkOverDue(submission.toBeSubmittedBy))}
-                                                handleUpload={(e) => this.handleUpload(e, submission._id)}/>
+                                                handleUpload={(e) => this.handleUpload(e, submission._id,submission.assignmentName,submission.moduleName)}/>
                                         </td>
                                     </tr>
                                 );
@@ -178,6 +175,8 @@ class AssignmentSubmissionScreen extends React.Component {
                         }
                         </tbody>
                     </Table>
+                    {/*<button className="btn btn-primary" onClick={(e) => this.props.renderDefaultPage()}>Back*/}
+                    {/*</button>*/}
                 </div>
                     </div>
                 </div>

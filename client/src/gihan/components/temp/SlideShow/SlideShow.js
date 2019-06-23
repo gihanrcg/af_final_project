@@ -23,8 +23,8 @@ const zoomOutProperties = {
 
 const Slideshow = () => {
     return (
-        <div align="center" >
-            <div className="slide-container-inner">
+        <div align="center" style={{position:'relative'}} >
+            <div className="slide-container-inner" style={{position:'absolute'}}>
                 <p className="slideshow-inner-main-text">NEVER STOP EXPLORING</p>
                 <button className="button button2">join with us</button>
             </div>

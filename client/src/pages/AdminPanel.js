@@ -6,6 +6,7 @@ import {checkAuthAdmin} from "../gihan/functions/checkAuth";
 
 import StudentDetails from '../gihan/components/adminPanel/StudentDetails'
 import LecturerDetails from "../gihan/components/adminPanel/LecturerDetails";
+import NotificationCreater from "../gihan/components/adminPanel/NotificationCreater";
 
 class AdminPanel extends React.Component {
 
@@ -33,6 +34,7 @@ class AdminPanel extends React.Component {
                         <Switch>
                             <PrivateRouteAdmin path="/admin/students" component={StudentDetails}/>
                             <PrivateRouteAdmin path="/admin/lecturers" component={LecturerDetails}/>
+                            <PrivateRouteAdmin path="/admin/notifications" component={NotificationCreater}/>
                         </Switch>
                     </BrowserRouter>
                 </div>

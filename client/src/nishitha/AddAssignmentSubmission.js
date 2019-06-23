@@ -3,6 +3,7 @@ import {Table} from 'reactstrap';
 import axios from 'axios';
 import swal from 'sweetalert';
 import LoadingScreen from '../gihan/components/LoadingScreen/LoadingScreen'
+import {DateRangeTwoTone} from "@material-ui/icons";
 
 class AddAssignmentSubmission extends React.Component {
 
@@ -22,6 +23,9 @@ class AddAssignmentSubmission extends React.Component {
 
         };
 
+    }
+    componentDidMount() {
+        this.setDate()
     }
 
     handleSubmit = (event) => {
@@ -100,22 +104,13 @@ class AddAssignmentSubmission extends React.Component {
         })
     }
 
-    setDate() {
-        var dtToday = new Date();
+    setDate=()=>{
 
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
+        //const date = new Date();
+        //date.setDate(date.getDate());
 
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        document.getElementById('datefield').attr('max', maxDate);
+        //document.getElementById('toBeSubmittedBy').min=new Date();
     }
-
 
     render() {
         const {assignmentName, moduleName, toBeSubmittedBy, details, errors} = this.state;
@@ -154,7 +149,9 @@ class AddAssignmentSubmission extends React.Component {
                                         <td>
                                             <input type="date"
                                                    value={toBeSubmittedBy} id="toBeSubmittedBy" name="toBeSubmittedBy"
-                                                   onChange={(e) => this.handleChange(e)}/>
+                                                   onChange={(e) => this.handleChange(e)}
+                                                   data-provide="datepicker"
+                                            />
                                         </td>
                                         <td style={{color: "red"}}>{errors.toBeSubmittedBy}</td>
                                     </tr>

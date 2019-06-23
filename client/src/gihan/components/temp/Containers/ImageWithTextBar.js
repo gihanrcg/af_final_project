@@ -36,7 +36,7 @@ class ImageWithTextBar extends Component {
         return (
             <div align="center">
                 <br/><br/><br/><br/>
-                <table border="0" style={tableStyles} cellPadding="20px" align="center">
+                <table border="0" className="table-responsive"  style={tableStyles} cellPadding="20px" align="center">
                     <tbody>
                     <tr>
                         <td><ImageWithText properties={mCard1}/></td>

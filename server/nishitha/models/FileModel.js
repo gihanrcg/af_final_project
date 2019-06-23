@@ -13,6 +13,15 @@ const FileSchema = new Schema({
     },
     submittedDate:{
         type:Date
+    },
+    assignmentName:{
+        type:String
+    },
+    moduleName:{
+        type:String
+    },
+    isGraded:{
+        type:Boolean
     }
 
 

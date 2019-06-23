@@ -18,7 +18,9 @@ class ParalaxContainer extends Component {
                         <div className="parallax-container-inner">
                             <h2 style={{color:'white'}}>FEEL THE DIFFERENCE</h2>
                             <h2 style={{color:'white'}}>ENJOY LIFE</h2>
-                            <button className="button button2">join with us</button>
+                            <button className="button button2" onClick={()=>{
+                                window.location.replace('/createUser')
+                            }}>join with us</button>
                         </div>
                     </div>
                 </div>

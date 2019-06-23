@@ -19,7 +19,6 @@ class HomePage extends React.Component {
                 <ImageWithTextBar/>
                 {/*<GridLayout/>*/}
                 <ParalaxContainer/>
-                <Footer/>
 
             </div>
         );
