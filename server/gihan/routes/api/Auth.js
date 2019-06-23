@@ -14,7 +14,7 @@ router.post('/getauthuser', (req, res) => {
     const token = req.headers.jwt_token;
 
     try {
-        const decoded = jwt.verify(token, config.get('jwt_secret_key'));
+        const decoded = jwt.verify(token, config.get('jwt_secret_key'));        
         User.findOne({
             email : decoded.email
         }).then(user => {
@@ -22,8 +22,7 @@ router.post('/getauthuser', (req, res) => {
                 return res.status(400).send({
                     message: 'User does not exsists'
                 });
-            }else{
-                console.log('returning user')
+            }else{               
                 return res.status(200).send({
                     user : user
                 })

@@ -37,6 +37,7 @@ class Profile extends React.Component {
                 selectedStudent: res.data.user,
                 isLoggedIn: true
             })
+            console.log(this.state.selectedStudent.profilePic)
 
         }).catch(err => {
 
@@ -52,6 +53,7 @@ class Profile extends React.Component {
         return (
             <div>
                 <NotificationContainer/>
+
                 <Form style={{width: '50%', align: 'center', padding: '20px'}}
                       className="main_form modal-content animate" onSubmit={this.onSubmitHandler}>
 
@@ -60,6 +62,8 @@ class Profile extends React.Component {
                         <img className="img-fluid"
                              src={"http://localhost:5000/" + this.state.selectedStudent.profilePic}
                              style={{borderRadius: '50%', width: '30%', height: 'auto'}} alt="userProfile"/>
+
+
                     )}
 
 

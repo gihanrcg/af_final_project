@@ -142,9 +142,8 @@ router.get('/confirm/:token', (req, res) => {
 
     try {
         const decoded = jwt.verify(req.params.token, config.get('email_secret_key'));
-        console.log('email', decoded.email)
 
-        User.findOneAndUpdate({ email: decoded.email }, { $set:{confirm: true} }, (err, doc) => {
+        User.findOneAndUpdate({ email: decoded.email }, { $set: { confirm: true } }, (err, doc) => {
 
             if (err) {
                 return res.status(400).send({
@@ -211,24 +210,22 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
                                 {
                                     expiresIn: 3600
                                 }, (err, token) => {
-                                    console.log('token', token)
                                     if (err) {
-                                        console.log(err)
+                                        console.log('Email Error : ' ,err)
                                         throw err
                                     }
                                     else {
                                         const url = 'https://sms-af.herokuapp.com/api/users/confirm/' + token;
-                                        
+
                                         transporter.sendMail({
                                             to: user.email,
                                             subject: 'Email Confirmation',
-                                            html: '<b>Thank you</b> for joining with our School Management System <br/>'+
-                                            'Please click this url to confirm your email address : <a href="' + url + '">' + url + '</a>'
+                                            html: '<b>Thank you</b> for joining with our School Management System <br/>' +
+                                                'Please click this url to confirm your email address : <a href="' + url + '">' + url + '</a>'
                                         });
                                         return res.status(200).send({
                                             data: true,
                                             message: 'valid user',
-                                            token: token,
                                             userId: u.userId,
                                             userType: u.userType
                                         })
@@ -237,7 +234,7 @@ router.post('/createUser', upload.single('profilePic'), (req, res) => {
 
                             return res.status(200).send({
                                 data: true,
-                                message: 'valid user',                              
+                                message: 'valid user',
                                 userId: u.userId,
                                 userType: u.userType
                             })

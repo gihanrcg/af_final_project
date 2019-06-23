@@ -61,8 +61,13 @@ class Login extends React.Component {
                 }).then((value) => {
                     if (value) {
 
-                        if (this.props.location.state.from) {
-                            window.location.replace(this.props.location.state.from.pathname);
+                        if (this.props.location.state) {
+                            if(this.props.location.state.from){
+                                window.location.replace(this.props.location.state.from.pathname);
+                            }else {
+                                window.location.replace("/");
+                            }
+
                         } else {
                             window.location.replace("/");
                         }
